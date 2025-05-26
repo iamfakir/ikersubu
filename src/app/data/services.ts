@@ -1,9 +1,25 @@
-import { FaMixer, FaCompactDisc, FaHeadphones, FaCode, FaLaptopCode, FaTools } from 'react-icons/fa';
-
+import { FaCompactDisc, FaHeadphones, FaCode, FaLaptopCode, FaTools } from 'react-icons/fa';
 import { ReactNode } from 'react';
 
+/**
+ * Type definition for service icons
+ * Can be either a ReactNode (JSX element) or a specific string identifier
+ */
+type ServiceIcon = ReactNode;
+
+/**
+ * Interface defining the structure of a service item
+ * @property {ServiceIcon} icon - Visual representation of the service
+ * @property {string} title - Name of the service
+ * @property {string} shortDescription - Brief summary for listings
+ * @property {string | ReactNode} description - Detailed service description
+ * @property {string[]} includes - List of included features
+ * @property {string} delivery - Expected turnaround time (e.g. "1-2 business days")
+ * @property {boolean} [featured] - Optional flag for featured services
+ * @property {boolean} [popular] - Optional flag for popular services
+ */
 export interface ServiceItem {
-  icon: string | ReactNode;
+  icon: ServiceIcon;
   title: string;
   shortDescription: string;
   description: string | ReactNode;
@@ -15,10 +31,21 @@ export interface ServiceItem {
 
 export const services: ServiceItem[] = [
   {
-    icon: 'mixer',
+    icon: <FaHeadphones className="w-8 h-8 text-indigo-600" aria-label="Mixing service" />,
     title: 'Mixing',
     shortDescription: 'Professional mixing services to bring clarity, depth, and balance to your tracks.',
-    description: 'Transform your raw recordings into polished, radio-ready tracks with professional mixing services. I focus on balancing levels, EQ, compression, and creative effects to bring your vision to life.',
+    description: (
+      <div className="space-y-4">
+        <p>Transform your raw recordings into polished, radio-ready tracks with professional mixing services.</p>
+        <ul className="list-disc pl-5 space-y-2">
+          <li>Balancing levels and panning</li>
+          <li>Precision EQ and compression</li>
+          <li>Creative effects processing</li>
+          <li>Stereo imaging and spatial enhancement</li>
+        </ul>
+        <p>I focus on bringing your musical vision to life with a professional, radio-ready sound.</p>
+      </div>
+    ),
     delivery: '3-5 business days',
     includes: [
       'Stem mixing',
@@ -29,7 +56,7 @@ export const services: ServiceItem[] = [
     popular: true
   },
   {
-    icon: <FaCompactDisc className="w-8 h-8 text-indigo-600" />,
+    icon: <FaCompactDisc className="w-8 h-8 text-indigo-600" aria-label="Mastering service" />,
     title: 'Mastering',
     shortDescription: 'Final polish and loudness optimization to make your music sound professional on all platforms.',
     description: (
@@ -49,7 +76,7 @@ export const services: ServiceItem[] = [
     includes: ['Loudness optimized master', 'Format-specific versions', 'ISRC code assignment', 'Cover art optimization']
   },
   {
-    icon: <FaHeadphones className="w-8 h-8 text-indigo-600" />,
+    icon: <FaHeadphones className="w-8 h-8 text-indigo-600" aria-label="Audio Production service" />,
     title: 'Audio Production',
     shortDescription: 'Full-service audio production from concept to final master.',
     description: (
@@ -70,7 +97,7 @@ export const services: ServiceItem[] = [
     popular: true
   },
   {
-    icon: <FaCode className="w-8 h-8 text-indigo-600" />,
+    icon: <FaCode className="w-8 h-8 text-indigo-600" aria-label="Audio Programming service" />,
     title: 'Audio Programming',
     shortDescription: 'Custom audio plugins and DSP development for unique sound processing.',
     description: (
@@ -90,7 +117,7 @@ export const services: ServiceItem[] = [
     includes: ['Custom development', 'Testing', 'Documentation', 'Support']
   },
   {
-    icon: <FaLaptopCode className="w-8 h-8 text-indigo-600" />,
+    icon: <FaLaptopCode className="w-8 h-8 text-indigo-600" aria-label="Web Audio Development service" />,
     title: 'Web Audio Development',
     shortDescription: 'Interactive audio experiences for the web using Web Audio API.',
     description: (
@@ -110,7 +137,7 @@ export const services: ServiceItem[] = [
     includes: ['Web development', 'Audio integration', 'Testing', 'Deployment']
   },
   {
-    icon: <FaTools className="w-8 h-8 text-indigo-600" />,
+    icon: <FaTools className="w-8 h-8 text-indigo-600" aria-label="Custom Solutions service" />,
     title: 'Custom Solutions',
     shortDescription: 'Tailored audio solutions for specialized needs and workflows.',
     description: (
