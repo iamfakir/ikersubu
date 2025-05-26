@@ -6,6 +6,13 @@ const nextConfig = {
       'plus.unsplash.com',
       'source.unsplash.com',
     ],
+    unoptimized: true,
+  },
+  // Add this to disable image optimization API route
+  experimental: {
+    images: {
+      unoptimized: true,
+    },
   },
 };
 
