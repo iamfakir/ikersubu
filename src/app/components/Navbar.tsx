@@ -4,12 +4,16 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
+interface NavLink {
+  href: string;
+  label: string;
+}
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('/');
-  const [isProductsOpen, setIsProductsOpen] = useState(false);
-
+  
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -26,125 +30,47 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const navLinks = [
+  const navLinks: NavLink[] = [
     { href: '/', label: 'Home' },
-    { 
-      label: 'Products',
-      submenu: [
-        { href: '/products/beats', label: 'Beats' },
-        { href: '/products/sound-kits', label: 'Sound Kits' },
-        { href: '/products/plugins', label: 'Plugins' },
-        { href: '/products/courses', label: 'Production Courses' }
-      ]
-    },
+    { href: '/about', label: 'About' },
     { href: '/portfolio', label: 'Portfolio' },
-    { href: '/testimonials', label: 'Testimonials' },
     { href: '/contact', label: 'Contact' }
   ];
-
-  const toggleProducts = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsProductsOpen(!isProductsOpen);
-  };
 
   return (
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed w-full z-50 transition-all duration-500 ${
-        isScrolled ? 'glass backdrop-blur-lg bg-opacity-70 border-b border-white/10' : 'bg-transparent'
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-black/90 backdrop-blur-md py-2' : 'bg-transparent py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <Link href="/" className="group">
-            <motion.div
-              className="text-2xl font-bold tracking-tighter transition-all duration-300 relative"
-              whileHover={{ scale: 1.05 }}
-            >
-              <span className="text-[#00F0FF]">
-                IKER SUBU
-              </span>
-              <motion.span
-                className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#00F0FF] to-[#9D00FF]"
-                initial={{ width: "0%" }}
-                animate={{ width: activeLink === '/' ? "100%" : "0%" }}
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.div>
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link href="/" className="flex-shrink-0">
+            <span className="text-2xl font-bold text-white">IKER SUBU</span>
           </Link>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8 h-full">
             {navLinks.map((link) => (
-              <div key={link.href || link.label} className="relative group">
-                {link.submenu ? (
-                  <>
-                    <button
-                      onClick={toggleProducts}
-                      className={`flex items-center h-full text-white hover:text-[#00F0FF] transition-colors duration-300 ${
-                        isProductsOpen ? 'text-[#00F0FF]' : ''
-                      }`}
-                    >
-                      {link.label}
-                      <svg
-                        className={`ml-1 w-4 h-4 transform transition-transform ${
-                          isProductsOpen ? 'rotate-180' : ''
-                        }`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-                    {isProductsOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-[#0B0E17] ring-1 ring-black ring-opacity-5 z-50"
-                      >
-                        <div className="py-1">
-                          {link.submenu.map((item) => (
-                            <Link
-                              key={item.href}
-                              href={item.href}
-                              className="block px-4 py-2 text-sm text-white hover:bg-[#1A1F35] hover:text-[#00F0FF] transition-colors duration-200"
-                              onClick={() => setIsProductsOpen(false)}
-                            >
-                              {item.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </>
-                ) : (
-                  <Link
-                    href={link.href}
-                    className="relative group h-full flex items-center"
-                  >
-                    <span className={`text-white hover:text-[#00F0FF] transition-colors duration-300 ${
-                      activeLink === link.href ? 'text-[#00F0FF]' : ''
-                    }`}>
-                      {link.label}
-                    </span>
-                    <span className={`absolute bottom-0 left-0 w-full h-0.5 transform origin-left transition-transform duration-300 ${
-                      activeLink === link.href
-                        ? 'bg-gradient-to-r from-[#00F0FF] to-[#9D00FF] scale-x-100'
-                        : 'bg-[#00F0FF] scale-x-0 group-hover:scale-x-100'
-                    }`} />
-                  </Link>
-                )}
-              </div>
+              <Link
+                key={link.href}
+                href={link.href}
+                className="relative group h-full flex items-center"
+              >
+                <span className={`text-white hover:text-[#00F0FF] transition-colors duration-300 ${
+                  activeLink === link.href ? 'text-[#00F0FF]' : ''
+                }`}>
+                  {link.label}
+                </span>
+                <span className={`absolute bottom-0 left-0 w-full h-0.5 transform origin-left transition-transform duration-300 ${
+                  activeLink === link.href
+                    ? 'bg-gradient-to-r from-[#00F0FF] to-[#9D00FF] scale-x-100'
+                    : 'bg-[#00F0FF] scale-x-0 group-hover:scale-x-100'
+                }`} />
+              </Link>
             ))}
           </div>
           
@@ -181,68 +107,18 @@ const Navbar = () => {
       >
         <div className="px-4 py-4 space-y-1">
           {navLinks.map((link) => (
-            <div key={link.href || link.label}>
-              {link.submenu ? (
-                <div className="mb-2">
-                  <button
-                    onClick={() => setIsProductsOpen(!isProductsOpen)}
-                    className={`w-full flex items-center justify-between py-3 px-4 rounded-md transition-all duration-300 ${
-                      isProductsOpen ? 'bg-white/10 text-[#00F0FF]' : 'text-white hover:bg-white/5 hover:text-[#00F0FF]'
-                    }`}
-                  >
-                    <span>{link.label}</span>
-                    <svg
-                      className={`w-4 h-4 transform transition-transform ${
-                        isProductsOpen ? 'rotate-180' : ''
-                      }`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </button>
-                  {isProductsOpen && (
-                    <div className="mt-1 ml-4 space-y-1">
-                      {link.submenu.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="block py-2 px-4 text-sm rounded-md transition-all duration-300 text-gray-300 hover:bg-white/5 hover:text-[#00F0FF]"
-                          onClick={() => {
-                            setIsMobileMenuOpen(false);
-                            setIsProductsOpen(false);
-                          }}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <Link
-                  href={link.href}
-                  className={`block py-3 px-4 rounded-md transition-all duration-300 ${
-                    activeLink === link.href
-                      ? 'bg-white/10 text-[#00F0FF]'
-                      : 'text-white hover:bg-white/5 hover:text-[#00F0FF]'
-                  }`}
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setIsProductsOpen(false);
-                  }}
-                >
-                  {link.label}
-                </Link>
-              )}
-            </div>
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`block py-3 px-4 rounded-md transition-all duration-300 ${
+                activeLink === link.href
+                  ? 'bg-white/10 text-[#00F0FF]'
+                  : 'text-white hover:bg-white/5 hover:text-[#00F0FF]'
+              }`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
           ))}
         </div>
       </motion.div>
