@@ -1,10 +1,12 @@
 import { FaMixer, FaCompactDisc, FaHeadphones, FaCode, FaLaptopCode, FaTools } from 'react-icons/fa';
 
+import { ReactNode } from 'react';
+
 export interface ServiceItem {
-  icon: string;
+  icon: string | ReactNode;
   title: string;
   shortDescription: string;
-  description: string;
+  description: string | ReactNode;
   includes: string[];
   delivery: string;
   featured?: boolean;
