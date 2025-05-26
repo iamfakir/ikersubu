@@ -9,10 +9,16 @@ const inter = Inter({
   weight: ['400', '500', '600', '700']
 });
 
+// Separate viewport export for Next.js 14+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   title: 'IKER SUBU',
   description: 'Music production and audio engineering by IKER SUBU',
-  viewport: 'width=device-width, initial-scale=1',
+  // Viewport is now handled by the separate viewport export
 }
 
 export default function RootLayout({

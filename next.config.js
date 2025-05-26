@@ -8,12 +8,7 @@ const nextConfig = {
     ],
     unoptimized: true,
   },
-  // Add this to disable image optimization API route
-  experimental: {
-    images: {
-      unoptimized: true,
-    },
-  },
+  // Remove experimental configuration as it's not needed with current Next.js version
 };
 
 module.exports = nextConfig;
