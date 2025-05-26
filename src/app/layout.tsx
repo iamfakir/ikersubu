@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'MixedByIker',
-  description: 'Personal portfolio and projects by Iker',
+  title: 'IKER SUBU',
+  description: 'Music production and audio engineering by IKER SUBU',
   viewport: 'width=device-width, initial-scale=1',
 }
 
