@@ -7,6 +7,10 @@ import { motion } from 'framer-motion';
 interface NavLink {
   href: string;
   label: string;
+  submenu?: Array<{
+    href: string;
+    label: string;
+  }>;
 }
 
 const Navbar = () => {
@@ -30,9 +34,12 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const navLinks: NavLink[] = [
+  const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
+    { 
+      href: '/products', 
+      label: 'Products',
+    },
     { href: '/portfolio', label: 'Portfolio' },
     { href: '/contact', label: 'Contact' }
   ];
