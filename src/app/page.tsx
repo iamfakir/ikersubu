@@ -95,11 +95,10 @@ export default function Home() {
               className="mb-8"
             >
               <motion.h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-4">
-                <span className="block text-[#E0E0FF]">Mixed by</span>
                 <motion.span
                   className="block text-[#00F0FF]"
                 >
-                  Iker
+                  IKER SUBU
                 </motion.span>
               </motion.h1>
               

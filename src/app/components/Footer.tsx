@@ -137,7 +137,7 @@ const Footer = () => {
         >
           <p className="flex items-center justify-center">
             <span className="text-[#00F0FF] mr-2">©</span>
-            {currentYear} Mixed by Iker. All rights reserved.
+            {currentYear} IKER SUBU. All rights reserved.
           </p>
         </motion.div>
       </motion.div>

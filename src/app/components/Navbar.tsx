@@ -8,6 +8,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('/');
+  const [isProductsOpen, setIsProductsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,10 +28,24 @@ const Navbar = () => {
 
   const navLinks = [
     { href: '/', label: 'Home' },
+    { 
+      label: 'Products',
+      submenu: [
+        { href: '/products/beats', label: 'Beats' },
+        { href: '/products/sound-kits', label: 'Sound Kits' },
+        { href: '/products/plugins', label: 'Plugins' },
+        { href: '/products/courses', label: 'Production Courses' }
+      ]
+    },
     { href: '/portfolio', label: 'Portfolio' },
     { href: '/testimonials', label: 'Testimonials' },
     { href: '/contact', label: 'Contact' }
   ];
+
+  const toggleProducts = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsProductsOpen(!isProductsOpen);
+  };
 
   return (
     <motion.nav
@@ -49,7 +64,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.05 }}
             >
               <span className="text-[#00F0FF]">
-                MIXED BY IKER
+                IKER SUBU
               </span>
               <motion.span
                 className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#00F0FF] to-[#9D00FF]"
@@ -62,24 +77,74 @@ const Navbar = () => {
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8 h-full">
             {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="relative group"
-              >
-                <span className={`text-white hover:text-[#00F0FF] transition-colors duration-300 py-2 ${
-                  activeLink === link.href ? 'text-[#00F0FF]' : ''
-                }`}>
-                  {link.label}
-                </span>
-                <span className={`absolute bottom-0 left-0 w-full h-0.5 transform origin-left transition-transform duration-300 ${
-                  activeLink === link.href
-                    ? 'bg-gradient-to-r from-[#00F0FF] to-[#9D00FF] scale-x-100'
-                    : 'bg-[#00F0FF] scale-x-0 group-hover:scale-x-100'
-                }`} />
-              </Link>
+              <div key={link.href || link.label} className="relative group">
+                {link.submenu ? (
+                  <>
+                    <button
+                      onClick={toggleProducts}
+                      className={`flex items-center h-full text-white hover:text-[#00F0FF] transition-colors duration-300 ${
+                        isProductsOpen ? 'text-[#00F0FF]' : ''
+                      }`}
+                    >
+                      {link.label}
+                      <svg
+                        className={`ml-1 w-4 h-4 transform transition-transform ${
+                          isProductsOpen ? 'rotate-180' : ''
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                    {isProductsOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-[#0B0E17] ring-1 ring-black ring-opacity-5 z-50"
+                      >
+                        <div className="py-1">
+                          {link.submenu.map((item) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              className="block px-4 py-2 text-sm text-white hover:bg-[#1A1F35] hover:text-[#00F0FF] transition-colors duration-200"
+                              onClick={() => setIsProductsOpen(false)}
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    href={link.href}
+                    className="relative group h-full flex items-center"
+                  >
+                    <span className={`text-white hover:text-[#00F0FF] transition-colors duration-300 ${
+                      activeLink === link.href ? 'text-[#00F0FF]' : ''
+                    }`}>
+                      {link.label}
+                    </span>
+                    <span className={`absolute bottom-0 left-0 w-full h-0.5 transform origin-left transition-transform duration-300 ${
+                      activeLink === link.href
+                        ? 'bg-gradient-to-r from-[#00F0FF] to-[#9D00FF] scale-x-100'
+                        : 'bg-[#00F0FF] scale-x-0 group-hover:scale-x-100'
+                    }`} />
+                  </Link>
+                )}
+              </div>
             ))}
           </div>
           
@@ -114,20 +179,70 @@ const Navbar = () => {
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        <div className="px-4 py-4 space-y-3">
+        <div className="px-4 py-4 space-y-1">
           {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`block py-3 px-4 text-center rounded-md transition-all duration-300 ${
-                activeLink === link.href
-                  ? 'bg-white/10 text-[#00F0FF]'
-                  : 'text-white hover:bg-white/5 hover:text-[#00F0FF]'
-              }`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
+            <div key={link.href || link.label}>
+              {link.submenu ? (
+                <div className="mb-2">
+                  <button
+                    onClick={() => setIsProductsOpen(!isProductsOpen)}
+                    className={`w-full flex items-center justify-between py-3 px-4 rounded-md transition-all duration-300 ${
+                      isProductsOpen ? 'bg-white/10 text-[#00F0FF]' : 'text-white hover:bg-white/5 hover:text-[#00F0FF]'
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    <svg
+                      className={`w-4 h-4 transform transition-transform ${
+                        isProductsOpen ? 'rotate-180' : ''
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                  {isProductsOpen && (
+                    <div className="mt-1 ml-4 space-y-1">
+                      {link.submenu.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="block py-2 px-4 text-sm rounded-md transition-all duration-300 text-gray-300 hover:bg-white/5 hover:text-[#00F0FF]"
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            setIsProductsOpen(false);
+                          }}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  href={link.href}
+                  className={`block py-3 px-4 rounded-md transition-all duration-300 ${
+                    activeLink === link.href
+                      ? 'bg-white/10 text-[#00F0FF]'
+                      : 'text-white hover:bg-white/5 hover:text-[#00F0FF]'
+                  }`}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setIsProductsOpen(false);
+                  }}
+                >
+                  {link.label}
+                </Link>
+              )}
+            </div>
           ))}
         </div>
       </motion.div>
