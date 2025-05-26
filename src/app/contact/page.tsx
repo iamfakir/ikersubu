@@ -13,6 +13,7 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const [serviceType, setServiceType] = useState('');
 
   // Animation variants
   const containerVariants = {
@@ -39,7 +40,7 @@ export default function Contact() {
     setIsSubmitting(true);
     
     // Simulate API call
-    console.log('Form submitted:', { name, email, message });
+    console.log('Form submitted:', { name, email, message, serviceType });
     
     // Simulate delay for API call
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -52,6 +53,7 @@ export default function Contact() {
       setName('');
       setEmail('');
       setMessage('');
+      setServiceType('');
       setIsSubmitted(false);
     }, 3000);
   };
@@ -103,7 +105,7 @@ export default function Contact() {
           animate="visible"
         >
           <motion.div className="text-center" variants={itemVariants}>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-primary animate-gradient mb-6">
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-[#00F0FF] mb-6">
               Get in Touch
             </h1>
             <p className="mt-2 text-lg text-[#A0A0A5] max-w-lg mx-auto">
@@ -180,6 +182,37 @@ export default function Contact() {
                     variants={itemVariants}
                   />
                 </div>
+
+                <div className="relative">
+                  <motion.label 
+                    htmlFor="serviceType" 
+                    className={`absolute left-3 transition-all duration-200 pointer-events-none ${
+                      serviceType ? 'text-xs -top-2 text-[#00F0FF]' : 'text-sm top-3 text-[#A0A0A5]'
+                    }`}
+                    variants={itemVariants}
+                  >
+                    What service are you interested in?
+                  </motion.label>
+                  <motion.select
+                    id="serviceType"
+                    name="serviceType"
+                    value={serviceType}
+                    onChange={(e) => setServiceType(e.target.value)}
+                    required
+                    className="input-futuristic pt-4 appearance-none text-[#E0E0FF]"
+                    variants={itemVariants}
+                  >
+                    <option value="" disabled hidden></option>
+                    <option value="mix_and_master">Mixing & Mastering</option>
+                    <option value="circuitBend">Circuit Bend</option>
+                    <option value="pluginsAutomation">Plugins Automation</option>
+                    <option value="touchdesigner">Touchdesigner</option>
+                    <option value="others">Others</option>
+                  </motion.select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-[#A0A0A5]">
+                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                  </div>
+                </div>
                 
                 <div className="relative">
                   <motion.label 
@@ -200,42 +233,46 @@ export default function Contact() {
                     rows={5}
                     className="input-futuristic pt-4"
                     variants={itemVariants}
-                  ></motion.textarea>
+                  />
                 </div>
                 
-                <motion.div variants={itemVariants}>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="btn-futuristic w-full relative overflow-hidden group"
-                  >
-                    <span className={`transition-all duration-300 ${isSubmitting ? 'opacity-0' : 'opacity-100'}`}>
-                      Send Message
-                    </span>
-                    {isSubmitting && (
-                      <span className="absolute inset-0 flex items-center justify-center">
-                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                      </span>
-                    )}
-                  </button>
+                <motion.div 
+                  className="flex items-center space-x-4"
+                  variants={itemVariants}
+                >
+                  <label className="flex items-center space-x-2">
+                    <input 
+                      type="checkbox" 
+                      className="form-checkbox h-5 w-5 text-cyan-500 rounded focus:ring-cyan-500 border-cyan-500" 
+                    />
+                    <span className="text-[#00F0FF]">Sign up for newsletter</span>
+                  </label>
                 </motion.div>
+                <motion.button
+                  type="submit"
+                  className="btn-primary w-full py-3 rounded-lg text-lg font-semibold flex items-center justify-center relative overflow-hidden group"
+                  disabled={isSubmitting}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <motion.span 
+                    className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    initial={{ opacity: 0 }}
+                  />
+                  <span className="relative z-10">
+                    {isSubmitting ? (
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                    ) : (
+                      'Send Message'
+                    )}
+                  </span>
+                </motion.button>
               </form>
             )}
-          </motion.div>
-          
-          <motion.div className="text-center" variants={itemVariants}>
-            <Link
-              href="/"
-              className="inline-flex items-center text-[#00F0FF] hover:text-[#9D00FF] transition-colors"
-            >
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              Back to Home
-            </Link>
           </motion.div>
         </motion.div>
       </motion.main>
