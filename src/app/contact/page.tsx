@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { useState, FormEvent, useRef, useEffect } from 'react';
+import { useState, FormEvent, useRef, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function Contact() {
+function ContactContent() {
   const searchParams = useSearchParams();
   const [name, setName] = useState('');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -19,7 +19,7 @@ export default function Contact() {
   const [serviceType, setServiceType] = useState('');
 
   useEffect(() => {
-    const service = searchParams.get('service');
+    const service = searchParams?.get('service');
     if (service) {
       setServiceType(service);
     }
@@ -314,5 +314,17 @@ export default function Contact() {
       </motion.main>
       <Footer />
     </div>
+  );
+}
+
+export default function Contact() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-[#0B0E17]">
+        <div className="animate-pulse text-white">Loading contact form...</div>
+      </div>
+    }>
+      <ContactContent />
+    </Suspense>
   );
 }
