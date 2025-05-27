@@ -4,16 +4,36 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { useState, FormEvent, useRef } from 'react';
+import { useState, FormEvent, useRef, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 export default function Contact() {
+  const searchParams = useSearchParams();
   const [name, setName] = useState('');
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const [serviceType, setServiceType] = useState('');
+
+  useEffect(() => {
+    const service = searchParams.get('service');
+    if (service) {
+      setServiceType(service);
+    }
+
+    const handleMouseMove = (event: MouseEvent) => {
+      setMousePosition({ x: event.clientX, y: event.clientY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [searchParams]);
 
   // Animation variants
   const containerVariants = {
@@ -71,9 +91,25 @@ export default function Contact() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#0B0E17] to-[#1A1F35] z-0"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E17]/20 to-transparent mix-blend-overlay z-10"></div>
         
-        {/* Animated background circles */}
+        {/* Animated background element following cursor */}
+        <motion.div
+          className="absolute w-64 h-64 rounded-full bg-gradient-to-br from-[#00F0FF] to-[#9D00FF] opacity-20 blur-3xl pointer-events-none z-10"
+          animate={{
+            x: mousePosition.x - 128, // Center the element on the cursor (w-64 is 256px, half is 128px)
+            y: mousePosition.y - 128, // Center the element on the cursor
+            scale: [1, 1.05, 1],
+            opacity: [0.2, 0.25, 0.2]
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 60,
+            damping: 25
+          }}
+        />
+
+        {/* Existing Animated background circles */}
         <motion.div 
-          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-[#00F0FF] opacity-5 blur-3xl"
+          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-[#00F0FF] opacity-5 blur-3xl z-10"
           animate={{ 
             scale: [1, 1.2, 1],
             opacity: [0.05, 0.08, 0.05]
@@ -85,7 +121,7 @@ export default function Contact() {
           }}
         />
         <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-[#9D00FF] opacity-5 blur-3xl"
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-[#9D00FF] opacity-5 blur-3xl z-10"
           animate={{ 
             scale: [1.2, 1, 1.2],
             opacity: [0.08, 0.05, 0.08]
