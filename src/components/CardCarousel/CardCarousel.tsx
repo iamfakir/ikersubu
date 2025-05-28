@@ -19,6 +19,7 @@ interface WorkItem {
   description: string;
   techniques: string[];
   imageUrl: string;
+  isFeatured?: boolean;
 }
 
 // Type assertion to ensure the imported data matches our WorkItem type
