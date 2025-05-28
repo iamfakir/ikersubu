@@ -19,6 +19,7 @@ interface WorkItem {
   description: string;
   techniques: string[];
   imageUrl: string;
+  isFeatured?: boolean;
 }
 
 // Type assertion to ensure the imported data matches our WorkItem type
@@ -28,14 +29,20 @@ export default function CardCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [selectedProject, setSelectedProject] = useState<WorkItem | null>(null);
-  const [activeTab, setActiveTab] = useState<'assisted' | 'mixed'>('assisted');
+  const [activeTab, setActiveTab] = useState<'assisted' | 'all'>('assisted');
   const carouselRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const transitionTimeout = useRef<NodeJS.Timeout | null>(null);
   
   // Filter projects based on active tab
-  const filteredItems = workItems.filter(item => item.type === activeTab);
+  const filteredItems = workItems.filter(item => {
+    if (activeTab === 'assisted') {
+      return item.isFeatured;
+    } else {
+      return true; // For 'all' tab, show all projects
+    }
+  });
 
   const updateCarousel = (direction: 'next' | 'prev' | number) => {
     if (isAnimating) return;
@@ -131,20 +138,20 @@ export default function CardCarousel() {
 
   return (
     <div className="card-carousel-container">
-      <h1 className="portfolio-title">PROJECT SHOWCASE</h1> {/* Changed title */}
+      <h1 className="portfolio-title">Portfolio</h1>
       
       <div className="filter-buttons">
         <button 
           onClick={() => setActiveTab('assisted')}
           className={`filter-button ${activeTab === 'assisted' ? 'active' : ''}`}
         >
-          Featured Work
+          Assisted Mixes
         </button>
         <button 
-          onClick={() => setActiveTab('mixed')}
-          className={`filter-button ${activeTab === 'mixed' ? 'active' : ''}`}
+          onClick={() => setActiveTab('all')}
+          className={`filter-button ${activeTab === 'all' ? 'active' : ''}`}
         >
-          All Projects (Soon)
+          All Mixes
         </button>
       </div>
 
@@ -248,19 +255,7 @@ export default function CardCarousel() {
         </div>
       )}
 
-      {filteredItems.length > 1 && (
-        <div className="dots">
-          {filteredItems.map((_, index) => (
-            <button 
-              key={index} 
-              className={`dot ${index === currentIndex ? 'active' : ''}`}
-              onClick={() => updateCarousel(index)}
-              disabled={isAnimating}
-              aria-label={`Go to project ${index + 1}`}
-            />
-          ))}
-        </div>
-      )}
+
 
       {/* Placeholder for Animated Stats */}
       <div className="animated-stats-placeholder">

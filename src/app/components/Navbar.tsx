@@ -46,7 +46,7 @@ const Navbar = () => {
       label: 'Products',
       href: '#',
       submenu: [
-        { href: '/products/beats', label: 'Beats' },
+        { href: '/products/microlicensing', label: 'Microlicensing' },
         { href: '/products/sound-kits', label: 'Sound Kits' },
         { href: '/products/plugins', label: 'Plugins' }
       ]
