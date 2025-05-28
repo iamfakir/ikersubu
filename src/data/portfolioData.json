@@ -14,7 +14,8 @@
         "Mid-side EQ for width",
         "Vocal doubling and effects"
       ],
-      "imageUrl": "/assets/images/works/34.jpg"
+      "imageUrl": "/assets/images/works/34.jpg",
+      "isFeatured": true
     },
     {
       "id": 2,
@@ -30,7 +31,8 @@
         "Vocal chain optimization",
         "Spatial processing"
       ],
-      "imageUrl": "/assets/images/works/56.jpg"
+      "imageUrl": "/assets/images/works/56.jpg",
+      "isFeatured": true
     },
     {
       "id": 3,
@@ -46,7 +48,8 @@
         "Vocal production",
         "Dynamic processing"
       ],
-      "imageUrl": "/assets/images/works/55.jpg"
+      "imageUrl": "/assets/images/works/55.jpg",
+      "isFeatured": true
     },
     {
       "id": 4,
@@ -62,7 +65,8 @@
         "Spatial processing",
         "Texture layering"
       ],
-      "imageUrl": "/assets/images/works/54.jpg"
+      "imageUrl": "/assets/images/works/54.jpg",
+      "isFeatured": true
     },
     {
       "id": 5,
