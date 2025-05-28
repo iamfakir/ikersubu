@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
+import WaveAnimation from './WaveAnimation';
 // Note: Run "npm install @emailjs/browser" or "yarn add @emailjs/browser" first
 
 const Contact = () => {
@@ -52,8 +53,11 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen bg-gray-900 text-white py-20 px-4">
+      <div className="fixed inset-0 w-full h-full -z-10">
+        <WaveAnimation />
+      </div>
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -148,7 +152,7 @@ const Contact = () => {
           </motion.form>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
