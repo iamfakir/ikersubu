@@ -6,69 +6,35 @@ import AudioWave from '../AudioWave';
 import './CardCarousel.css';
 import '../AudioWave.css';
 
+import portfolioData from '@/data/portfolioData.json';
+
 interface WorkItem {
+  id: number;
   name: string;
-  role: string; // This can represent 'Mix Type' or 'Project Role'
-  bio?: string; // This can be 'Project Description' or 'Key Techniques'
+  role: string;
   type: 'assisted' | 'mixed';
+  year: number;
+  genre: string;
+  client: string;
+  description: string;
+  techniques: string[];
   imageUrl: string;
 }
 
-const workItems: WorkItem[] = [
-  {
-    name: "Project Alpha",
-    role: "Full Mix & Master",
-    bio: "A dynamic rock track mix focusing on punch and clarity, mastered for streaming platforms.",
-    type: "assisted", // Assuming 'assisted' means you want to show it now
-    imageUrl: "/assets/images/works/34.jpg"
-  },
-  {
-    name: "Song Beta",
-    role: "Vocal Production & Mix",
-    bio: "Pop song featuring layered vocals, FX, and a wide stereo image.",
-    type: "assisted",
-    imageUrl: "/assets/images/works/35.jpg"
-  },
-  {
-    name: "EP Gamma",
-    role: "Stem Mastering",
-    bio: "Stem master for an electronic EP, enhancing depth and loudness.",
-    type: "assisted",
-    imageUrl: "/assets/images/works/36.jpg"
-  },
-  {
-    name: "Album Delta",
-    role: "Full Mix",
-    bio: "Indie folk album mixed for warmth and natural dynamics.",
-    type: "assisted",
-    imageUrl: "/assets/images/works/37.jpg"
-  },
-  {
-    name: "Single Epsilon",
-    role: "Mixing & Additional Production",
-    bio: "Hip-hop single with heavy 808s and crisp high-end.",
-    type: "assisted",
-    imageUrl: "/assets/images/works/38.jpg"
-  },
-  {
-    name: "Soundtrack Zeta",
-    role: "Audio Post-Production & Mix",
-    bio: "Mixed for a short film, focusing on dialogue clarity and immersive soundscapes.",
-    type: "assisted",
-    imageUrl: "/assets/images/works/39.jpg"
-  }
-];
+// Type assertion to ensure the imported data matches our WorkItem type
+const workItems: WorkItem[] = portfolioData.projects as WorkItem[];
 
 export default function CardCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<WorkItem | null>(null); // Changed from selectedMember
+  const [selectedProject, setSelectedProject] = useState<WorkItem | null>(null);
   const [activeTab, setActiveTab] = useState<'assisted' | 'mixed'>('assisted');
   const carouselRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const transitionTimeout = useRef<NodeJS.Timeout | null>(null);
-
+  
+  // Filter projects based on active tab
   const filteredItems = workItems.filter(item => item.type === activeTab);
 
   const updateCarousel = (direction: 'next' | 'prev' | number) => {
@@ -231,7 +197,9 @@ export default function CardCarousel() {
                     </div>
                     <div className="card-content">
                       <h3>{cardData.name}</h3>
-                      <p>{cardData.role}</p>
+                      <p className="role">{cardData.role}</p>
+                      <p className="client">{cardData.client}</p>
+                      <p className="genre">{cardData.genre}</p>
                     </div>
                     <AudioWave className="card-wave" />
                   </div>
@@ -259,12 +227,22 @@ export default function CardCarousel() {
         <div className="member-details-overlay" onClick={handleOverlayClick}>
           <div className="member-details-card">
             <button className="close-button" onClick={() => setSelectedProject(null)}>×</button>
-            <h2 className="member-name">{selectedProject.name}</h2>
-            <p className="member-role">{selectedProject.role}</p>
-            {selectedProject.bio && <p className="member-bio">{selectedProject.bio}</p>}
-             {/* Placeholder for more details, e.g., audio player, tech stack */}
-            <div className="project-links-placeholder">
-                <p><em>Listen / More Info Soon</em></p>
+            <h2 className="project-name">{selectedProject.name}</h2>
+            <p className="project-role">{selectedProject.role}</p>
+            <p className="project-client">Client: {selectedProject.client}</p>
+            <p className="project-genre">Genre: {selectedProject.genre}</p>
+            <p className="project-year">Year: {selectedProject.year}</p>
+            <div className="project-description">
+              <h4>Project Details:</h4>
+              <p>{selectedProject.description}</p>
+            </div>
+            <div className="project-techniques">
+              <h4>Techniques Used:</h4>
+              <ul>
+                {selectedProject.techniques.map((tech, index) => (
+                  <li key={index}>{tech}</li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
