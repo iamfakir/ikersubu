@@ -29,7 +29,7 @@ export default function CardCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [selectedProject, setSelectedProject] = useState<WorkItem | null>(null);
-  const [activeTab, setActiveTab] = useState<'assisted' | 'all'>('assisted');
+  const [activeTab, setActiveTab] = useState<'assisted' | 'mixMaster' | 'production' | 'recording'>('assisted');
   const carouselRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
@@ -38,10 +38,15 @@ export default function CardCarousel() {
   // Filter projects based on active tab
   const filteredItems = workItems.filter(item => {
     if (activeTab === 'assisted') {
-      return item.isFeatured;
-    } else {
-      return true; // For 'all' tab, show all projects
+      return item.type === 'assisted';
+    } else if (activeTab === 'mixMaster') {
+      return item.type === 'mixed';
+    } else if (activeTab === 'production') {
+      return false; // Return empty for now, user will add files later
+    } else if (activeTab === 'recording') {
+      return false; // Return empty for now, user will add files later
     }
+    return false;
   });
 
   const updateCarousel = (direction: 'next' | 'prev' | number) => {
@@ -148,10 +153,22 @@ export default function CardCarousel() {
           Assisted Mixes
         </button>
         <button 
-          onClick={() => setActiveTab('all')}
-          className={`filter-button ${activeTab === 'all' ? 'active' : ''}`}
+          onClick={() => setActiveTab('mixMaster')}
+          className={`filter-button ${activeTab === 'mixMaster' ? 'active' : ''}`}
         >
-          All Mixes
+          Mix/Master
+        </button>
+        <button 
+          onClick={() => setActiveTab('production')}
+          className={`filter-button ${activeTab === 'production' ? 'active' : ''}`}
+        >
+          Production
+        </button>
+        <button 
+          onClick={() => setActiveTab('recording')}
+          className={`filter-button ${activeTab === 'recording' ? 'active' : ''}`}
+        >
+          Recording
         </button>
       </div>
 
@@ -192,15 +209,16 @@ export default function CardCarousel() {
                 >
                   <div className="card-inner">
                     <div className="image-container">
-                      <Image
-                        src={cardData.imageUrl} 
-                        alt={cardData.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="card-image"
-                        priority={cardData.position === 0} // Prioritize center image
-                        // objectFit="cover" // Redundant with fill and CSS
-                      />
+                      {activeTab === 'assisted' && (
+                        <Image
+                          src={cardData.imageUrl} 
+                          alt={cardData.name}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          className="card-image"
+                          priority={cardData.position === 0} // Prioritize center image
+                        />
+                      )}
                     </div>
                     <div className="card-content">
                       <h3>{cardData.name}</h3>
