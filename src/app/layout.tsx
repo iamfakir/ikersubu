@@ -33,9 +33,9 @@ export default function RootLayout({
         <meta charSet="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
       </head>
-      <body className="min-h-screen bg-white text-gray-900 antialiased">
-        <div id="root" className="min-h-screen flex flex-col">
-          <Navbar />
+      <body className="text-gray-900 antialiased">
+        <div id="root" className="flex flex-col">
+          {/* <Navbar /> */}
           {children}
         </div>
       </body>
