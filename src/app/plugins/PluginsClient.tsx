@@ -59,8 +59,8 @@ export default function PluginsClient({ plugins }: PluginsClientProps) {
                   </div>
                 </Link>
                 <div className="p-6">
-                  <div className="flex justify-between items-start mb-2">
-                    <h2 className="text-2xl font-bold text-white">{plugin.title}</h2>
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2"> {/* Adjusted for mobile stacking */}
+                    <h2 className="text-2xl font-bold text-white mb-2 sm:mb-0">{plugin.title}</h2> {/* Added margin bottom on mobile */}
                     <span className="text-sm text-[#00F0FF] bg-[#00F0FF]/10 px-3 py-1 rounded-full">
                       {plugin.category}
                     </span>
@@ -69,8 +69,8 @@ export default function PluginsClient({ plugins }: PluginsClientProps) {
                   
                   <ul className="space-y-1 mb-6">
                     {plugin.features.map((feature, index) => (
-                      <li key={index} className="flex items-center text-gray-400 text-sm">
-                        <svg className="w-4 h-4 mr-2 text-[#00F0FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <li key={index} className="flex items-start text-gray-400 text-sm"> {/* Changed to items-start */}
+                        <svg className="w-4 h-4 mr-2 text-[#00F0FF] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> {/* Added flex-shrink-0 */}
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                         {feature}

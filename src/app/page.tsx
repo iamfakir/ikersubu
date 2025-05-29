@@ -88,21 +88,21 @@ export default function Home() {
           
           
           {/* Content */}
-          <div className="relative z-20 text-center px-8 max-w-4xl mx-auto">
+          <div className="relative z-20 text-center px-4 sm:px-8 max-w-4xl mx-auto"> {/* Adjusted px for mobile */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="mb-8"
             >
-              <motion.h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-4">
+              <motion.h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-4"> {/* Adjusted font sizes */}
                 <motion.span
                   className="block text-[#00F0FF]"
                 >
                   IKER SUBU
                 </motion.span>
                 <motion.span
-                  className="block text-white text-4xl sm:text-5xl md:text-6xl mt-2"
+                  className="block text-white text-3xl sm:text-4xl md:text-5xl mt-2" {/* Adjusted font sizes */}
                 >
                   Professional Audio Engineer & Producer
                 </motion.span>
@@ -112,7 +112,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.5 }}
-                className="text-xl sm:text-2xl text-[#A0A0A5] mt-6 max-w-2xl mx-auto"
+                className="text-lg sm:text-xl text-[#A0A0A5] mt-6 max-w-2xl mx-auto" {/* Adjusted font sizes */}
               >
                 Crafting sonic excellence, one mix at a time.
               </motion.p>
@@ -164,8 +164,8 @@ export default function Home() {
         </div>
 
         {/* Featured Work Carousel Section */}
-        <section className="py-20 px-8">
-          <h2 className="text-4xl font-bold text-center mb-12 text-white">Featured Mixes</h2>
+        <section className="py-20 px-4 sm:px-8"> {/* Adjusted px for mobile */}
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">Featured Mixes</h2> {/* Adjusted font sizes */}
           <CardCarousel />
           <div className="carousel">
             {/* Carousel of featured projects or testimonials */}
@@ -182,7 +182,7 @@ export default function Home() {
 }
 
         {/* Brand Story Section */}
-        <section className="py-20 px-8 bg-gradient-to-b from-[#0B0E17] to-[#1A1F35]">
+        <section className="py-20 px-4 sm:px-8 bg-gradient-to-b from-[#0B0E17] to-[#1A1F35]"> {/* Adjusted px for mobile */}
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -190,8 +190,8 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl font-bold text-white mb-6">My Audio Journey</h2>
-              <p className="text-xl text-[#A0A0A5] max-w-3xl mx-auto">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">My Audio Journey</h2> {/* Adjusted font sizes */}
+              <p className="text-lg sm:text-xl text-[#A0A0A5] max-w-3xl mx-auto"> {/* Adjusted font sizes */}
                 From bedroom producer to professional audio engineer, I've dedicated my life to perfecting the art of sound. 
                 Every mix tells a story, and I'm here to make yours unforgettable.
               </p>
