@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface NavLinkItem {
   href: string;
   label: string;
+  submenu?: NavLinkItem[];
 }
 
 interface NavLink extends NavLinkItem {
@@ -16,7 +17,7 @@ interface NavLink extends NavLinkItem {
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const [activeLink, setActiveLink] = useState('/');
   
   useEffect(() => {
@@ -33,11 +34,34 @@ const Navbar = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+    if (!isMobileMenuOpen) {
+      setOpenSubmenu(null);
+    }
   };
 
-  const toggleProducts = (e: React.MouseEvent) => {
+  const toggleSubmenu = (e: React.MouseEvent, label: string) => {
     e.preventDefault();
-    setIsProductsOpen(!isProductsOpen);
+    e.stopPropagation();
+    if (window.innerWidth < 768) { // Mobile
+      setOpenSubmenu(openSubmenu === label ? null : label);
+    }
+  };
+
+  const handleMouseEnter = (label: string) => {
+    if (window.innerWidth >= 768) { // Desktop
+      setOpenSubmenu(label);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (window.innerWidth >= 768) { // Desktop
+      setOpenSubmenu(null);
+    }
+  };
+  
+  const closeAllMenus = () => {
+    setOpenSubmenu(null);
+    setIsMobileMenuOpen(false);
   };
 
   const navLinks: NavLink[] = [
@@ -48,7 +72,7 @@ const Navbar = () => {
       submenu: [
         { href: '/products/microlicensing', label: 'Microlicensing' },
         { href: '/products/sound-kits', label: 'Sound Kits' },
-        { href: '/products/plugins', label: 'Plugins' }
+        { href: '/plugins', label: 'Plugins' }
       ]
     },
     { href: '/portfolio', label: 'Portfolio' },
@@ -73,19 +97,24 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8 h-full">
             {navLinks.map((link) => (
-              <div key={link.label} className="relative group h-full flex items-center">
+              <div 
+                key={link.label} 
+                className="relative group h-full flex items-center"
+                onMouseEnter={() => handleMouseEnter(link.label)}
+                onMouseLeave={handleMouseLeave}
+              >
                 {link.submenu ? (
                   <>
                     <button
-                      onClick={toggleProducts}
+                      onClick={(e) => toggleSubmenu(e, link.label)}
                       className={`flex items-center text-white hover:text-[#00F0FF] transition-colors duration-300 ${
-                        isProductsOpen ? 'text-[#00F0FF]' : ''
+                        openSubmenu === link.label ? 'text-[#00F0FF]' : ''
                       }`}
                     >
                       {link.label}
                       <svg
                         className={`ml-1 w-4 h-4 transform transition-transform ${
-                          isProductsOpen ? 'rotate-180' : ''
+                          openSubmenu === link.label ? 'rotate-180' : ''
                         }`}
                         fill="none"
                         stroke="currentColor"
@@ -101,7 +130,7 @@ const Navbar = () => {
                       </svg>
                     </button>
                     <AnimatePresence>
-                      {isProductsOpen && (
+                      {openSubmenu === link.label && (
                         <motion.div
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -110,14 +139,52 @@ const Navbar = () => {
                         >
                           <div className="py-1">
                             {link.submenu.map((item) => (
-                              <Link
-                                key={item.href}
-                                href={item.href}
-                                className="block px-4 py-2 text-sm text-white hover:bg-[#1A1F35] hover:text-[#00F0FF] transition-colors duration-200"
-                                onClick={() => setIsProductsOpen(false)}
-                              >
-                                {item.label}
-                              </Link>
+                              <div key={item.href} className="relative group">
+                                {item.submenu ? (
+                                  <>
+                                    <button
+                                      onClick={(e) => toggleSubmenu(e, item.label || '')}
+                                      className="w-full text-left px-4 py-2 text-sm text-white hover:bg-[#1A1F35] hover:text-[#00F0FF] transition-colors duration-200 flex justify-between items-center"
+                                    >
+                                      {item.label}
+                                      <svg className="w-4 h-4 ml-2 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                      </svg>
+                                    </button>
+                                    <AnimatePresence>
+                                      {openSubmenu === item.label && (
+                                        <motion.div
+                                          initial={{ opacity: 0, x: 10 }}
+                                          animate={{ opacity: 1, x: 0 }}
+                                          exit={{ opacity: 0, x: 10 }}
+                                          className="absolute left-full top-0 ml-1 w-56 rounded-md shadow-lg bg-[#0B0E17] ring-1 ring-black ring-opacity-5 z-50"
+                                        >
+                                          <div className="py-1">
+                                            {item.submenu.map((subItem) => (
+                                              <Link
+                                                key={subItem.href}
+                                                href={subItem.href}
+                                                className="block px-4 py-2 text-sm text-white hover:bg-[#1A1F35] hover:text-[#00F0FF] transition-colors duration-200"
+                                                onClick={() => setOpenSubmenu(null)}
+                                              >
+                                                {subItem.label}
+                                              </Link>
+                                            ))}
+                                          </div>
+                                        </motion.div>
+                                      )}
+                                    </AnimatePresence>
+                                  </>
+                                ) : (
+                                  <Link
+                                    href={item.href}
+                                    className="block px-4 py-2 text-sm text-white hover:bg-[#1A1F35] hover:text-[#00F0FF] transition-colors duration-200"
+                                    onClick={() => setOpenSubmenu(null)}
+                                  >
+                                    {item.label}
+                                  </Link>
+                                )}
+                              </div>
                             ))}
                           </div>
                         </motion.div>
@@ -182,15 +249,15 @@ const Navbar = () => {
               {link.submenu ? (
                 <div className="mb-2">
                   <button
-                    onClick={() => setIsProductsOpen(!isProductsOpen)}
+                    onClick={(e) => toggleSubmenu(e, link.label)}
                     className={`w-full flex items-center justify-between py-3 px-4 rounded-md transition-all duration-300 ${
-                      isProductsOpen ? 'bg-white/10 text-[#00F0FF]' : 'text-white hover:bg-white/5 hover:text-[#00F0FF]'
+                      openSubmenu === link.label ? 'bg-white/10 text-[#00F0FF]' : 'text-white hover:bg-white/5 hover:text-[#00F0FF]'
                     }`}
                   >
                     <span>{link.label}</span>
                     <svg
                       className={`w-4 h-4 transform transition-transform ${
-                        isProductsOpen ? 'rotate-180' : ''
+                        openSubmenu === link.label ? 'rotate-180' : ''
                       }`}
                       fill="none"
                       stroke="currentColor"
@@ -205,8 +272,8 @@ const Navbar = () => {
                       />
                     </svg>
                   </button>
-                  {isProductsOpen && (
-                    <div className="mt-1 ml-4 space-y-1">
+                  {openSubmenu === link.label && (
+                    <div className="pl-4 mt-1 space-y-1">
                       {link.submenu.map((item) => (
                         <Link
                           key={item.href}
@@ -214,7 +281,8 @@ const Navbar = () => {
                           className="block py-2 px-4 text-sm rounded-md transition-all duration-300 text-gray-300 hover:bg-white/5 hover:text-[#00F0FF]"
                           onClick={() => {
                             setIsMobileMenuOpen(false);
-                            setIsProductsOpen(false);
+                            setOpenSubmenu(null);
+
                           }}
                         >
                           {item.label}
@@ -233,7 +301,7 @@ const Navbar = () => {
                   }`}
                   onClick={() => {
                     setIsMobileMenuOpen(false);
-                    setIsProductsOpen(false);
+                    setOpenSubmenu(null);
                   }}
                 >
                   {link.label}
