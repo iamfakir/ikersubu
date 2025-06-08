@@ -8,6 +8,22 @@ export const metadata: Metadata = {
 
 const plugins = [
   {
+    id: 'dripper-web',
+    title: 'Dripper Web - Interactive Demo',
+    description: 'Try our saturation processor directly in your browser with real-time audio processing.',
+    category: 'Web Demo',
+    image: '/assets/images/Plugin/dripper/Silver.png',
+    url: '/plugins/dripper-web',
+    comingSoon: false,
+    features: [
+      'Real-time audio processing',
+      'Interactive knob control',
+      'Even/Odd harmonics modes',
+      'Download processed audio',
+      'No installation required'
+    ]
+  },
+  {
     id: 'dripper-silver',
     title: 'Dripper - Silver Edition',
     description: 'A versatile audio effect plugin that adds warmth and character to your tracks.',
