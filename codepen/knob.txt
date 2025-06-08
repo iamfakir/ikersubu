@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saturation Audio Processor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            font-weight: 300;
+            color: #ff6b6b;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+        }
+
+        .upload-section {
+            margin-bottom: 40px;
+        }
+
+        .upload-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            color: white;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .knob-container {
+            margin: 50px 0;
+            position: relative;
+        }
+
+        .knob {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            margin: 0 auto;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 
+                0 0 20px rgba(52, 152, 219, 0.3),
+                inset 0 0 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .knob:hover {
+            box-shadow: 
+                0 0 30px rgba(52, 152, 219, 0.5),
+                inset 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .knob-pointer {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 4px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ff6b6b, #ff8e8e);
+            transform: translateX(-50%) rotate(0deg);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+            transform-origin: 50% 65px;
+            transition: transform 0.2s ease;
+        }
+
+        .knob-markers {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .knob-marker {
+            position: absolute;
+            width: 2px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.6);
+            top: 5px;
+            left: 50%;
+            transform-origin: 50% 70px;
+            transform: translateX(-50%);
+        }
+
+        .knob-marker.active {
+            background: #ff6b6b;
+            box-shadow: 0 0 8px rgba(255, 107, 107, 0.8);
+        }
+
+        .step-indicator {
+            margin-top: 10px;
+            font-size: 1.1em;
+            color: #f39c12;
+            text-shadow: 0 0 10px rgba(243, 156, 18, 0.3);
+        }
+
+        .knob-label {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #ecf0f1;
+            text-shadow: 0 0 10px rgba(236, 240, 241, 0.3);
+        }
+
+        .value-display {
+            margin-top: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #3498db;
+            text-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+        }
+
+        .mode-indicator {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border-radius: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .even-mode {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            color: white;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .odd-mode {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .controls {
+            margin-top: 30px;
+        }
+
+        .control-btn {
+            background: linear-gradient(45deg, #8e44ad, #9b59b6);
+            border: none;
+            padding: 12px 25px;
+            margin: 0 10px;
+            border-radius: 20px;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(142, 68, 173, 0.4);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.9em;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .rotation-counter {
+            margin-top: 10px;
+            font-size: 1em;
+            color: #f39c12;
+            text-shadow: 0 0 10px rgba(243, 156, 18, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Saturation Audio Processor</h1>
+        
+        <div class="upload-section">
+            <button class="upload-btn" onclick="document.getElementById('audioFile').click()">
+                Upload Audio File
+            </button>
+            <input type="file" id="audioFile" class="file-input" accept="audio/*">
+        </div>
+
+        <div class="knob-container">
+            <div class="knob" id="saturationKnob">
+                <div class="knob-markers" id="knobMarkers"></div>
+                <div class="knob-pointer" id="knobPointer"></div>
+            </div>
+            <div class="knob-label">Saturation</div>
+            <div class="value-display" id="valueDisplay">0%</div>
+            <div class="step-indicator" id="stepIndicator">Step: 0/12</div>
+            <div class="mode-indicator even-mode" id="modeIndicator">Even Harmonics Mode</div>
+        </div>
+
+        <div class="controls">
+            <button class="control-btn" id="playBtn" disabled>Play</button>
+            <button class="control-btn" id="pauseBtn" disabled>Pause</button>
+            <button class="control-btn" id="stopBtn" disabled>Stop</button>
+            <button class="control-btn" id="downloadBtn" disabled>Download</button>
+        </div>
+
+        <div class="status" id="statusDisplay">Upload an audio file to begin</div>
+    </div>
+
+    <script>
+        class SaturationProcessor {
+            constructor() {
+                this.audioContext = null;
+                this.audioBuffer = null;
+                this.sourceNode = null;
+                this.isPlaying = false;
+                this.isPaused = false;
+                this.currentStep = 0; // 0-12 discrete steps
+                this.processedBuffer = null;
+                this.gainNode = null;
+                this.saturationNode = null;
+                this.startTime = 0;
+                this.pauseTime = 0;
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.createKnobMarkers();
+                this.updateKnobDisplay();
+            }
+
+            initializeElements() {
+                this.knob = document.getElementById('saturationKnob');
+                this.knobPointer = document.getElementById('knobPointer');
+                this.knobMarkers = document.getElementById('knobMarkers');
+                this.valueDisplay = document.getElementById('valueDisplay');
+                this.stepIndicator = document.getElementById('stepIndicator');
+                this.modeIndicator = document.getElementById('modeIndicator');
+                this.statusDisplay = document.getElementById('statusDisplay');
+                this.playBtn = document.getElementById('playBtn');
+                this.pauseBtn = document.getElementById('pauseBtn');
+                this.stopBtn = document.getElementById('stopBtn');
+                this.downloadBtn = document.getElementById('downloadBtn');
+                this.audioFileInput = document.getElementById('audioFile');
+            }
+
+            createKnobMarkers() {
+                // Create 12 markers from 6 o'clock (180°) to 5 o'clock (150°)
+                // Total range: 330° (180° to 510°, which is 150° of next rotation)
+                const totalAngle = 330;
+                const startAngle = 180; // 6 o'clock
+                
+                for (let i = 0; i <= 12; i++) {
+                    const marker = document.createElement('div');
+                    marker.className = 'knob-marker';
+                    marker.id = `marker-${i}`;
+                    
+                    const angle = startAngle + (i * totalAngle / 12);
+                    marker.style.transform = `translateX(-50%) rotate(${angle}deg)`;
+                    
+                    this.knobMarkers.appendChild(marker);
+                }
+            }
+
+            setupEventListeners() {
+                this.audioFileInput.addEventListener('change', (e) => this.handleFileUpload(e));
+                this.knob.addEventListener('mousedown', (e) => this.startKnobDrag(e));
+                this.knob.addEventListener('wheel', (e) => this.handleKnobScroll(e));
+                this.playBtn.addEventListener('click', () => this.playAudio());
+                this.pauseBtn.addEventListener('click', () => this.pauseAudio());
+                this.stopBtn.addEventListener('click', () => this.stopAudio());
+                this.downloadBtn.addEventListener('click', () => this.downloadProcessedAudio());
+            }
+
+            handleKnobScroll(event) {
+                event.preventDefault();
+                const delta = event.deltaY > 0 ? 1 : -1;
+                this.setStep(this.currentStep + delta);
+            }
+
+            setStep(newStep) {
+                newStep = Math.max(0, Math.min(12, newStep));
+                if (newStep !== this.currentStep) {
+                    this.currentStep = newStep;
+                    this.updateKnobDisplay();
+                    this.updateRealTimeSaturation();
+                }
+            }
+
+            updateRealTimeSaturation() {
+                if (this.saturationNode) {
+                    // Update saturation parameters in real-time
+                    const saturationAmount = this.currentStep / 12;
+                    
+                    // Create new saturation curve
+                    const curve = this.createSaturationCurve(saturationAmount);
+                    this.saturationNode.curve = curve;
+                    this.saturationNode.oversample = '4x';
+                }
+            }
+
+            createSaturationCurve(amount) {
+                const samples = 44100;
+                const curve = new Float32Array(samples);
+                const deg = Math.PI / 180;
+                
+                for (let i = 0; i < samples; i++) {
+                    const x = (i * 2) / samples - 1;
+                    
+                    if (this.currentStep <= 6) {
+                        // Even harmonics mode - softer saturation
+                        const evenSat = amount * 0.5;
+                        curve[i] = Math.tanh(x * (1 + evenSat * 3)) * (1 - evenSat * 0.1);
+                    } else {
+                        // Odd harmonics mode - harder saturation
+                        const oddSat = ((this.currentStep - 6) / 6) * 0.7;
+                        curve[i] = x * (1 + oddSat) + Math.sin(x * Math.PI * oddSat) * oddSat * 0.3;
+                        curve[i] = Math.max(-1, Math.min(1, curve[i]));
+                    }
+                }
+                
+                return curve;
+            }
+
+            startKnobDrag(event) {
+                event.preventDefault();
+                const knobRect = this.knob.getBoundingClientRect();
+                const centerX = knobRect.left + knobRect.width / 2;
+                const centerY = knobRect.top + knobRect.height / 2;
+
+                const handleMouseMove = (e) => {
+                    const angle = this.getAngleFromCenter(e.clientX, e.clientY, centerX, centerY);
+                    const step = this.angleToStep(angle);
+                    this.setStep(step);
+                };
+
+                const handleMouseUp = () => {
+                    document.removeEventListener('mousemove', handleMouseMove);
+                    document.removeEventListener('mouseup', handleMouseUp);
+                };
+
+                document.addEventListener('mousemove', handleMouseMove);
+                document.addEventListener('mouseup', handleMouseUp);
+            }
+
+            getAngleFromCenter(x, y, centerX, centerY) {
+                let angle = Math.atan2(y - centerY, x - centerX) * (180 / Math.PI);
+                // Normalize to 0-360
+                if (angle < 0) angle += 360;
+                return angle;
+            }
+
+            angleToStep(angle) {
+                // Convert angle to step (0-12)
+                // 6 o'clock = 180°, 5 o'clock = 150° (or 510° in extended range)
+                const startAngle = 180;
+                const totalAngle = 330;
+                
+                let normalizedAngle;
+                if (angle >= 180) {
+                    normalizedAngle = angle - 180;
+                } else if (angle <= 150) {
+                    normalizedAngle = angle + 180; // 330° range
+                } else {
+                    // Between 150° and 180°, choose closest
+                    const distTo180 = 180 - angle;
+                    const distTo150 = angle - 150;
+                    if (distTo180 < distTo150) {
+                        normalizedAngle = 0;
+                    } else {
+                        normalizedAngle = 330;
+                    }
+                }
+                
+                const step = Math.round((normalizedAngle / totalAngle) * 12);
+                return Math.max(0, Math.min(12, step));
+            }
+
+            updateKnobDisplay() {
+                // Update pointer rotation (6 o'clock to 5 o'clock)
+                const totalAngle = 330;
+                const startAngle = 180;
+                const pointerAngle = startAngle + (this.currentStep * totalAngle / 12);
+                
+                this.knobPointer.style.transform = `translateX(-50%) rotate(${pointerAngle}deg)`;
+                
+                // Update value display
+                const percentage = (this.currentStep / 12) * 100;
+                this.valueDisplay.textContent = `${Math.round(percentage)}%`;
+                this.stepIndicator.textContent = `Step: ${this.currentStep}/12`;
+                
+                // Update markers
+                const markers = this.knobMarkers.querySelectorAll('.knob-marker');
+                markers.forEach((marker, index) => {
+                    if (index <= this.currentStep) {
+                        marker.classList.add('active');
+                    } else {
+                        marker.classList.remove('active');
+                    }
+                });
+                
+                // Update mode indicator
+                if (this.currentStep <= 6) {
+                    this.modeIndicator.textContent = 'Even Harmonics Mode';
+                    this.modeIndicator.className = 'mode-indicator even-mode';
+                } else {
+                    this.modeIndicator.textContent = 'Odd Harmonics Mode';
+                    this.modeIndicator.className = 'mode-indicator odd-mode';
+                }
+            }
+
+            async handleFileUpload(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                this.statusDisplay.textContent = 'Loading audio file...';
+                
+                try {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const arrayBuffer = await file.arrayBuffer();
+                    this.audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
+                    
+                    this.setupAudioChain();
+                    this.enableControls();
+                    this.statusDisplay.textContent = `Loaded: ${file.name}`;
+                } catch (error) {
+                    this.statusDisplay.textContent = 'Error loading audio file';
+                    console.error('Audio loading error:', error);
+                }
+            }
+
+            setupAudioChain() {
+                // Create audio processing chain
+                this.gainNode = this.audioContext.createGain();
+                this.saturationNode = this.audioContext.createWaveShaper();
+                
+                // Initialize saturation
+                this.updateRealTimeSaturation();
+                
+                // Connect chain: source -> saturation -> gain -> output
+                this.gainNode.connect(this.audioContext.destination);
+                this.saturationNode.connect(this.gainNode);
+            }
+
+            processAudio() {
+                if (!this.audioBuffer) return;
+
+                const sampleRate = this.audioBuffer.sampleRate;
+                const length = this.audioBuffer.length;
+                const numberOfChannels = this.audioBuffer.numberOfChannels;
+                
+                this.processedBuffer = this.audioContext.createBuffer(numberOfChannels, length, sampleRate);
+
+                for (let channel = 0; channel < numberOfChannels; channel++) {
+                    const inputData = this.audioBuffer.getChannelData(channel);
+                    const outputData = this.processedBuffer.getChannelData(channel);
+                    
+                    // Apply frequency-based saturation
+                    this.applySaturation(inputData, outputData, sampleRate);
+                }
+            }
+
+            applySaturation(inputData, outputData, sampleRate) {
+                const fundamentalFreq = 50; // 50Hz fundamental
+                const boostPerStep = 0.25; // 0.25dB per step
+                
+                // Calculate saturation amount based on current step
+                const saturationAmount = (this.currentStep / 12) * 0.6; // Max 60% saturation
+                
+                // Simple saturation simulation
+                for (let i = 0; i < inputData.length; i++) {
+                    let sample = inputData[i];
+                    
+                    // Apply saturation based on current step
+                    if (this.currentStep <= 6) {
+                        // Even harmonics mode (steps 0-6)
+                        const stepSaturation = (this.currentStep / 6) * 0.5;
+                        sample = this.applyEvenHarmonics(sample, stepSaturation);
+                    } else {
+                        // Odd harmonics mode (steps 7-12)
+                        const stepSaturation = ((this.currentStep - 6) / 6) * 0.5;
+                        sample = this.applyOddHarmonics(sample, stepSaturation);
+                    }
+                    
+                    outputData[i] = Math.max(-1, Math.min(1, sample));
+                }
+            }
+
+            applyEvenHarmonics(sample, amount) {
+                // Simulate even harmonic distortion
+                const saturated = Math.tanh(sample * (1 + amount * 2));
+                return sample + (saturated - sample) * amount;
+            }
+
+            applyOddHarmonics(sample, amount) {
+                // Simulate odd harmonic distortion
+                const saturated = sample + Math.sin(sample * Math.PI) * amount * 0.3;
+                return Math.max(-1, Math.min(1, saturated));
+            }
+
+            startKnobDrag(event) {
+                event.preventDefault();
+                const knobRect = this.knob.getBoundingClientRect();
+                const centerX = knobRect.left + knobRect.width / 2;
+                const centerY = knobRect.top + knobRect.height / 2;
+
+                const handleMouseMove = (e) => {
+                    const angle = this.getAngleFromCenter(e.clientX, e.clientY, centerX, centerY);
+                    const step = this.angleToStep(angle);
+                    this.setStep(step);
+                };
+
+                const handleMouseUp = () => {
+                    document.removeEventListener('mousemove', handleMouseMove);
+                    document.removeEventListener('mouseup', handleMouseUp);
+                };
+
+                document.addEventListener('mousemove', handleMouseMove);
+                document.addEventListener('mouseup', handleMouseUp);
+            }
+
+            getAngleFromCenter(x, y, centerX, centerY) {
+                let angle = Math.atan2(y - centerY, x - centerX) * (180 / Math.PI);
+                // Normalize to 0-360
+                if (angle < 0) angle += 360;
+                return angle;
+            }
+
+            angleToStep(angle) {
+                // Convert angle to step (0-12)
+                // 6 o'clock = 180°, 5 o'clock = 150° (or 510° in extended range)
+                const startAngle = 180;
+                const totalAngle = 330;
+                
+                let normalizedAngle;
+                if (angle >= 180) {
+                    normalizedAngle = angle - 180;
+                } else if (angle <= 150) {
+                    normalizedAngle = angle + 180; // 330° range
+                } else {
+                    // Between 150° and 180°, choose closest
+                    const distTo180 = 180 - angle;
+                    const distTo150 = angle - 150;
+                    if (distTo180 < distTo150) {
+                        normalizedAngle = 0;
+                    } else {
+                        normalizedAngle = 330;
+                    }
+                }
+                
+                const step = Math.round((normalizedAngle / totalAngle) * 12);
+                return Math.max(0, Math.min(12, step));
+            }
+
+            updateKnobDisplay() {
+                // Update pointer rotation (6 o'clock to 5 o'clock)
+                const totalAngle = 330;
+                const startAngle = 180;
+                const pointerAngle = startAngle + (this.currentStep * totalAngle / 12);
+                
+                this.knobPointer.style.transform = `translateX(-50%) rotate(${pointerAngle}deg)`;
+                
+                // Update value display
+                const percentage = (this.currentStep / 12) * 100;
+                this.valueDisplay.textContent = `${Math.round(percentage)}%`;
+                this.stepIndicator.textContent = `Step: ${this.currentStep}/12`;
+                
+                // Update markers
+                const markers = this.knobMarkers.querySelectorAll('.knob-marker');
+                markers.forEach((marker, index) => {
+                    if (index <= this.currentStep) {
+                        marker.classList.add('active');
+                    } else {
+                        marker.classList.remove('active');
+                    }
+                });
+                
+                // Update mode indicator
+                if (this.currentStep <= 6) {
+                    this.modeIndicator.textContent = 'Even Harmonics Mode';
+                    this.modeIndicator.className = 'mode-indicator even-mode';
+                } else {
+                    this.modeIndicator.textContent = 'Odd Harmonics Mode';
+                    this.modeIndicator.className = 'mode-indicator odd-mode';
+                }
+            }
+
+            enableControls() {
+                this.playBtn.disabled = false;
+                this.pauseBtn.disabled = false;
+                this.stopBtn.disabled = false;
+                this.downloadBtn.disabled = false;
+            }
+
+            async playAudio() {
+                if (!this.audioBuffer || this.isPlaying) return;
+
+                if (this.audioContext.state === 'suspended') {
+                    await this.audioContext.resume();
+                }
+
+                // Create new source node
+                this.sourceNode = this.audioContext.createBufferSource();
+                this.sourceNode.buffer = this.audioBuffer;
+                
+                // Connect to processing chain
+                this.sourceNode.connect(this.saturationNode);
+                
+                this.sourceNode.onended = () => {
+                    this.isPlaying = false;
+                    this.isPaused = false;
+                    this.statusDisplay.textContent = 'Playback finished';
+                };
+
+                // Handle resume from pause
+                const offset = this.isPaused ? this.pauseTime : 0;
+                const when = this.audioContext.currentTime;
+                
+                this.sourceNode.start(when, offset);
+                this.startTime = when - offset;
+                this.isPlaying = true;
+                this.isPaused = false;
+                this.statusDisplay.textContent = 'Playing with real-time saturation...';
+            }
+
+            pauseAudio() {
+                if (this.isPlaying && this.sourceNode) {
+                    this.pauseTime = this.audioContext.currentTime - this.startTime;
+                    this.sourceNode.stop();
+                    this.isPlaying = false;
+                    this.isPaused = true;
+                    this.statusDisplay.textContent = 'Playback paused';
+                }
+            }
+
+            stopAudio() {
+                if (this.sourceNode) {
+                    this.sourceNode.stop();
+                    this.sourceNode = null;
+                    this.isPlaying = false;
+                    this.isPaused = false;
+                    this.pauseTime = 0;
+                    this.statusDisplay.textContent = 'Playback stopped';
+                }
+            }
+
+            async downloadProcessedAudio() {
+                if (!this.audioBuffer) return;
+
+                this.statusDisplay.textContent = 'Processing audio for download...';
+                
+                // Create offline context for processing
+                const offlineCtx = new OfflineAudioContext(
+                    this.audioBuffer.numberOfChannels,
+                    this.audioBuffer.length,
+                    this.audioBuffer.sampleRate
+                );
+                
+                // Create offline processing chain
+                const source = offlineCtx.createBufferSource();
+                const saturation = offlineCtx.createWaveShaper();
+                const gain = offlineCtx.createGain();
+                
+                source.buffer = this.audioBuffer;
+                saturation.curve = this.createSaturationCurve(this.currentStep / 12);
+                saturation.oversample = '4x';
+                
+                source.connect(saturation);
+                saturation.connect(gain);
+                gain.connect(offlineCtx.destination);
+                
+                source.start(0);
+                
+                try {
+                    const renderedBuffer = await offlineCtx.startRendering();
+                    const wavBlob = this.bufferToWav(renderedBuffer);
+                    const url = URL.createObjectURL(wavBlob);
+                    
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `saturated_audio_step_${this.currentStep}.wav`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    this.statusDisplay.textContent = 'Download started';
+                } catch (error) {
+                    this.statusDisplay.textContent = 'Error processing audio';
+                    console.error('Download error:', error);
+                }
+            }
+
+            bufferToWav(buffer) {
+                const length = buffer.length;
+                const numberOfChannels = buffer.numberOfChannels;
+                const sampleRate = buffer.sampleRate;
+                const arrayBuffer = new ArrayBuffer(44 + length * numberOfChannels * 2);
+                const view = new DataView(arrayBuffer);
+                
+                // WAV header
+                const writeString = (offset, string) => {
+                    for (let i = 0; i < string.length; i++) {
+                        view.setUint8(offset + i, string.charCodeAt(i));
+                    }
+                };
+                
+                writeString(0, 'RIFF');
+                view.setUint32(4, 36 + length * numberOfChannels * 2, true);
+                writeString(8, 'WAVE');
+                writeString(12, 'fmt ');
+                view.setUint32(16, 16, true);
+                view.setUint16(20, 1, true);
+                view.setUint16(22, numberOfChannels, true);
+                view.setUint32(24, sampleRate, true);
+                view.setUint32(28, sampleRate * numberOfChannels * 2, true);
+                view.setUint16(32, numberOfChannels * 2, true);
+                view.setUint16(34, 16, true);
+                writeString(36, 'data');
+                view.setUint32(40, length * numberOfChannels * 2, true);
+                
+                // Convert float samples to 16-bit PCM
+                let offset = 44;
+                for (let i = 0; i < length; i++) {
+                    for (let channel = 0; channel < numberOfChannels; channel++) {
+                        const sample = Math.max(-1, Math.min(1, buffer.getChannelData(channel)[i]));
+                        view.setInt16(offset, sample * 0x7FFF, true);
+                        offset += 2;
+                    }
+                }
+                
+                return new Blob([arrayBuffer], { type: 'audio/wav' });
+            }
+        }
+
+        // Initialize the processor
+        const processor = new SaturationProcessor();
+    </script>
+</body>
+</html>

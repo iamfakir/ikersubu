@@ -5,6 +5,9 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
 const DripperWebPage = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
   const [audioBuffer, setAudioBuffer] = useState<AudioBuffer | null>(null);
@@ -299,10 +302,46 @@ const DripperWebPage = () => {
 
   // Removed knob scroll and click handlers - now using arrow controls
 
+  const handlePasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === 'tripper98') {
+      setIsAuthenticated(true);
+      setError('');
+    } else {
+      setError('Incorrect password. Please try again.');
+    }
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="h-screen flex items-center justify-center bg-black text-white">
+        <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl text-center">
+          <h2 className="text-2xl font-bold text-[#ff6b6b] mb-4">Enter Password</h2>
+          <form onSubmit={handlePasswordSubmit} className="flex flex-col items-center">
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              className="p-3 rounded-md bg-white/20 text-white placeholder-gray-400 mb-4 focus:outline-none focus:ring-2 focus:ring-[#ff6b6b]"
+            />
+            <button
+              type="submit"
+              className="bg-gradient-to-r from-[#ff6b6b] to-[#ff8e8e] hover:from-[#ff5252] hover:to-[#ff7979] text-white font-medium py-3 px-6 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+            >
+              Submit
+            </button>
+            {error && <p className="text-[#ff6b6b] mt-4">{error}</p>}
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <Navbar />
-      <div className="h-screen overflow-hidden bg-gradient-to-b from-[#1a1a2e] to-[#16213e] text-white flex flex-col">
+      <div className="h-screen overflow-hidden bg-black text-white flex flex-col">
         {/* Mobile Warning */}
         <div className="md:hidden flex-1 flex items-center justify-center p-4">
           <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl text-center">
@@ -343,22 +382,25 @@ const DripperWebPage = () => {
               {/* Knob Section */}
               <div className="flex flex-col items-center mb-8">
                 <div className="relative mb-6">
+                  {/* Knob Container */}
+                  {/* Knob */}
                   <div 
                     ref={knobRef}
-                    className="w-40 h-40 rounded-full bg-gradient-to-br from-[#2c3e50] to-[#3498db] relative shadow-2xl hover:shadow-[#3498db]/30 transition-all duration-300"
+                    className="w-40 h-40 rounded-full bg-gradient-to-br from-[#333] to-[#555] relative shadow-2xl hover:shadow-[#555]/30 transition-all duration-300"
                     style={{
-                      boxShadow: '0 0 30px rgba(52, 152, 219, 0.3), inset 0 0 30px rgba(0, 0, 0, 0.3)'
+                      boxShadow: '0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.1)'
                     }}
                   >
                     <div ref={markersRef} className="absolute inset-0 pointer-events-none"></div>
                     <div 
                       ref={pointerRef}
-                      className="absolute top-3 left-1/2 w-1 h-16 bg-gradient-to-b from-[#ff6b6b] to-[#ff8e8e] rounded-full shadow-lg"
-                      style={{
-                        transformOrigin: '50% 77px',
-                        transform: 'translateX(-50%) rotate(180deg)',
-                        boxShadow: '0 0 15px rgba(255, 107, 107, 0.5)'
-                      }}
+                      className={`absolute top-3 left-1/2 w-1 h-16 rounded-full shadow-lg ${currentStep > 6 ? 'bg-gradient-to-b from-[#8e44ad] to-[#9b59b6]' : 'bg-gradient-to-b from-[#ff6b6b] to-[#ff8e8e]'}`}
+                        style={{
+                          transformOrigin: '50% 77px',
+                          transform: 'translateX(-50%) rotate(180deg)',
+                          boxShadow: `0 0 15px ${currentStep > 6 ? 'rgba(142, 68, 173, 0.5)' : 'rgba(255, 107, 107, 0.5)'}`,
+                          transition: 'transform 0.1s ease-out, background-color 0.3s ease-out, box-shadow 0.3s ease-out' // Added transition for animation
+                        }}
                     ></div>
                     
                     {/* Knob Step Numbers */}
@@ -387,33 +429,47 @@ const DripperWebPage = () => {
                     })}
                   </div>
                   
-                  {/* Arrow Controls */}
-                  <div className="flex items-center justify-center gap-4 mb-4">
+                  {/* Arrows below knob */}
+                  <div className="flex justify-center gap-8 mt-4">
+                    {/* Left Arrow */}
                     <button
                       onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
                       disabled={currentStep === 0}
-                      className="bg-gradient-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-2 px-4 rounded-full transition-all duration-300"
+                      className="bg-gradient-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-5 rounded-full transition-all duration-300 text-xl"
                     >
                       ←
                     </button>
-                    <span className="text-lg font-semibold text-[#ecf0f1] min-w-[60px] text-center">
-                      Step {currentStep}
-                    </span>
+                    
+                    {/* Right Arrow */}
                     <button
                       onClick={() => setCurrentStep(Math.min(12, currentStep + 1))}
                       disabled={currentStep === 12}
-                      className="bg-gradient-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-2 px-4 rounded-full transition-all duration-300"
+                      className="bg-gradient-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-5 rounded-full transition-all duration-300 text-xl"
                     >
                       →
                     </button>
                   </div>
                   
-                  <div className="text-center">
-                    <div className="text-xl font-semibold text-[#ecf0f1] mb-2">Saturation</div>
-                    <div className="text-2xl font-bold text-[#3498db] mb-2">
-                      {Math.round((currentStep / 12) * 100)}%
-                    </div>
+                  {/* Dripper/Tripper Buttons */}
+                  <div className="flex justify-center gap-4 mt-4">
+                    <button
+                      onClick={() => setCurrentStep(1)} // Dripper sets to step 1
+                      className="bg-gradient-to-r from-[#ff6b6b] to-[#ff8e8e] hover:from-[#ff5252] hover:to-[#ff7979] text-white font-medium py-2 px-4 rounded-full transition-all duration-300 shadow-lg"
+                    >
+                      Dripper
+                    </button>
+                    <button
+                      onClick={() => setCurrentStep(7)} // Tripper sets to step 7
+                      className="bg-gradient-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] text-white font-medium py-2 px-4 rounded-full transition-all duration-300 shadow-lg"
+                    >
+                      Tripper
+                    </button>
                   </div>
+                  
+                  {/* Step Display */}
+                  
+                  
+                  
                 </div>
               </div>
 
