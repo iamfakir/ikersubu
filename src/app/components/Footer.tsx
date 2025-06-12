@@ -60,7 +60,7 @@ const Footer = () => {
               {[
                 { href: "/", label: "Home" },
                 { href: "/portfolio", label: "Portfolio" },
-                { href: "/testimonials", label: "Testimonials" },
+                
                 { href: "/contact", label: "Contact" }
               ].map((link, index) => (
                 <motion.li

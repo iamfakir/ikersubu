@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshAir Plugin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #e0e0e0;
+        }
+
+        .plugin-container {
+            background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 
+                20px 20px 60px #0f0f0f,
+                -20px -20px 60px #3a3a3a,
+                inset 2px 2px 10px rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: #c0c0c0;
+            text-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        .upload-section {
+            margin-bottom: 30px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            display: block;
+            background: linear-gradient(145deg, #3a3a3a, #2a2a2a);
+            border: 2px dashed rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .file-label:hover {
+            border-color: rgba(255,255,255,0.4);
+            background: linear-gradient(145deg, #4a4a4a, #3a3a3a);
+            transform: translateY(-2px);
+        }
+
+        .controls-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .knob-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+        }
+
+        .knob {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, #6a6a6a, #2a2a2a);
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 
+                10px 10px 30px rgba(0,0,0,0.8),
+                -5px -5px 20px rgba(255,255,255,0.1),
+                inset 2px 2px 10px rgba(0,0,0,0.3),
+                inset -2px -2px 10px rgba(255,255,255,0.1);
+            transition: all 0.2s ease;
+            border: 3px solid rgba(255,255,255,0.1);
+        }
+
+        .knob:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                15px 15px 40px rgba(0,0,0,0.9),
+                -7px -7px 25px rgba(255,255,255,0.15),
+                inset 2px 2px 10px rgba(0,0,0,0.4),
+                inset -2px -2px 10px rgba(255,255,255,0.15);
+        }
+
+        .knob-pointer {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 25px;
+            background: linear-gradient(to bottom, #ffffff, #c0c0c0);
+            border-radius: 2px;
+            transform-origin: center 50px;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .knob-label {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #a0a0a0;
+            font-weight: 300;
+        }
+
+        .value-display {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-top: 5px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(145deg, #4a4a4a, #2a2a2a);
+            border: none;
+            color: #e0e0e0;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn:hover {
+            background: linear-gradient(145deg, #5a5a5a, #3a3a3a);
+            transform: translateY(-2px);
+            box-shadow: 7px 7px 20px rgba(0,0,0,0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #808080;
+        }
+
+        .waveform-container {
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .slider-container {
+            margin: 20px 0;
+        }
+
+        .slider-label {
+            display: block;
+            font-size: 14px;
+            color: #a0a0a0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .slider {
+            width: 200px;
+            height: 6px;
+            background: linear-gradient(145deg, #1a1a1a, #3a3a3a);
+            border-radius: 5px;
+            outline: none;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at 30% 30%, #8a8a8a, #4a4a4a);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 
+                3px 3px 8px rgba(0,0,0,0.6),
+                -1px -1px 4px rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            background: radial-gradient(circle at 30% 30%, #9a9a9a, #5a5a5a);
+            transform: scale(1.1);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at 30% 30%, #8a8a8a, #4a4a4a);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .waveform {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="plugin-container">
+        <h1 class="title">FreshAir</h1>
+        
+        <div class="upload-section">
+            <input type="file" id="audioFile" class="file-input" accept="audio/*">
+            <label for="audioFile" class="file-label">
+                <div>Click to Upload Audio</div>
+                <div style="font-size: 12px; color: #808080; margin-top: 5px;">Supports MP3, WAV, FLAC</div>
+            </label>
+        </div>
+
+        <div class="waveform-container">
+            <canvas class="waveform" id="waveform"></canvas>
+        </div>
+
+        <div class="controls-section">
+            <div class="knob-container">
+                <div class="knob" id="presenceKnob">
+                    <div class="knob-pointer" id="presencePointer"></div>
+                </div>
+                <div class="knob-label">Presence</div>
+                <div class="value-display" id="presenceValue">0%</div>
+            </div>
+            
+            <div class="slider-container">
+                <label class="slider-label">Wet/Dry Mix</label>
+                <input type="range" id="wetSlider" min="0" max="100" value="0" class="slider">
+                <div class="slider-value" id="wetSliderValue">0%</div>
+            </div>
+        </div>
+
+        <div class="audio-controls">
+            <button class="btn" id="playBtn">Play</button>
+            <button class="btn" id="pauseBtn">Pause</button>
+            <button class="btn" id="stopBtn">Stop</button>
+        </div>
+
+        <div class="status" id="status">Ready to load audio</div>
+    </div>
+
+    <script>
+        class FreshAirPlugin {
+            constructor() {
+                this.audioContext = null;
+                this.audioBuffer = null;
+                this.sourceNode = null;
+                this.gainNode = null;
+                this.wetGainNode = null;
+                this.dryGainNode = null;
+                this.highPassFilter = null;
+                this.presenceFilter = null;
+                this.deEsserFilter = null;
+                this.compressor = null;
+                this.analyser = null;
+                this.isPlaying = false;
+                this.wetAmount = 0;
+                this.presenceAmount = 0;
+                this.startTime = 0;
+                this.pauseTime = 0;
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.setupKnobControl();
+            }
+
+            initializeElements() {
+                this.fileInput = document.getElementById('audioFile');
+                this.playBtn = document.getElementById('playBtn');
+                this.pauseBtn = document.getElementById('pauseBtn');
+                this.stopBtn = document.getElementById('stopBtn');
+                this.status = document.getElementById('status');
+                this.presenceKnob = document.getElementById('presenceKnob');
+                this.presencePointer = document.getElementById('presencePointer');
+                this.presenceValue = document.getElementById('presenceValue');
+                this.wetSlider = document.getElementById('wetSlider');
+                this.wetSliderValue = document.getElementById('wetSliderValue');
+                this.waveform = document.getElementById('waveform');
+                
+                this.setupWaveform();
+            }
+
+            setupWaveform() {
+                const canvas = this.waveform;
+                const ctx = canvas.getContext('2d');
+                canvas.width = canvas.offsetWidth * 2;
+                canvas.height = canvas.offsetHeight * 2;
+                ctx.scale(2, 2);
+                
+                this.waveformCtx = ctx;
+                this.drawEmptyWaveform();
+            }
+
+            drawEmptyWaveform() {
+                const ctx = this.waveformCtx;
+                const width = this.waveform.offsetWidth;
+                const height = this.waveform.offsetHeight;
+                
+                ctx.clearRect(0, 0, width, height);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(0, height / 2);
+                ctx.lineTo(width, height / 2);
+                ctx.stroke();
+            }
+
+            async initializeAudioContext() {
+                if (!this.audioContext) {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    if (this.audioContext.state === 'suspended') {
+                        await this.audioContext.resume();
+                    }
+                }
+            }
+
+            setupEventListeners() {
+                this.fileInput.addEventListener('change', (e) => this.handleFileUpload(e));
+                this.playBtn.addEventListener('click', () => this.play());
+                this.pauseBtn.addEventListener('click', () => this.pause());
+                this.stopBtn.addEventListener('click', () => this.stop());
+                this.wetSlider.addEventListener('input', (e) => this.setWetAmount(parseFloat(e.target.value)));
+            }
+
+            setupKnobControl() {
+                let isDragging = false;
+                let startY = 0;
+                let startValue = 0;
+
+                const handleMouseDown = (e) => {
+                    isDragging = true;
+                    startY = e.clientY || e.touches[0].clientY;
+                    startValue = this.presenceAmount;
+                    document.addEventListener('mousemove', handleMouseMove);
+                    document.addEventListener('mouseup', handleMouseUp);
+                    document.addEventListener('touchmove', handleMouseMove);
+                    document.addEventListener('touchend', handleMouseUp);
+                };
+
+                const handleMouseMove = (e) => {
+                    if (!isDragging) return;
+                    
+                    const currentY = e.clientY || e.touches[0].clientY;
+                    const deltaY = startY - currentY;
+                    const sensitivity = 0.5;
+                    
+                    let newValue = startValue + (deltaY * sensitivity);
+                    newValue = Math.max(0, Math.min(100, newValue));
+                    
+                    this.setPresenceAmount(newValue);
+                };
+
+                const handleMouseUp = () => {
+                    isDragging = false;
+                    document.removeEventListener('mousemove', handleMouseMove);
+                    document.removeEventListener('mouseup', handleMouseUp);
+                    document.removeEventListener('touchmove', handleMouseMove);
+                    document.removeEventListener('touchend', handleMouseUp);
+                };
+
+                this.presenceKnob.addEventListener('mousedown', handleMouseDown);
+                this.presenceKnob.addEventListener('touchstart', handleMouseDown);
+            }
+
+            updateProcessing() {
+                if (this.presenceFilter && this.airFilter && this.deEsserFilter) {
+                    // Presence enhancement (0 to +6dB at 10kHz)
+                    const presenceGain = (this.presenceAmount / 100) * 6;
+                    this.presenceFilter.gain.value = presenceGain;
+                    
+                    // Air/sparkle enhancement (0 to +3dB at 15kHz)
+                    const airGain = (this.presenceAmount / 100) * 3;
+                    this.airFilter.gain.value = airGain;
+                    
+                    // De-essing (0 to -4dB at sibilant frequencies)
+                    const deEssGain = -(this.presenceAmount / 100) * 4;
+                    this.deEsserFilter.gain.value = deEssGain;
+                }
+                
+                if (this.wetGainNode && this.dryGainNode) {
+                    const wetGain = this.wetAmount / 100;
+                    const dryGain = 1 - wetGain;
+                    this.wetGainNode.gain.value = wetGain;
+                    this.dryGainNode.gain.value = dryGain;
+                }
+            }
+
+            setPresenceAmount(value) {
+                this.presenceAmount = value;
+                this.presenceValue.textContent = `${Math.round(value)}%`;
+                
+                // Update knob rotation
+                const rotation = (value / 100) * 270 - 135; // -135 to +135 degrees
+                this.presencePointer.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
+                
+                // Update processing
+                this.updateProcessing();
+            }
+
+            setWetAmount(value) {
+                this.wetAmount = value;
+                this.wetSliderValue.textContent = `${Math.round(value)}%`;
+                this.wetSlider.value = value;
+                
+                // Update processing
+                this.updateProcessing();
+            }
+
+            async handleFileUpload(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                this.status.textContent = 'Loading audio...';
+                
+                try {
+                    await this.initializeAudioContext();
+                    
+                    const arrayBuffer = await file.arrayBuffer();
+                    this.audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
+                    
+                    this.drawWaveform();
+                    this.status.textContent = 'Audio loaded successfully';
+                } catch (error) {
+                    console.error('Error loading audio:', error);
+                    this.status.textContent = 'Error loading audio file';
+                }
+            }
+
+            drawWaveform() {
+                const ctx = this.waveformCtx;
+                const width = this.waveform.offsetWidth;
+                const height = this.waveform.offsetHeight;
+                
+                ctx.clearRect(0, 0, width, height);
+                
+                const data = this.audioBuffer.getChannelData(0);
+                const step = Math.ceil(data.length / width);
+                const amp = height / 2;
+                
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                
+                for (let i = 0; i < width; i++) {
+                    let min = 1.0;
+                    let max = -1.0;
+                    
+                    for (let j = 0; j < step; j++) {
+                        const datum = data[(i * step) + j];
+                        if (datum < min) min = datum;
+                        if (datum > max) max = datum;
+                    }
+                    
+                    ctx.moveTo(i, (1 + min) * amp);
+                    ctx.lineTo(i, (1 + max) * amp);
+                }
+                
+                ctx.stroke();
+            }
+
+            createEffectChain() {
+                if (!this.audioContext) return;
+
+                // Create nodes
+                this.gainNode = this.audioContext.createGain();
+                this.wetGainNode = this.audioContext.createGain();
+                this.dryGainNode = this.audioContext.createGain();
+                
+                // High-frequency presence enhancement (high-shelf boost)
+                this.presenceFilter = this.audioContext.createBiquadFilter();
+                this.presenceFilter.type = 'highshelf';
+                this.presenceFilter.frequency.value = 10000; // 10kHz
+                this.presenceFilter.Q.value = 0.7;
+                
+                // Air/sparkle enhancement at higher frequencies
+                this.airFilter = this.audioContext.createBiquadFilter();
+                this.airFilter.type = 'peaking';
+                this.airFilter.frequency.value = 15000; // 15kHz
+                this.airFilter.Q.value = 1.5;
+                
+                // De-esser (multiband compressor simulation for harsh frequencies)
+                this.deEsserFilter = this.audioContext.createBiquadFilter();
+                this.deEsserFilter.type = 'peaking';
+                this.deEsserFilter.frequency.value = 6500; // Sibilant range
+                this.deEsserFilter.Q.value = 2;
+                
+                this.compressor = this.audioContext.createDynamicsCompressor();
+                this.compressor.threshold.value = -25;
+                this.compressor.knee.value = 8;
+                this.compressor.ratio.value = 6;
+                this.compressor.attack.value = 0.001;
+                this.compressor.release.value = 0.05;
+                
+                // Analyser for visualization
+                this.analyser = this.audioContext.createAnalyser();
+                this.analyser.fftSize = 2048;
+                
+                // Set initial values
+                this.updateProcessing();
+                
+                // Connect wet signal chain (processed)
+                this.sourceNode.connect(this.presenceFilter);
+                this.presenceFilter.connect(this.airFilter);
+                this.airFilter.connect(this.deEsserFilter);
+                this.deEsserFilter.connect(this.compressor);
+                this.compressor.connect(this.wetGainNode);
+                
+                // Connect dry signal (bypass)
+                this.sourceNode.connect(this.dryGainNode);
+                
+                // Mix wet and dry signals
+                this.wetGainNode.connect(this.gainNode);
+                this.dryGainNode.connect(this.gainNode);
+                this.gainNode.connect(this.analyser);
+                this.analyser.connect(this.audioContext.destination);
+            }
+
+            async play() {
+                if (!this.audioBuffer) {
+                    this.status.textContent = 'Please load an audio file first';
+                    return;
+                }
+
+                await this.initializeAudioContext();
+                
+                if (this.isPlaying) {
+                    this.stop();
+                }
+
+                this.sourceNode = this.audioContext.createBufferSource();
+                this.sourceNode.buffer = this.audioBuffer;
+                
+                this.createEffectChain();
+                
+                const offset = this.pauseTime || 0;
+                this.sourceNode.start(0, offset);
+                this.startTime = this.audioContext.currentTime - offset;
+                this.isPlaying = true;
+                
+                this.sourceNode.onended = () => {
+                    this.isPlaying = false;
+                    this.pauseTime = 0;
+                    this.status.textContent = 'Playback finished';
+                };
+                
+                this.status.textContent = 'Playing...';
+            }
+
+            pause() {
+                if (this.isPlaying && this.sourceNode) {
+                    this.pauseTime = this.audioContext.currentTime - this.startTime;
+                    this.sourceNode.stop();
+                    this.isPlaying = false;
+                    this.status.textContent = 'Paused';
+                }
+            }
+
+            stop() {
+                if (this.sourceNode) {
+                    this.sourceNode.stop();
+                    this.isPlaying = false;
+                    this.pauseTime = 0;
+                    this.status.textContent = 'Stopped';
+                }
+            }
+        }
+
+        // Initialize the plugin when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new FreshAirPlugin();
+        });
+    </script>
+</body>
+</html>
