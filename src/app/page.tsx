@@ -3,6 +3,9 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
+import CreditsSection from './components/CreditsSection';
+import LogosSection from './components/LogosSection';
+import FeaturedMixes from './components/FeaturedMixes';
 import Footer from './components/Footer';
 import Services from './components/Services';
 import CardCarousel from '../components/CardCarousel/CardCarousel';
@@ -157,6 +160,15 @@ export default function Home() {
             </svg>
           </motion.div>
         </motion.section>
+
+        {/* Credits Section */}
+        <CreditsSection />
+
+        {/* Company Logos Section */}
+        <LogosSection />
+
+        {/* Featured Mixes Section */}
+        <FeaturedMixes />
 
         {/* Services Section */}
         <div id="services">

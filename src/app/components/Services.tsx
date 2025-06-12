@@ -32,85 +32,105 @@ interface ServiceModalProps {
 
 const services: ServiceItem[] = [
   {
-    icon: <FaMixer className="w-8 h-8 text-indigo-600" />,
-    title: 'Mixing',
-    shortDescription: 'Professional mixing services to bring clarity, depth, and balance to your tracks.',
+    icon: <FaMixer className="w-8 h-8 text-[#00F0FF]" />,
+    title: 'R&B/Hip-Hop Mixing',
+    shortDescription: 'Specialized mixing for R&B and Hip-Hop tracks that make your vocals shine and your beats knock.',
     description: (
       <div className="space-y-4">
-        <p>My professional mixing service transforms your raw recordings into polished, radio-ready tracks. Using industry-standard tools and techniques, I focus on:</p>
+        <p>As an R&B and Hip-Hop specialist, I bring out the best in your tracks with a focus on:</p>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Balancing levels and panning for optimal stereo imaging</li>
-          <li>EQ and compression to enhance clarity and punch</li>
-          <li>Creative effects and automation to bring your vision to life</li>
-          <li>Vocal tuning and alignment for perfect performances</li>
-          <li>Reference track matching to meet industry standards</li>
+          <li>Crystal clear, present vocals that cut through the mix</li>
+          <li>Powerful, controlled low-end that translates on all systems</li>
+          <li>Modern, competitive loudness while maintaining dynamics</li>
+          <li>Creative vocal effects and ad-lib processing</li>
+          <li>808s and bass that bump without muddying the mix</li>
         </ul>
-        <p>I work with all genres and provide 2 rounds of revisions to ensure your complete satisfaction.</p>
+        <p>I've worked with artists across the R&B and Hip-Hop spectrum, from smooth soul to hard-hitting trap. My goal is to make your music sound polished, professional, and ready for streaming platforms.</p>
       </div>
     ),
     delivery: '3-5 business days',
-    includes: ['Stem mixing', '2 rounds of revisions', 'High-quality WAV file', 'MP3 reference'],
+    includes: ['Unlimited revisions', '24-48h delivery option', 'Reference track matching', 'Streaming-optimized masters'],
     popular: true
   },
   {
-    icon: <FaCompactDisc className="w-8 h-8 text-indigo-600" />,
-    title: 'Mastering',
-    shortDescription: 'Final polish and loudness optimization to make your music sound professional on all platforms.',
+    icon: <FaCompactDisc className="w-8 h-8 text-[#9D00FF]" />,
+    title: 'Vocal Production',
+    shortDescription: 'From comping to tuning, get radio-ready vocal tracks that stand out in the mix.',
     description: (
       <div className="space-y-4">
-        <p>Professional mastering ensures your music sounds its best across all playback systems and streaming platforms. My mastering service includes:</p>
+        <p>Vocal production is where the magic happens in R&B and Hip-Hop. My vocal production service includes:</p>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Loudness optimization for streaming platforms (-14 LUFS)</li>
-          <li>Stereo enhancement and width control</li>
-          <li>EQ balancing for translation across all systems</li>
-          <li>Harmonic excitement and stereo imaging</li>
-          <li>Format-specific optimization for CD, streaming, and vinyl</li>
+          <li>Professional vocal comping and alignment</li>
+          <li>Pitch correction and tuning (subtle or robotic effect if desired)</li>
+          <li>De-essing and breath control</li>
+          <li>Creative vocal stacking and arrangement</li>
+          <li>Ad-lib processing and placement</li>
         </ul>
-        <p>I provide multiple format options and a detailed report of the processing applied.</p>
+        <p>I'll work closely with you to ensure the vocals complement your artistic vision while maintaining a professional, polished sound.</p>
       </div>
     ),
-    delivery: '1-2 business days',
-    includes: ['Loudness optimized master', 'Format-specific versions', 'ISRC code assignment', 'Cover art optimization']
+    delivery: '2-3 business days',
+    includes: ['Unlimited takes', 'Vocal comping', 'Tuning and alignment', 'Mixing preparation']
   },
   {
-    icon: <FaTools className="w-8 h-8 text-indigo-600" />,
-    title: 'Circuit Bending',
-    shortDescription: 'Custom hardware modifications and creative sound design through circuit manipulation.',
+    icon: <FaHeadphones className="w-8 h-8 text-[#00F0FF]" />,
+    title: 'Beat Mixing',
+    shortDescription: 'Professional mixing for your instrumentals to compete with major label productions.',
     description: (
       <div className="space-y-4">
-        <p>Transform ordinary electronic devices into unique musical instruments through circuit bending:</p>
+        <p>Your beats deserve to hit hard and translate on any system. My beat mixing service includes:</p>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Custom modifications of electronic devices</li>
-          <li>Creation of unique sound generators</li>
-          <li>Installation of control interfaces</li>
-          <li>Documentation of modifications</li>
-          <li>Basic usage training</li>
+          <li>808 and bass processing that bumps on any system</li>
+          <li>Drum bus processing for maximum impact</li>
+          <li>Stereo imaging and width enhancement</li>
+          <li>Creative sound design and effects</li>
+          <li>Reference track matching</li>
         </ul>
-        <p>Each circuit bent device is unique and comes with personalized support to help you explore its capabilities.</p>
+        <p>I'll make sure your beats have the professional polish and competitive edge they need to stand out.</p>
       </div>
     ),
-    delivery: '2-4 weeks',
-    includes: ['Custom modifications', 'Testing and calibration', 'User manual', 'Support session']
+    delivery: '2-4 business days',
+    includes: ['Stem mixing', '2 mix revisions', 'Reference track matching', 'Streaming-optimized output']
   },
   {
-    icon: <FaCode className="w-8 h-8 text-indigo-600" />,
-    title: 'Programming Audioware',
-    shortDescription: 'Custom audio software development and DSP programming for unique sound processing needs.',
+    icon: <FaTools className="w-8 h-8 text-[#9D00FF]" />,
+    title: 'Sound Design',
+    shortDescription: 'Custom sound design for your tracks, from 808s to atmospheric textures.',
     description: (
       <div className="space-y-4">
-        <p>Specialized audio software development services including:</p>
+        <p>Elevate your production with custom sound design tailored to your track:</p>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Custom VST/AU plugin development</li>
-          <li>Max/MSP patch creation</li>
-          <li>Pure Data programming</li>
-          <li>SuperCollider development</li>
-          <li>Real-time audio processing solutions</li>
+          <li>Custom 808 and bass sound design</li>
+          <li>Atmospheric textures and risers</li>
+          <li>Drum processing and layering</li>
+          <li>Vocal chops and manipulation</li>
+          <li>Transition effects and ear candy</li>
         </ul>
-        <p>Create unique tools for your specific audio processing needs with professional programming expertise.</p>
+        <p>I'll create unique sounds that fit your track perfectly and help it stand out from the crowd.</p>
       </div>
     ),
-    delivery: 'Project-based timeline',
-    includes: ['Source code', 'Documentation', 'Installation support', 'Bug fixes']
+    delivery: '3-5 business days',
+    includes: ['Custom sound design', 'Multiple variations', 'Mixing preparation', '1 revision round']
+  },
+  {
+    icon: <FaCode className="w-8 h-8 text-[#00F0FF]" />,
+    title: 'Mentoring',
+    shortDescription: '1-on-1 sessions to improve your mixing and production skills.',
+    description: (
+      <div className="space-y-4">
+        <p>Take your mixing and production skills to the next level with personalized 1-on-1 mentoring:</p>
+        <ul className="list-disc pl-5 space-y-2">
+          <li>Mixing techniques for R&B and Hip-Hop</li>
+          <li>Vocal processing and production</li>
+          <li>Beat making and sound selection</li>
+          <li>Workflow optimization</li>
+          <li>Industry insights and career advice</li>
+        </ul>
+        <p>Whether you're just starting out or looking to refine your skills, I'll provide the guidance you need to reach your goals.</p>
+      </div>
+    ),
+    delivery: '1-2 hours per session',
+    includes: ['Custom lesson plan', 'Project feedback', 'Resource recommendations', 'Follow-up support']
   },
   {
     icon: <FaRobot className="w-8 h-8 text-indigo-600" />,
@@ -133,24 +153,44 @@ const services: ServiceItem[] = [
     includes: ['Custom scripts', 'Documentation', 'Integration support', 'Maintenance guide']
   },
   {
-    icon: <FaLaptopCode className="w-8 h-8 text-indigo-600" />,
-    title: 'TouchDesigner',
-    shortDescription: 'Create immersive audiovisual experiences and interactive installations.',
+    icon: <FaLaptopCode className="w-8 h-8 text-[#9D00FF]" />,
+    title: 'Audio Software Development',
+    shortDescription: 'Custom audio software and plugin development for specialized needs.',
     description: (
       <div className="space-y-4">
-        <p>Professional TouchDesigner development for audiovisual projects:</p>
+        <p>Specialized audio software development services including:</p>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Real-time audio visualization</li>
-          <li>Interactive installations</li>
-          <li>Custom operator development</li>
-          <li>Performance optimization</li>
-          <li>Integration with audio hardware</li>
+          <li>Custom VST/AU plugin development</li>
+          <li>Max/MSP patch creation</li>
+          <li>Pure Data programming</li>
+          <li>SuperCollider development</li>
+          <li>Real-time audio processing solutions</li>
         </ul>
-        <p>Bring your audiovisual concepts to life with professional TouchDesigner development.</p>
+        <p>Create unique tools for your specific audio processing needs with professional programming expertise.</p>
       </div>
     ),
     delivery: 'Project-based timeline',
-    includes: ['Project files', 'Documentation', 'Performance optimization', 'Installation support']
+    includes: ['Source code', 'Documentation', 'Installation support', 'Bug fixes']
+  },
+  {
+    icon: <FaRobot className="w-8 h-8 text-[#00F0FF]" />,
+    title: 'Workflow Automation',
+    shortDescription: 'Custom scripts and automation for your music production workflow.',
+    description: (
+      <div className="space-y-4">
+        <p>Streamline your music production with custom automation solutions:</p>
+        <ul className="list-disc pl-5 space-y-2">
+          <li>DAW-specific macro creation</li>
+          <li>Batch processing workflows</li>
+          <li>File organization and naming conventions</li>
+          <li>Template creation and optimization</li>
+          <li>Integration with cloud services</li>
+        </ul>
+        <p>Save hours of repetitive work with custom automation tailored to your specific workflow needs.</p>
+      </div>
+    ),
+    delivery: '1-2 weeks',
+    includes: ['Custom scripts', 'Documentation', 'Training', 'Support']
   }
 ];
 
