@@ -33,164 +33,141 @@ interface ServiceModalProps {
 const services: ServiceItem[] = [
   {
     icon: <FaMixer className="w-8 h-8 text-[#00F0FF]" />,
-    title: 'R&B/Hip-Hop Mixing',
-    shortDescription: 'Specialized mixing for R&B and Hip-Hop tracks that make your vocals shine and your beats knock.',
+    title: 'Professional Mixing',
+    shortDescription: 'Industry-standard mixing that elevates your tracks to compete with professional releases.',
     description: (
       <div className="space-y-4">
-        <p>As an R&B and Hip-Hop specialist, I bring out the best in your tracks with a focus on:</p>
+        <p><strong>Transform your raw recordings into polished, release-ready tracks.</strong> Drawing from my experience working with high-profile productions, I deliver:</p>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Crystal clear, present vocals that cut through the mix</li>
-          <li>Powerful, controlled low-end that translates on all systems</li>
-          <li>Modern, competitive loudness while maintaining dynamics</li>
-          <li>Creative vocal effects and ad-lib processing</li>
-          <li>808s and bass that bump without muddying the mix</li>
+          <li><strong>Vocal Clarity:</strong> Clear, present vocals that sit perfectly in the mix</li>
+          <li><strong>Impactful Low-End:</strong> Bass and drums that translate powerfully across all playback systems</li>
+          <li><strong>Optimized Loudness:</strong> Streaming-ready masters that maintain dynamics and impact</li>
+          <li><strong>Genre-Appropriate Balance:</strong> Techniques tailored to the specific needs of your music</li>
+          <li><strong>Professional Finish:</strong> Sound quality that captures attention and enhances your artistic vision</li>
         </ul>
-        <p>I've worked with artists across the R&B and Hip-Hop spectrum, from smooth soul to hard-hitting trap. My goal is to make your music sound polished, professional, and ready for streaming platforms.</p>
+        <p><strong>Why choose my mixing?</strong> Your music deserves meticulous attention to detail. I address common challenges such as muddy low-end, vocals that don't blend, and mixes that lack translation across different listening environments.</p>
+        <div className="bg-[#1A1F35] p-4 rounded-lg mt-4">
+          <h4 className="text-[#00F0FF] font-semibold mb-2">Pricing Tiers:</h4>
+          <ul className="space-y-1 text-sm">
+            <li><strong>Essential Mix:</strong> $150 - Professional mix with 2 revisions</li>
+            <li><strong>Premium Mix:</strong> $250 - Includes vocal production + unlimited revisions</li>
+            <li><strong>Deluxe Package:</strong> $350 - Mix + Master + stems + radio edit</li>
+          </ul>
+        </div>
       </div>
     ),
     delivery: '3-5 business days',
-    includes: ['Unlimited revisions', '24-48h delivery option', 'Reference track matching', 'Streaming-optimized masters'],
+    includes: ['Professional mixing', 'Streaming optimization', 'Reference matching', 'Revision rounds included'],
+    featured: true,
     popular: true
   },
   {
     icon: <FaCompactDisc className="w-8 h-8 text-[#9D00FF]" />,
     title: 'Vocal Production',
-    shortDescription: 'From comping to tuning, get radio-ready vocal tracks that stand out in the mix.',
+    shortDescription: 'Transform raw vocal recordings into polished, professional performances.',
     description: (
       <div className="space-y-4">
-        <p>Vocal production is where the magic happens in R&B and Hip-Hop. My vocal production service includes:</p>
+        <p><strong>Your vocals are central to your track's impact.</strong> I specialize in vocal production techniques that elevate performances to a professional standard:</p>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Professional vocal comping and alignment</li>
-          <li>Pitch correction and tuning (subtle or robotic effect if desired)</li>
-          <li>De-essing and breath control</li>
-          <li>Creative vocal stacking and arrangement</li>
-          <li>Ad-lib processing and placement</li>
+          <li><strong>Precise Comping:</strong> Seamlessly combine the best takes for a flawless performance</li>
+          <li><strong>Accurate Pitch Correction:</strong> Natural and transparent tuning, or creative effects as desired</li>
+          <li><strong>Vocal Arrangement:</strong> Crafting rich harmonies and ad-libs to enhance the soundscape</li>
+          <li><strong>Refinement:</strong> Cleaning up breaths, sibilance, and other unwanted artifacts</li>
+          <li><strong>Creative Processing:</strong> Applying effects and treatments that complement your artistic vision</li>
         </ul>
-        <p>I'll work closely with you to ensure the vocals complement your artistic vision while maintaining a professional, polished sound.</p>
+        <p><strong>My approach:</strong> I focus on bringing out the best in your vocal performance, ensuring it sits perfectly within the mix and captivates your audience.</p>
+        <div className="bg-[#1A1F35] p-4 rounded-lg mt-4">
+          <h4 className="text-[#00F0FF] font-semibold mb-2">Pricing Options:</h4>
+          <ul className="space-y-1 text-sm">
+            <li><strong>Basic Vocal Production:</strong> $100 - Comping, tuning, basic processing</li>
+            <li><strong>Full Vocal Production:</strong> $175 - Includes harmonies, ad-libs, creative effects</li>
+          </ul>
+        </div>
       </div>
     ),
     delivery: '2-3 business days',
-    includes: ['Unlimited takes', 'Vocal comping', 'Tuning and alignment', 'Mixing preparation']
+    includes: ['Vocal comping', 'Pitch correction', 'Harmony arrangement', 'Mix-ready stems']
   },
   {
     icon: <FaHeadphones className="w-8 h-8 text-[#00F0FF]" />,
     title: 'Beat Mixing',
-    shortDescription: 'Professional mixing for your instrumentals to compete with major label productions.',
+    shortDescription: 'Make your instrumentals hit hard and translate perfectly across all playback systems.',
     description: (
       <div className="space-y-4">
-        <p>Your beats deserve to hit hard and translate on any system. My beat mixing service includes:</p>
+        <p><strong>Your instrumentals are the backbone of your music.</strong> I ensure your beats have the professional polish that makes them stand out:</p>
         <ul className="list-disc pl-5 space-y-2">
-          <li>808 and bass processing that bumps on any system</li>
-          <li>Drum bus processing for maximum impact</li>
-          <li>Stereo imaging and width enhancement</li>
-          <li>Creative sound design and effects</li>
-          <li>Reference track matching</li>
+          <li><strong>Low-End Control:</strong> Deep, controlled bass that hits hard without muddiness</li>
+          <li><strong>Drum Punch:</strong> Drums that cut through the mix while maintaining groove and impact</li>
+          <li><strong>Spatial Imaging:</strong> Professional stereo width that creates depth and clarity</li>
+          <li><strong>Balanced Frequencies:</strong> EQ and compression that ensure every element has its place</li>
+          <li><strong>Release-Ready Loudness:</strong> Beats that match commercial standards and translate across platforms</li>
         </ul>
-        <p>I'll make sure your beats have the professional polish and competitive edge they need to stand out.</p>
+        <p><strong>Ideal for:</strong> Producers, artists, and anyone seeking a professional, impactful mix for their instrumental tracks.</p>
+        <div className="bg-[#1A1F35] p-4 rounded-lg mt-4">
+          <h4 className="text-[#00F0FF] font-semibold mb-2">Beat Mixing Rates:</h4>
+          <ul className="space-y-1 text-sm">
+            <li><strong>Standard Beat Mix:</strong> $75 - Professional mix with 1 revision</li>
+            <li><strong>Premium Beat Mix:</strong> $125 - Includes tagged/untagged versions + stems</li>
+          </ul>
+        </div>
       </div>
     ),
     delivery: '2-4 business days',
-    includes: ['Stem mixing', '2 mix revisions', 'Reference track matching', 'Streaming-optimized output']
+    includes: ['Professional mixing', 'Stem delivery', 'Reference matching', 'Commercial loudness']
   },
   {
     icon: <FaTools className="w-8 h-8 text-[#9D00FF]" />,
-    title: 'Sound Design',
-    shortDescription: 'Custom sound design for your tracks, from 808s to atmospheric textures.',
+    title: 'R&B/Hip-Hop Sound Design',
+    shortDescription: 'Custom sounds and textures that make your tracks unique and memorable.',
     description: (
       <div className="space-y-4">
-        <p>Elevate your production with custom sound design tailored to your track:</p>
+        <p><strong>Stand out with signature sounds.</strong> I create custom audio elements that give your R&B and Hip-Hop tracks a unique identity:</p>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Custom 808 and bass sound design</li>
-          <li>Atmospheric textures and risers</li>
-          <li>Drum processing and layering</li>
-          <li>Vocal chops and manipulation</li>
-          <li>Transition effects and ear candy</li>
+          <li><strong>Custom 808s:</strong> Unique bass sounds tailored to your track's key and vibe</li>
+          <li><strong>Vocal Chops:</strong> Creative vocal manipulation and sampling</li>
+          <li><strong>Atmospheric Elements:</strong> Pads, textures, and ambient sounds</li>
+          <li><strong>Transition Effects:</strong> Risers, sweeps, and ear candy</li>
+          <li><strong>Drum Layering:</strong> Enhanced percussion with custom processing</li>
         </ul>
-        <p>I'll create unique sounds that fit your track perfectly and help it stand out from the crowd.</p>
+        <p><strong>Perfect for:</strong> Artists wanting signature sounds, producers building unique beat libraries, or tracks needing that extra creative touch.</p>
+        <div className="bg-[#1A1F35] p-4 rounded-lg mt-4">
+          <h4 className="text-[#00F0FF] font-semibold mb-2">Sound Design Pricing:</h4>
+          <ul className="space-y-1 text-sm">
+            <li><strong>Basic Package:</strong> $50 - 3-5 custom elements</li>
+            <li><strong>Full Package:</strong> $100 - 8-10 elements + variations</li>
+          </ul>
+        </div>
       </div>
     ),
     delivery: '3-5 business days',
-    includes: ['Custom sound design', 'Multiple variations', 'Mixing preparation', '1 revision round']
+    includes: ['Custom sound elements', 'Multiple variations', 'Stems provided', 'Commercial usage rights']
   },
   {
     icon: <FaCode className="w-8 h-8 text-[#00F0FF]" />,
-    title: 'Mentoring',
-    shortDescription: '1-on-1 sessions to improve your mixing and production skills.',
+    title: 'R&B/Hip-Hop Mixing Mentorship',
+    shortDescription: 'Learn professional mixing techniques specifically for R&B and Hip-Hop from industry experience.',
     description: (
       <div className="space-y-4">
-        <p>Take your mixing and production skills to the next level with personalized 1-on-1 mentoring:</p>
+        <p><strong>Master the art of R&B and Hip-Hop mixing.</strong> Learn the techniques I've developed working with major artists:</p>
         <ul className="list-disc pl-5 space-y-2">
-          <li>Mixing techniques for R&B and Hip-Hop</li>
-          <li>Vocal processing and production</li>
-          <li>Beat making and sound selection</li>
-          <li>Workflow optimization</li>
-          <li>Industry insights and career advice</li>
+          <li><strong>Vocal Mixing Mastery:</strong> Make vocals sit perfectly in R&B and Hip-Hop mixes</li>
+          <li><strong>808 & Bass Techniques:</strong> Get that professional low-end that translates</li>
+          <li><strong>Genre-Specific Processing:</strong> EQ, compression, and effects for each style</li>
+          <li><strong>Mix Analysis:</strong> Breakdown of commercial tracks and your own projects</li>
+          <li><strong>Industry Insights:</strong> Real-world advice from major label experience</li>
         </ul>
-        <p>Whether you're just starting out or looking to refine your skills, I'll provide the guidance you need to reach your goals.</p>
+        <p><strong>Who this helps:</strong> Producers and engineers wanting to specialize in R&B/Hip-Hop, artists learning to mix their own music, or anyone serious about improving their skills.</p>
+        <div className="bg-[#1A1F35] p-4 rounded-lg mt-4">
+          <h4 className="text-[#00F0FF] font-semibold mb-2">Mentorship Options:</h4>
+          <ul className="space-y-1 text-sm">
+            <li><strong>Single Session:</strong> $75/hour - One-time consultation</li>
+            <li><strong>Monthly Package:</strong> $250 - 4 sessions + project feedback</li>
+          </ul>
+        </div>
       </div>
     ),
     delivery: '1-2 hours per session',
-    includes: ['Custom lesson plan', 'Project feedback', 'Resource recommendations', 'Follow-up support']
-  },
-  {
-    icon: <FaRobot className="w-8 h-8 text-indigo-600" />,
-    title: 'Automation',
-    shortDescription: 'Streamline your audio workflow with custom automation solutions and scripts.',
-    description: (
-      <div className="space-y-4">
-        <p>Enhance your productivity with automated audio processing solutions:</p>
-        <ul className="list-disc pl-5 space-y-2">
-          <li>Custom DAW automation scripts</li>
-          <li>Batch processing workflows</li>
-          <li>Audio file management systems</li>
-          <li>Metadata automation</li>
-          <li>Integration with existing tools</li>
-        </ul>
-        <p>Save time and maintain consistency with tailored automation solutions for your audio workflow.</p>
-      </div>
-    ),
-    delivery: '1-3 weeks',
-    includes: ['Custom scripts', 'Documentation', 'Integration support', 'Maintenance guide']
-  },
-  {
-    icon: <FaLaptopCode className="w-8 h-8 text-[#9D00FF]" />,
-    title: 'Audio Software Development',
-    shortDescription: 'Custom audio software and plugin development for specialized needs.',
-    description: (
-      <div className="space-y-4">
-        <p>Specialized audio software development services including:</p>
-        <ul className="list-disc pl-5 space-y-2">
-          <li>Custom VST/AU plugin development</li>
-          <li>Max/MSP patch creation</li>
-          <li>Pure Data programming</li>
-          <li>SuperCollider development</li>
-          <li>Real-time audio processing solutions</li>
-        </ul>
-        <p>Create unique tools for your specific audio processing needs with professional programming expertise.</p>
-      </div>
-    ),
-    delivery: 'Project-based timeline',
-    includes: ['Source code', 'Documentation', 'Installation support', 'Bug fixes']
-  },
-  {
-    icon: <FaRobot className="w-8 h-8 text-[#00F0FF]" />,
-    title: 'Workflow Automation',
-    shortDescription: 'Custom scripts and automation for your music production workflow.',
-    description: (
-      <div className="space-y-4">
-        <p>Streamline your music production with custom automation solutions:</p>
-        <ul className="list-disc pl-5 space-y-2">
-          <li>DAW-specific macro creation</li>
-          <li>Batch processing workflows</li>
-          <li>File organization and naming conventions</li>
-          <li>Template creation and optimization</li>
-          <li>Integration with cloud services</li>
-        </ul>
-        <p>Save hours of repetitive work with custom automation tailored to your specific workflow needs.</p>
-      </div>
-    ),
-    delivery: '1-2 weeks',
-    includes: ['Custom scripts', 'Documentation', 'Training', 'Support']
+    includes: ['Personalized curriculum', 'Project feedback', 'Resource library', 'Follow-up support']
   }
 ];
 
@@ -331,7 +308,7 @@ const Services = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Professional Audio Engineering
+            Audio Services
           </motion.h2>
           <motion.p 
             className="text-xl text-[#A0A0A5] max-w-3xl mx-auto"
@@ -340,7 +317,8 @@ const Services = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Elevate your sound with our comprehensive suite of professional audio services
+            Professional mixing and audio services specifically crafted for R&B,POP and Hip-Hop artists. 
+            With experience working on projects for various reputable projects.
           </motion.p>
         </div>
         
