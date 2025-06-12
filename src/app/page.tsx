@@ -168,7 +168,7 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-center mb-12 text-white">Featured Mixes</h2>
           <CardCarousel />
           <div className="carousel">
-            {/* Carousel of featured projects or testimonials */}
+            
             <div className="carousel-item">Project 1</div>
             <div className="carousel-item">Project 2</div>
             <div className="carousel-item">Project 3</div>

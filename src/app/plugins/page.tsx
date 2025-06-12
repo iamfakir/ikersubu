@@ -8,6 +8,21 @@ export const metadata: Metadata = {
 
 const plugins = [
   {
+    id: 'airfry',
+    title: 'Airfry Audio Demo',
+    description: 'Try the Airfry audio effect demo. Adjust presence and wet mix, then play the audio!',
+    category: 'Web Demo',
+    image: '/assets/images/Plugin/airfry/thumbnail.png', // Place your image here
+    url: '/plugins/airfry',
+    comingSoon: false,
+    features: [
+      'Presence and wet mix controls',
+      'Interactive audio demo',
+      'Modern UI',
+      'SVG play/pause icons'
+    ]
+  },
+  {
     id: 'dripper-web',
     title: 'Dripper Web - Interactive Demo',
     description: 'Try our saturation processor directly in your browser with real-time audio processing.',
