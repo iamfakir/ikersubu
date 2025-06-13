@@ -33,8 +33,8 @@ interface ServiceModalProps {
 const services: ServiceItem[] = [
   {
     icon: <FaMixer className="w-8 h-8 text-[#00F0FF]" />,
-    title: 'Professional Mixing',
-    shortDescription: 'Industry-standard mixing that elevates your tracks to compete with professional releases.',
+    title: 'Professional Mixing Services for R&B and Hip-Hop',
+    shortDescription: 'Expert R&B and Hip-Hop mixing services. Achieve polished, release-ready tracks that compete with major-label productions. Vocal clarity, impactful low-end, and optimized loudness for all streaming platforms.',
     description: (
       <div className="space-y-4">
         <p><strong>Transform your raw recordings into polished, release-ready tracks.</strong> Drawing from my experience working with high-profile productions, I deliver:</p>
@@ -63,8 +63,8 @@ const services: ServiceItem[] = [
   },
   {
     icon: <FaCompactDisc className="w-8 h-8 text-[#9D00FF]" />,
-    title: 'Vocal Production',
-    shortDescription: 'Transform raw vocal recordings into polished, professional performances.',
+    title: 'Vocal Production & Tuning for R&B/Hip-Hop',
+    shortDescription: 'Professional vocal production and tuning services for R&B and Hip-Hop. Get flawless vocal performances with precise comping, natural pitch correction, and creative vocal arrangements.',
     description: (
       <div className="space-y-4">
         <p><strong>Your vocals are central to your track's impact.</strong> I specialize in vocal production techniques that elevate performances to a professional standard:</p>
@@ -90,8 +90,8 @@ const services: ServiceItem[] = [
   },
   {
     icon: <FaHeadphones className="w-8 h-8 text-[#00F0FF]" />,
-    title: 'Beat Mixing',
-    shortDescription: 'Make your instrumentals hit hard and translate perfectly across all playback systems.',
+    title: 'Beat Mixing Services for Hip-Hop & R&B Instrumentals',
+    shortDescription: 'Get your Hip-Hop and R&B beats mixed to perfection. Ensure your instrumentals have deep bass, punchy drums, and clear stereo imaging for all playback systems.',
     description: (
       <div className="space-y-4">
         <p><strong>Your instrumentals are the backbone of your music.</strong> I ensure your beats have the professional polish that makes them stand out:</p>
@@ -117,8 +117,8 @@ const services: ServiceItem[] = [
   },
   {
     icon: <FaTools className="w-8 h-8 text-[#9D00FF]" />,
-    title: 'R&B/Hip-Hop Sound Design',
-    shortDescription: 'Custom sounds and textures that make your tracks unique and memorable.',
+    title: 'Custom Sound Design for R&B and Hip-Hop Productions',
+    shortDescription: 'Unique sound design services for R&B and Hip-Hop. Custom 808s, vocal chops, atmospheric textures, and transition FX to make your music stand out.',
     description: (
       <div className="space-y-4">
         <p><strong>Stand out with signature sounds.</strong> I create custom audio elements that give your R&B and Hip-Hop tracks a unique identity:</p>
@@ -144,8 +144,8 @@ const services: ServiceItem[] = [
   },
   {
     icon: <FaCode className="w-8 h-8 text-[#00F0FF]" />,
-    title: 'R&B/Hip-Hop Mixing Mentorship',
-    shortDescription: 'Learn professional mixing techniques specifically for R&B and Hip-Hop from industry experience.',
+    title: 'R&B/Hip-Hop Mixing Mentorship & Audio Engineering Courses',
+    shortDescription: 'Learn professional R&B and Hip-Hop mixing techniques. One-on-one mentorship and audio engineering courses covering vocal mixing, 808s, and genre-specific processing.',
     description: (
       <div className="space-y-4">
         <p><strong>Master the art of R&B and Hip-Hop mixing.</strong> Learn the techniques I've developed working with major artists:</p>

@@ -1,20 +1,20 @@
 module.exports = {
-  title: 'IKER SUBU - R&B & Hip-Hop Mixing Engineer & Producer',
-  description: 'Professional R&B and Hip-Hop mixing and mastering engineer. Specializing in bringing out the best in urban music with clean, powerful mixes that translate across all platforms.',
+  title: 'IKER SUBU - Mixing, Mastering, Audio Plugins & Sound Design',
+  description: 'Top-tier mixing and mastering services for R&B, Hip-Hop, and urban music. Discover innovative audio plugins (VST, AU, AAX) and custom sound design by IKER SUBU. Elevate your music production to a professional level.',
   canonical: 'https://ikersubu.com',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://ikersubu.com',
-    site_name: 'IKER SUBU',
-    title: 'IKER SUBU - R&B & Hip-Hop Mixing Engineer & Producer',
-    description: 'Professional R&B and Hip-Hop mixing and mastering services. Industry-standard sound quality tailored for urban music production.',
+    site_name: 'IKER SUBU - Audio Solutions',
+    title: 'IKER SUBU - Mixing, Mastering & Audio Plugin Development',
+    description: 'Expert mixing & mastering for R&B/Hip-Hop, plus high-quality audio plugins. Achieve industry-standard sound with IKER SUBU audio solutions.',
     images: [
       {
         url: 'https://ikersubu.com/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'IKER SUBU - Professional Audio Engineer & Producer',
+        alt: 'IKER SUBU - Mixing, Mastering, and Audio Plugins',
       },
     ],
   },
@@ -26,7 +26,7 @@ module.exports = {
   additionalMetaTags: [
     {
       name: 'keywords',
-      content: 'R&B mixing, Hip-Hop mixing, urban music production, audio engineer, mixing engineer, music production, beat making, sound design, music mastering, music producer, recording studio, vocal mixing, 808 mixing, trap mixing, urban music, music industry professional',
+      content: 'mixing services, mastering services, R&B mixing, Hip-Hop mixing, audio plugins, VST plugins, AU plugins, AAX plugins, sound design, music production tools, audio engineer, music producer, beat mixing, vocal production, IKER SUBU, professional audio, urban music',
     },
     {
       name: 'author',

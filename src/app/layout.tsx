@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from './components/Navbar';
+import dynamic from 'next/dynamic';
+
+const Navbar = dynamic(() => import('./components/Navbar'), { ssr: false });
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,8 +19,9 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'IKER SUBU',
-  description: 'Music production and audio engineering by IKER SUBU',
+  title: 'IKER SUBU - Mixing, Mastering & Audio Plugins',
+  description: 'Professional mixing and mastering services for R&B and Hip-Hop. High-quality audio plugins for music producers. Elevate your sound with IKER SUBU.',
+  keywords: 'mixing, mastering, audio engineer, music production, R&B, Hip-Hop, audio plugins, music software, pro audio, sound design, IKER SUBU',
   // Viewport is now handled by the separate viewport export
 }
 
@@ -35,7 +38,7 @@ export default function RootLayout({
       </head>
       <body className="text-gray-900 antialiased">
         <div id="root" className="flex flex-col">
-          {/* <Navbar /> */}
+          <Navbar />
           {children}
         </div>
       </body>

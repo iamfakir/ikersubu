@@ -38,7 +38,7 @@ module.exports = {
     let priority = config.priority;
     if (path === '/') {
       priority = 1.0;
-    } else if (path.includes('portfolio') || path.includes('services')) {
+    } else if (path.includes('portfolio') || path.includes('services') || path.includes('plugins')) {
       priority = 0.9;
     } else if (path.includes('about') || path.includes('contact')) {
       priority = 0.8;

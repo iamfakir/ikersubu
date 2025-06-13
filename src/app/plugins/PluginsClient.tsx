@@ -28,10 +28,10 @@ export default function PluginsClient({ plugins }: PluginsClientProps) {
         {/* Hero Section */}
         <header className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Audio Plugins
+            IKER SUBU Audio Plugins for Music Production
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Professional audio tools for music producers and sound designers
+            Discover innovative audio plugins designed by IKER SUBU. Enhance your music production and sound design workflow with professional VST, AU, and AAX tools.
           </p>
         </header>
 
@@ -60,12 +60,12 @@ export default function PluginsClient({ plugins }: PluginsClientProps) {
                 </Link>
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-2">
-                    <h2 className="text-2xl font-bold text-white">{plugin.title}</h2>
+                    <h2 className="text-2xl font-bold text-white">{plugin.title} - {plugin.category} Plugin</h2>
                     <span className="text-sm text-[#00F0FF] bg-[#00F0FF]/10 px-3 py-1 rounded-full">
                       {plugin.category}
                     </span>
                   </div>
-                  <p className="text-gray-300 mb-4">{plugin.description}</p>
+                  <p className="text-gray-300 mb-4">{plugin.description} Enhance your tracks with this powerful {plugin.category.toLowerCase()} plugin, designed for intuitive workflow and professional results.</p>
                   
                   <ul className="space-y-1 mb-6">
                     {plugin.features.map((feature, index) => (
