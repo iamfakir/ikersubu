@@ -3,27 +3,33 @@
 import { motion } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 
-// Sample data - replace with your actual mixes
+// Featured R&B/Hip-Hop portfolio pieces
 const mixes = [
   {
     id: 1,
-    title: 'Midnight Grooves',
-    artist: 'Artist Name',
-    genre: 'R&B',
+    title: 'Velvet Dreams',
+    artist: '[R&B Artist Name]',
+    genre: 'Contemporary R&B',
     year: '2024',
-    audioSrc: '/audio/mix1.mp3',
-    coverArt: '/images/mix1-cover.jpg',
-    credits: 'Mixed by You | Mastered by [Name]'
+    audioSrc: '/audio/velvet-dreams.mp3',
+    coverArt: '/images/velvet-dreams-cover.jpg',
+    credits: 'Mixed by Iker Subu | Produced by [Producer Name]',
+    description: 'Silky smooth R&B track featuring lush vocal harmonies and crisp 808s. This mix showcases the perfect balance between modern production and classic R&B warmth.',
+    highlights: ['Vocal layering and harmonies', 'Punchy 808 processing', 'Spatial reverb design'],
+    link: '/portfolio/velvet-dreams'
   },
   {
     id: 2,
-    title: 'Urban Vibes',
-    artist: 'Artist Name',
+    title: 'Street Symphony',
+    artist: '[Hip-Hop Artist Name]',
     genre: 'Hip-Hop',
-    year: '2024',
-    audioSrc: '/audio/mix2.mp3',
-    coverArt: '/images/mix2-cover.jpg',
-    credits: 'Mixed by You | Produced by [Name]'
+    year: '2023',
+    audioSrc: '/audio/street-symphony.mp3',
+    coverArt: '/images/street-symphony-cover.jpg',
+    credits: 'Mixed by Iker Subu | Produced by [Producer Name]',
+    description: 'Hard-hitting Hip-Hop track with aggressive drums and crystal-clear vocals. Demonstrates expertise in making rap vocals cut through dense instrumental arrangements.',
+    highlights: ['Vocal clarity and presence', 'Punchy drum processing', 'Dynamic range control'],
+    link: '/portfolio/street-symphony'
   }
 ];
 
@@ -174,7 +180,21 @@ export default function FeaturedMixes() {
                       )}
                     </div>
                     
-                    <p className="text-sm text-[#A0A0A5] mt-3">{mix.credits}</p>
+                    <p className="text-sm text-[#A0A0A5] mt-3 leading-relaxed">{mix.description}</p>
+                    
+                    <div className="mt-3">
+                      <h4 className="text-sm font-semibold text-white mb-2">Mix Highlights:</h4>
+                      <ul className="text-xs text-[#A0A0A5] space-y-1">
+                        {mix.highlights.map((highlight, idx) => (
+                          <li key={idx} className="flex items-center">
+                            <span className="w-1 h-1 bg-[#00F0FF] rounded-full mr-2"></span>
+                            {highlight}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <p className="text-xs text-[#A0A0A5] mt-3">{mix.credits}</p>
                     
                     <div className="mt-4">
                       <div className="h-1 bg-[#1E243A] rounded-full overflow-hidden">
@@ -188,6 +208,18 @@ export default function FeaturedMixes() {
                         <span>{currentMix === mix.id && isPlaying ? '2:45' : '0:00'}</span>
                         <span>3:30</span>
                       </div>
+                    </div>
+                    
+                    <div className="mt-3">
+                      <a 
+                        href={mix.link}
+                        className="text-xs text-[#00F0FF] hover:text-white transition-colors inline-flex items-center"
+                      >
+                        View Full Project Details
+                        <svg className="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </a>
                     </div>
                   </div>
                 </div>

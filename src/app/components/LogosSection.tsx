@@ -4,29 +4,29 @@ import { motion } from 'framer-motion';
 
 const companies = [
   {
-    name: 'Sony Music',
-    logo: '/logos/sony-music.svg',
-    url: 'https://www.sonymusic.com/'
+    name: 'Netflix',
+    logo: '/logos/netflix.svg',
+    url: 'https://www.netflix.com/'
   },
   {
-    name: 'Universal Music Group',
-    logo: '/logos/universal-music.svg',
-    url: 'https://www.universalmusic.com/'
-  },
-  {
-    name: 'Warner Music Group',
-    logo: '/logos/warner-music.svg',
-    url: 'https://www.wmg.com/'
-  },
-  {
-    name: 'Def Jam Recordings',
-    logo: '/logos/def-jam.svg',
-    url: 'https://www.defjam.com/'
+    name: 'A$AP Mob',
+    logo: '/logos/asap-mob.svg',
+    url: 'https://www.asapmob.com/'
   },
   {
     name: 'RCA Records',
     logo: '/logos/rca-records.svg',
     url: 'https://www.rcarecords.com/'
+  },
+  {
+    name: 'Polo Grounds Music',
+    logo: '/logos/polo-grounds.svg',
+    url: 'https://www.pologroundsmusic.com/'
+  },
+  {
+    name: 'Def Jam Recordings',
+    logo: '/logos/def-jam.svg',
+    url: 'https://www.defjam.com/'
   },
   {
     name: 'Atlantic Records',

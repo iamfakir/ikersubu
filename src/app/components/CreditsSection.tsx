@@ -4,13 +4,33 @@ import { motion } from 'framer-motion';
 
 const credits = [
   {
-    project: 'Album Name',
-    artist: 'Artist Name',
+    project: 'Squid Game Soundtrack',
+    artist: 'Netflix Original Series',
     role: 'Assistant Engineer',
-    year: '2024',
-    label: 'Record Label'
+    year: '2021',
+    label: 'Netflix'
   },
-  // Add more credits as needed
+  {
+    project: 'Testing Album',
+    artist: 'A$AP Rocky',
+    role: 'Assistant Engineer', 
+    year: '2018',
+    label: 'A$AP Worldwide/Polo Grounds/RCA'
+  },
+  {
+    project: '[Placeholder Project]',
+    artist: '[Major R&B Artist]',
+    role: 'Mixing Engineer',
+    year: '2023',
+    label: '[Major Label]'
+  },
+  {
+    project: '[Placeholder Album]',
+    artist: '[Hip-Hop Artist]',
+    role: 'Assistant Engineer',
+    year: '2022',
+    label: '[Record Label]'
+  }
 ];
 
 export default function CreditsSection() {

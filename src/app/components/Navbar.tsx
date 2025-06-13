@@ -18,15 +18,16 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
-  const [activeLink, setActiveLink] = useState('/');
+  const [activeLink, setActiveLink] = useState('');
   
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     
-    // Set active link based on current path
-    setActiveLink(window.location.pathname);
+    if (typeof window !== 'undefined') {
+      setActiveLink(window.location.pathname);
+    }
     
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
