@@ -1,11 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-
-
 import { motion } from 'framer-motion';
-
 import { useState, useEffect } from 'react';
+import { getAboutContent } from '../data/about';
 
 const AboutPage = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -15,12 +13,8 @@ const AboutPage = () => {
   }, []);
   
   if (!isMounted) return null;
-  const stats = [
-    { value: '2+', label: 'Years Experience' },
-    { value: '100+', label: 'Projects Completed' },
-    { value: '100%', label: 'Client Satisfaction' },
-    { value: '25+', label: 'Artists Worked With' },
-  ];
+  
+  const aboutContent = getAboutContent();
 
 
 
@@ -36,10 +30,10 @@ const AboutPage = () => {
               transition={{ duration: 0.5 }}
             >
               <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
-                Crafting Exceptional Sound
+                {aboutContent.hero.title}
               </h1>
               <p className="text-xl text-gray-300 mb-8">
-                Hi, I'm Iker Subu, a professional audio engineer and producer. Since 2022, I've been professionally focused on recording and mixing, and in 2024, I began assisting renowned producer Akash Shravan. I work with talented artists and help them achieve their sonic vision.
+                {aboutContent.hero.description}
               </p>
               <div className="flex flex-wrap gap-4 mb-12">
                 <a
@@ -63,16 +57,16 @@ const AboutPage = () => {
               className="relative h-96 lg:h-[500px] w-full rounded-2xl overflow-hidden"
             >
               <Image
-                src="/images/iker-profile.jpg"
-                alt="Iker Subu - Audio Engineer"
+                src={aboutContent.hero.profileImage}
+                alt={`${aboutContent.hero.name} - ${aboutContent.hero.role}`}
                 fill
                 className="object-cover"
                 priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
               <div className="absolute bottom-0 left-0 p-6">
-                <h3 className="text-2xl font-bold">Iker Subu</h3>
-                <p className="text-cyan-400">Audio Engineer & Producer</p>
+                <h3 className="text-2xl font-bold">{aboutContent.hero.name}</h3>
+                <p className="text-cyan-400">{aboutContent.hero.role}</p>
               </div>
             </motion.div>
           </div>
@@ -82,8 +76,8 @@ const AboutPage = () => {
       {/* Stats Section */}
       <section className="py-16 bg-gray-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+            {aboutContent.stats.map((stat, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -99,6 +93,8 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
+
+
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-cyan-900/30 to-blue-900/30">
         <div className="max-w-4xl mx-auto text-center">
@@ -107,9 +103,9 @@ const AboutPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Elevate Your Sound?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">{aboutContent.cta.title}</h2>
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Let's work together to bring your music to life with professional mixing and mastering services tailored to your unique sound.
+              {aboutContent.cta.description}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a

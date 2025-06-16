@@ -10,8 +10,8 @@ interface MixItem {
   highlights: string[];
   link: string;
   streamingLinks: {
-    appleMusic: string;
-    spotify: string;
+    youtube: string;
+    instagram: string;
   };
 }
 
@@ -32,34 +32,34 @@ const formatImagePath = (path: string): string => {
 const mixes: MixItem[] = [
   {
     id: 1,
-    title: 'Velvet Dreams',
-    artist: '[Artist Name]',
-    genre: 'Contemporary',
-    year: '2024',
-    coverArt: formatImagePath('/assets/images/works/28.jpg'),
-    credits: 'Mixed by Iker Subu | Produced by [Producer Name]',
+    title: 'Manadhil',
+    artist: 'JBE',
+    genre: 'R&B/Soul',
+    year: '2025',
+    coverArt: formatImagePath('public/assets/images/Mixes/mndhl.jpg'),
+    credits: 'Mixed by Iker Subu | Produced by Akroniim',
     description: 'Silky smooth track featuring lush vocal harmonies and crisp percussion. This mix showcases the perfect balance between modern production and classic warmth.',
-    highlights: ['Vocal layering and harmonies', 'Punchy percussion processing', 'Spatial reverb design'],
+    highlights: ['Vocal layering and harmonies', 'Punchy Low-end processing', 'Spatial reverb design'],
     link: '/portfolio/velvet-dreams',
     streamingLinks: {
-      appleMusic: 'https://music.apple.com/us/album/velvet-dreams',
-      spotify: 'https://open.spotify.com/album/velvetdreams'
+      youtube: 'https://www.youtube.com/watch?v=xvgSyBcq4l0&pp=ygUDSkJF',
+      instagram: 'https://www.instagram.com/reel/DIlk4wNTonN/'
     }
   },
   {
     id: 2,
-    title: 'Street Symphony',
-    artist: '[Artist Name]',
-    genre: 'Urban',
-    year: '2023',
-    coverArt: formatImagePath('/assets/images/works/34.jpg'),
-    credits: 'Mixed by Iker Subu | Produced by [Producer Name]',
-    description: 'Hard-hitting track with aggressive drums and crystal-clear vocals. Demonstrates expertise in making vocals cut through dense instrumental arrangements.',
+    title: 'Pesaadhe',
+    artist: 'JBE',
+    genre: 'R&B/Dance',
+    year: '2025',
+    coverArt: formatImagePath('public/assets/images/Mixes/pesadhe.jpg'),
+    credits: 'Mixed by Iker Subu | Produced by Akroniim',
+    description: 'Soulful electronic dance Song blending Haitian rhythms with house music, A groundbreaking fusion of styles.',
     highlights: ['Vocal clarity and presence', 'Punchy drum processing', 'Dynamic range control'],
     link: '/portfolio/street-symphony',
     streamingLinks: {
-      appleMusic: 'https://music.apple.com/us/album/street-symphony',
-      spotify: 'https://open.spotify.com/album/streetsymphony'
+      youtube: 'https://www.youtube.com/watch?v=PIDJ4uAgHNg',
+      instagram: 'https://www.instagram.com/jbexii/reel/DJ_tWygIp6l/'
     }
   }
 ];
