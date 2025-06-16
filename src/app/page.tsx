@@ -107,7 +107,7 @@ export default function Home() {
                 <motion.span
                   className="block text-white text-3xl sm:text-4xl md:text-5xl mt-2"
                 >
-                  R&B & Hip-Hop Mixing Engineer | Audio Plugin Developer
+                  Mixing Engineer | Audio Plugin Developer
                 </motion.span>
               </motion.h1>
               
@@ -117,7 +117,7 @@ export default function Home() {
                 transition={{ duration: 1, delay: 0.5 }}
                 className="text-xl sm:text-2xl text-[#A0A0A5] mt-6 max-w-2xl mx-auto"
               >
-                Expert mixing and mastering services for R&B and Hip-Hop, plus innovative audio plugins to enhance your productions. Achieve major-label sound quality.
+                Expert mixing and mastering services plus innovative audio plugins to enhance your productions. Achieve major-label sound quality.
               </motion.p>
             </motion.div>
             
@@ -128,12 +128,12 @@ export default function Home() {
               className="flex flex-col sm:flex-row justify-center items-center space-y-5 sm:space-y-0 sm:space-x-6 mt-12"
             >
               <motion.a
-                href="/portfolio"
+                href="/contact"
                 className="btn-futuristic group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Hear My Work
+                Get In Touch
                 <motion.span
                   className="ml-2"
                   animate={{ x: [0, 5, 0] }}
@@ -161,6 +161,23 @@ export default function Home() {
           </motion.div>
         </motion.section>
 
+        {/* About Me Section (Replacing Portfolio) */}
+        <section className="py-20 px-8 bg-gradient-to-b from-[#0B0E17] to-[#1A1F35]">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl font-bold text-white mb-6">About Me</h2>
+              <p className="text-xl text-[#A0A0A5] max-w-3xl mx-auto leading-relaxed">
+                Hi, I'm Iker Subu, a professional audio engineer and producer. Since 2022, I've been professionally focused on recording and mixing, and in 2024, I began assisting renowned Engineer x Producer Akash Shravan. I work with talented artists and help them achieve their sonic vision.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Credits Section */}
         <CreditsSection />
 
@@ -187,6 +204,129 @@ export default function Home() {
           </div>
         </section>
         
+        {/* Brand Story Section */}
+        <section className="py-20 px-8 bg-gradient-to-b from-[#0B0E17] to-[#1A1F35]">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl font-bold text-white mb-6">My Audio Journey</h2>
+              <p className="text-xl text-[#A0A0A5] max-w-3xl mx-auto">
+                From bedroom producer to professional audio engineer, I've dedicated my life to perfecting the art of sound. 
+                Every mix tells a story, and I'm here to make yours unforgettable.
+              </p>
+            </motion.div>
+            
+            {/* Custom SVG Graphics */}
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-center p-6 bg-gradient-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#00F0FF]/20"
+              >
+                <svg className="w-16 h-16 mx-auto mb-4 text-[#00F0FF]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                <h3 className="text-xl font-bold text-white mb-2">Precision</h3>
+                <p className="text-[#A0A0A5]">Every frequency matters. I craft each mix with surgical precision.</p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-center p-6 bg-gradient-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#9D00FF]/20"
+              >
+                <svg className="w-16 h-16 mx-auto mb-4 text-[#9D00FF]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <h3 className="text-xl font-bold text-white mb-2">Creativity</h3>
+                <p className="text-[#A0A0A5]">Pushing boundaries to create unique sonic landscapes.</p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-center p-6 bg-gradient-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#00F0FF]/20"
+              >
+                <svg className="w-16 h-16 mx-auto mb-4 text-[#00F0FF]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                </svg>
+                <h3 className="text-xl font-bold text-white mb-2">Passion</h3>
+                <p className="text-[#A0A0A5]">Music is my life. Your vision becomes my mission.</p>
+              </motion.div>
+            </div>
+            
+            {/* Process Timeline */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="bg-gradient-to-r from-[#00F0FF]/10 to-[#9D00FF]/10 rounded-lg p-8 border border-[#00F0FF]/20"
+            >
+              <h3 className="text-2xl font-bold text-white text-center mb-8">My Process</h3>
+              <div className="grid md:grid-cols-4 gap-6">
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-[#00F0FF] rounded-full flex items-center justify-center mx-auto mb-4 text-black font-bold">1</div>
+                  <h4 className="text-white font-semibold mb-2">Listen</h4>
+                  <p className="text-[#A0A0A5] text-sm">Understanding your vision and musical goals</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-[#9D00FF] rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold">2</div>
+                  <h4 className="text-white font-semibold mb-2">Analyze</h4>
+                  <p className="text-[#A0A0A5] text-sm">Breaking down the elements and structure</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-[#00F0FF] rounded-full flex items-center justify-center mx-auto mb-4 text-black font-bold">3</div>
+                  <h4 className="text-white font-semibold mb-2">Create</h4>
+                  <p className="text-[#A0A0A5] text-sm">Crafting the perfect mix with precision</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-[#9D00FF] rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold">4</div>
+                  <h4 className="text-white font-semibold mb-2">Deliver</h4>
+                  <p className="text-[#A0A0A5] text-sm">Professional results that exceed expectations</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+        
+        {/* Enhanced CTA Section */}
+        <section className="py-20 px-8 bg-gradient-to-t from-[#0B0E17] to-[#1A1F35]">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <h2 className="text-4xl font-bold text-white mb-6">Ready to Elevate Your Sound?</h2>
+            <p className="text-xl text-[#A0A0A5] mb-8">Let's create something extraordinary together</p>
+            <motion.div
+              className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0, 240, 255, 0.5)" }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 bg-gradient-to-r from-[#00F0FF] to-[#9D00FF] text-black font-bold rounded-lg transition-all duration-300"
+              >
+                Start Your Project
+              </motion.button>
+              <motion.a
+                href="/contact"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 border-2 border-[#00F0FF] text-[#00F0FF] font-bold rounded-lg hover:bg-[#00F0FF] hover:text-black transition-all duration-300"
+              >
+                Contact Me
+              </motion.a>
+            </motion.div>
+          </motion.div>
+        </section>
       </main>
       <Footer />
     </div>
@@ -306,12 +446,12 @@ export default function Home() {
                 Start Your Project
               </motion.button>
               <motion.a
-                href="/portfolio"
+                href="/contact"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 border-2 border-[#00F0FF] text-[#00F0FF] font-bold rounded-lg hover:bg-[#00F0FF] hover:text-black transition-all duration-300"
               >
-                Listen to Our Work
+                Contact Me
               </motion.a>
             </motion.div>
           </motion.div>

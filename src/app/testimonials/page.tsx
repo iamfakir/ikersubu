@@ -2,7 +2,7 @@ import Testimonials from '@/components/Testimonials/Testimonials';
 
 export const metadata = {
   title: 'Testimonials | IKER SUBU - Professional Audio Engineer',
-  description: 'See what artists and producers say about working with IKER SUBU. Professional mixing, mastering, and production services for R&B and Hip-Hop.',
+  description: 'See what artists and producers say about working with IKER SUBU. Professional mixing, mastering, and production services.',
   openGraph: {
     title: 'Client Testimonials | IKER SUBU',
     description: 'Read testimonials from artists and producers who have worked with IKER SUBU for professional mixing, mastering, and production services.',

@@ -2,34 +2,19 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import AudioWave from '../AudioWave';
 import './CardCarousel.css';
-import '../AudioWave.css';
 
-import portfolioData from '@/data/portfolioData.json';
+import { getPortfolioItems, getPortfolioItemsWithOrder, PortfolioItem } from '@/app/data/portfolio';
 
-interface WorkItem {
-  id: number;
-  name: string;
-  role: string;
-  type: 'assisted' | 'mixed';
-  year: number;
-  genre: string;
-  client: string;
-  description: string;
-  techniques: string[];
-  imageUrl: string;
-  isFeatured?: boolean;
-}
-
-// Type assertion to ensure the imported data matches our WorkItem type
-const workItems: WorkItem[] = portfolioData.projects as WorkItem[];
+// Use the PortfolioItem interface from the portfolio.ts file
+// Get portfolio items from the new data file
+const workItems: PortfolioItem[] = getPortfolioItems();
 
 export default function CardCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<WorkItem | null>(null);
-  const [activeTab, setActiveTab] = useState<'assisted' | 'mixMaster' | 'production' | 'recording'>('assisted');
+  const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(null);
+  const [activeTab, setActiveTab] = useState<'assisted' | 'mixed' | 'production' | 'recording'>('assisted');
   const carouselRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
@@ -39,14 +24,21 @@ export default function CardCarousel() {
   const filteredItems = workItems.filter(item => {
     if (activeTab === 'assisted') {
       return item.type === 'assisted';
-    } else if (activeTab === 'mixMaster') {
+    } else if (activeTab === 'mixed') {
       return item.type === 'mixed';
     } else if (activeTab === 'production') {
-      return false; // Return empty for now, user will add files later
+      return item.type === 'production';
     } else if (activeTab === 'recording') {
-      return false; // Return empty for now, user will add files later
+      return item.type === 'recording';
     }
     return false;
+  });
+  
+  // Sort the filtered items by order property if available
+  const sortedFilteredItems = [...filteredItems].sort((a, b) => {
+    const orderA = a.order || Number.MAX_SAFE_INTEGER;
+    const orderB = b.order || Number.MAX_SAFE_INTEGER;
+    return orderA - orderB;
   });
 
   const updateCarousel = (direction: 'next' | 'prev' | number) => {
@@ -127,7 +119,7 @@ export default function CardCarousel() {
     return visibleCardsData;
   };
 
-  const handleCardClick = (project: WorkItem) => {
+  const handleCardClick = (project: PortfolioItem) => {
     if (!isAnimating) {
       setSelectedProject(selectedProject?.name === project.name ? null : project);
     }
@@ -139,6 +131,7 @@ export default function CardCarousel() {
     }
   };
 
+  // Use the sorted filtered items for the visible cards
   const visibleCards = getVisibleCards();
 
   return (
@@ -153,8 +146,8 @@ export default function CardCarousel() {
           Assisted Mixes
         </button>
         <button 
-          onClick={() => setActiveTab('mixMaster')}
-          className={`filter-button ${activeTab === 'mixMaster' ? 'active' : ''}`}
+          onClick={() => setActiveTab('mixed')}
+          className={`filter-button ${activeTab === 'mixed' ? 'active' : ''}`}
         >
           Mix/Master
         </button>
@@ -209,16 +202,14 @@ export default function CardCarousel() {
                 >
                   <div className="card-inner">
                     <div className="image-container">
-                      {activeTab === 'assisted' && (
-                        <Image
-                          src={cardData.imageUrl} 
-                          alt={cardData.name}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          className="card-image"
-                          priority={cardData.position === 0} // Prioritize center image
-                        />
-                      )}
+                      <Image
+                        src={cardData.imageUrl} 
+                        alt={cardData.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="card-image"
+                        priority={cardData.position === 0} // Prioritize center image
+                      />
                     </div>
                     <div className="card-content">
                       <h3>{cardData.name}</h3>
@@ -226,7 +217,6 @@ export default function CardCarousel() {
                       <p className="client">{cardData.client}</p>
                       <p className="genre">{cardData.genre}</p>
                     </div>
-                    <AudioWave className="card-wave" />
                   </div>
                 </div>
               );
@@ -273,8 +263,6 @@ export default function CardCarousel() {
         </div>
       )}
 
-
-
       {/* Placeholder for Animated Stats */}
       <div className="animated-stats-placeholder">
         {/* Example Structure: */}
@@ -283,7 +271,6 @@ export default function CardCarousel() {
         {/* <div className="stat-item"><span>99%</span> Client Satisfaction</div> */}
         <p>Animated stats coming soon!</p>
       </div>
-
     </div>
   );
 }

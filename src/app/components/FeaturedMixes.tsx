@@ -1,88 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
+import { useState } from 'react';
+import { getFeaturedMixes } from '../data/mixes';
 
-// Featured R&B/Hip-Hop portfolio pieces
-const mixes = [
-  {
-    id: 1,
-    title: 'Velvet Dreams',
-    artist: '[R&B Artist Name]',
-    genre: 'Contemporary R&B',
-    year: '2024',
-    audioSrc: '/audio/velvet-dreams.mp3',
-    coverArt: '/images/velvet-dreams-cover.jpg',
-    credits: 'Mixed by Iker Subu | Produced by [Producer Name]',
-    description: 'Silky smooth R&B track featuring lush vocal harmonies and crisp 808s. This mix showcases the perfect balance between modern production and classic R&B warmth.',
-    highlights: ['Vocal layering and harmonies', 'Punchy 808 processing', 'Spatial reverb design'],
-    link: '/portfolio/velvet-dreams'
-  },
-  {
-    id: 2,
-    title: 'Street Symphony',
-    artist: '[Hip-Hop Artist Name]',
-    genre: 'Hip-Hop',
-    year: '2023',
-    audioSrc: '/audio/street-symphony.mp3',
-    coverArt: '/images/street-symphony-cover.jpg',
-    credits: 'Mixed by Iker Subu | Produced by [Producer Name]',
-    description: 'Hard-hitting Hip-Hop track with aggressive drums and crystal-clear vocals. Demonstrates expertise in making rap vocals cut through dense instrumental arrangements.',
-    highlights: ['Vocal clarity and presence', 'Punchy drum processing', 'Dynamic range control'],
-    link: '/portfolio/street-symphony'
-  }
-];
+// Get featured mixes from data file
+const mixes = getFeaturedMixes();
 
 export default function FeaturedMixes() {
   const [currentMix, setCurrentMix] = useState<number | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
-
-  const togglePlay = (mixId: number) => {
-    if (currentMix === mixId) {
-      // Toggle play/pause for current mix
-      if (isPlaying) {
-        audioRef.current?.pause();
-      } else {
-        audioRef.current?.play();
-      }
-      setIsPlaying(!isPlaying);
-    } else {
-      // Switch to a new mix
-      setCurrentMix(mixId);
-      setIsPlaying(true);
-      // The play() call will be handled by the useEffect below
-    }
-  };
-
-  // Handle audio element events
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const handleEnded = () => setIsPlaying(false);
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
-
-    audio.addEventListener('ended', handleEnded);
-    audio.addEventListener('play', handlePlay);
-    audio.addEventListener('pause', handlePause);
-
-    // Auto-play when currentMix changes
-    if (currentMix !== null) {
-      audio.src = mixes.find(mix => mix.id === currentMix)?.audioSrc || '';
-      audio.play().catch(error => {
-        console.error('Audio playback failed:', error);
-        setIsPlaying(false);
-      });
-    }
-
-    return () => {
-      audio.removeEventListener('ended', handleEnded);
-      audio.removeEventListener('play', handlePlay);
-      audio.removeEventListener('pause', handlePause);
-    };
-  }, [currentMix]);
 
   return (
     <section className="py-20 px-8 bg-gradient-to-b from-[#0B0E17] to-[#1A1F35]">
@@ -95,10 +22,10 @@ export default function FeaturedMixes() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Featured R&B / Hip-Hop Mixes
+            Featured Mixes
           </h2>
           <p className="text-[#A0A0A5] max-w-2xl mx-auto">
-            Listen to my latest mixing work in the R&B and Hip-Hop genres
+            Check out my latest mixing work
           </p>
         </motion.div>
 
@@ -113,23 +40,23 @@ export default function FeaturedMixes() {
               className={`bg-[#161B2D] rounded-xl overflow-hidden transition-all duration-300 ${
                 currentMix === mix.id ? 'ring-2 ring-[#00F0FF]' : 'hover:ring-1 hover:ring-[#00F0FF]/50'
               }`}
+              onClick={() => setCurrentMix(currentMix === mix.id ? null : mix.id)}
             >
               <div className="p-6">
                 <div className="flex items-start space-x-6">
                   <div className="relative group">
                     <div className="w-24 h-24 rounded-lg bg-gradient-to-br from-[#00F0FF] to-[#9D00FF] flex items-center justify-center overflow-hidden">
                       {mix.coverArt ? (
-                        <img
+                        <Image
                           src={mix.coverArt}
                           alt={`${mix.title} cover`}
                           className="w-full h-full object-cover"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
-                            const fallback = document.createElement('div');
-                            fallback.className = 'w-full h-full flex items-center justify-center text-white text-2xl font-bold';
-                            fallback.textContent = mix.title.split(' ').map(word => word[0]).join('');
-                            target.parentNode?.insertBefore(fallback, target);
+                          width={96}
+                          height={96}
+                          priority={true}
+                          onError={() => {
+                            console.error(`Failed to load image: ${mix.coverArt}`);
+                            // Next.js Image component handles errors automatically
                           }}
                         />
                       ) : (
@@ -138,26 +65,6 @@ export default function FeaturedMixes() {
                         </span>
                       )}
                     </div>
-                    <button
-                      onClick={() => togglePlay(mix.id)}
-                      className={`absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg ${
-                        currentMix === mix.id && isPlaying ? 'opacity-100' : ''
-                      }`}
-                      aria-label={currentMix === mix.id && isPlaying ? 'Pause' : 'Play'}
-                    >
-                      <div className="w-12 h-12 rounded-full bg-[#00F0FF] flex items-center justify-center text-black">
-                        {currentMix === mix.id && isPlaying ? (
-                          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                        ) : (
-                          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                        )}
-                      </div>
-                    </button>
                   </div>
                   
                   <div className="flex-1">
@@ -175,7 +82,7 @@ export default function FeaturedMixes() {
                       {currentMix === mix.id && (
                         <div className="flex items-center space-x-2">
                           <div className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse"></div>
-                          <span className="text-xs text-[#A0A0A5]">Now Playing</span>
+                          <span className="text-xs text-[#A0A0A5]">Selected</span>
                         </div>
                       )}
                     </div>
@@ -196,21 +103,7 @@ export default function FeaturedMixes() {
                     
                     <p className="text-xs text-[#A0A0A5] mt-3">{mix.credits}</p>
                     
-                    <div className="mt-4">
-                      <div className="h-1 bg-[#1E243A] rounded-full overflow-hidden">
-                        <div 
-                          className={`h-full bg-gradient-to-r from-[#00F0FF] to-[#9D00FF] transition-all duration-300 ${
-                            currentMix === mix.id && isPlaying ? 'w-3/4' : 'w-0'
-                          }`}
-                        ></div>
-                      </div>
-                      <div className="flex justify-between text-xs text-[#A0A0A5] mt-1">
-                        <span>{currentMix === mix.id && isPlaying ? '2:45' : '0:00'}</span>
-                        <span>3:30</span>
-                      </div>
-                    </div>
-                    
-                    <div className="mt-3">
+                    <div className="mt-3 flex items-center justify-between">
                       <a 
                         href={mix.link}
                         className="text-xs text-[#00F0FF] hover:text-white transition-colors inline-flex items-center"
@@ -220,6 +113,31 @@ export default function FeaturedMixes() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </a>
+                      
+                      <div className="flex space-x-3">
+                        <a 
+                          href={mix.streamingLinks.youtube} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-[#FF0000] hover:text-white transition-colors"
+                          aria-label={`Watch ${mix.title} on YouTube`}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 576 512" fill="currentColor">
+                            <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/>
+                          </svg>
+                        </a>
+                        <a 
+                          href={mix.streamingLinks.instagram} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-[#E1306C] hover:text-white transition-colors"
+                          aria-label={`Follow ${mix.title} on Instagram`}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 448 512" fill="currentColor">
+                            <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                          </svg>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -257,9 +175,6 @@ export default function FeaturedMixes() {
           </a>
         </motion.div>
       </div>
-      
-      {/* Hidden audio element */}
-      <audio ref={audioRef} preload="metadata" />
     </section>
   );
 }
