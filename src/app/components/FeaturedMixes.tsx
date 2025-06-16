@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 // Featured R&B/Hip-Hop portfolio pieces
 const mixes = [
@@ -11,12 +11,15 @@ const mixes = [
     artist: '[R&B Artist Name]',
     genre: 'Contemporary R&B',
     year: '2024',
-    audioSrc: '/audio/velvet-dreams.mp3',
     coverArt: '/images/velvet-dreams-cover.jpg',
     credits: 'Mixed by Iker Subu | Produced by [Producer Name]',
     description: 'Silky smooth R&B track featuring lush vocal harmonies and crisp 808s. This mix showcases the perfect balance between modern production and classic R&B warmth.',
     highlights: ['Vocal layering and harmonies', 'Punchy 808 processing', 'Spatial reverb design'],
-    link: '/portfolio/velvet-dreams'
+    link: '/portfolio/velvet-dreams',
+    streamingLinks: {
+      appleMusic: 'https://music.apple.com/us/album/velvet-dreams',
+      spotify: 'https://open.spotify.com/album/velvetdreams'
+    }
   },
   {
     id: 2,
@@ -24,65 +27,20 @@ const mixes = [
     artist: '[Hip-Hop Artist Name]',
     genre: 'Hip-Hop',
     year: '2023',
-    audioSrc: '/audio/street-symphony.mp3',
     coverArt: '/images/street-symphony-cover.jpg',
     credits: 'Mixed by Iker Subu | Produced by [Producer Name]',
     description: 'Hard-hitting Hip-Hop track with aggressive drums and crystal-clear vocals. Demonstrates expertise in making rap vocals cut through dense instrumental arrangements.',
     highlights: ['Vocal clarity and presence', 'Punchy drum processing', 'Dynamic range control'],
-    link: '/portfolio/street-symphony'
+    link: '/portfolio/street-symphony',
+    streamingLinks: {
+      appleMusic: 'https://music.apple.com/us/album/street-symphony',
+      spotify: 'https://open.spotify.com/album/streetsymphony'
+    }
   }
 ];
 
 export default function FeaturedMixes() {
   const [currentMix, setCurrentMix] = useState<number | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
-
-  const togglePlay = (mixId: number) => {
-    if (currentMix === mixId) {
-      // Toggle play/pause for current mix
-      if (isPlaying) {
-        audioRef.current?.pause();
-      } else {
-        audioRef.current?.play();
-      }
-      setIsPlaying(!isPlaying);
-    } else {
-      // Switch to a new mix
-      setCurrentMix(mixId);
-      setIsPlaying(true);
-      // The play() call will be handled by the useEffect below
-    }
-  };
-
-  // Handle audio element events
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const handleEnded = () => setIsPlaying(false);
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
-
-    audio.addEventListener('ended', handleEnded);
-    audio.addEventListener('play', handlePlay);
-    audio.addEventListener('pause', handlePause);
-
-    // Auto-play when currentMix changes
-    if (currentMix !== null) {
-      audio.src = mixes.find(mix => mix.id === currentMix)?.audioSrc || '';
-      audio.play().catch(error => {
-        console.error('Audio playback failed:', error);
-        setIsPlaying(false);
-      });
-    }
-
-    return () => {
-      audio.removeEventListener('ended', handleEnded);
-      audio.removeEventListener('play', handlePlay);
-      audio.removeEventListener('pause', handlePause);
-    };
-  }, [currentMix]);
 
   return (
     <section className="py-20 px-8 bg-gradient-to-b from-[#0B0E17] to-[#1A1F35]">
@@ -98,7 +56,7 @@ export default function FeaturedMixes() {
             Featured R&B / Hip-Hop Mixes
           </h2>
           <p className="text-[#A0A0A5] max-w-2xl mx-auto">
-            Listen to my latest mixing work in the R&B and Hip-Hop genres
+            Check out my latest mixing work in the R&B and Hip-Hop genres
           </p>
         </motion.div>
 
@@ -113,6 +71,7 @@ export default function FeaturedMixes() {
               className={`bg-[#161B2D] rounded-xl overflow-hidden transition-all duration-300 ${
                 currentMix === mix.id ? 'ring-2 ring-[#00F0FF]' : 'hover:ring-1 hover:ring-[#00F0FF]/50'
               }`}
+              onClick={() => setCurrentMix(currentMix === mix.id ? null : mix.id)}
             >
               <div className="p-6">
                 <div className="flex items-start space-x-6">
@@ -138,26 +97,6 @@ export default function FeaturedMixes() {
                         </span>
                       )}
                     </div>
-                    <button
-                      onClick={() => togglePlay(mix.id)}
-                      className={`absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg ${
-                        currentMix === mix.id && isPlaying ? 'opacity-100' : ''
-                      }`}
-                      aria-label={currentMix === mix.id && isPlaying ? 'Pause' : 'Play'}
-                    >
-                      <div className="w-12 h-12 rounded-full bg-[#00F0FF] flex items-center justify-center text-black">
-                        {currentMix === mix.id && isPlaying ? (
-                          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                        ) : (
-                          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                        )}
-                      </div>
-                    </button>
                   </div>
                   
                   <div className="flex-1">
@@ -175,7 +114,7 @@ export default function FeaturedMixes() {
                       {currentMix === mix.id && (
                         <div className="flex items-center space-x-2">
                           <div className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse"></div>
-                          <span className="text-xs text-[#A0A0A5]">Now Playing</span>
+                          <span className="text-xs text-[#A0A0A5]">Selected</span>
                         </div>
                       )}
                     </div>
@@ -196,21 +135,7 @@ export default function FeaturedMixes() {
                     
                     <p className="text-xs text-[#A0A0A5] mt-3">{mix.credits}</p>
                     
-                    <div className="mt-4">
-                      <div className="h-1 bg-[#1E243A] rounded-full overflow-hidden">
-                        <div 
-                          className={`h-full bg-gradient-to-r from-[#00F0FF] to-[#9D00FF] transition-all duration-300 ${
-                            currentMix === mix.id && isPlaying ? 'w-3/4' : 'w-0'
-                          }`}
-                        ></div>
-                      </div>
-                      <div className="flex justify-between text-xs text-[#A0A0A5] mt-1">
-                        <span>{currentMix === mix.id && isPlaying ? '2:45' : '0:00'}</span>
-                        <span>3:30</span>
-                      </div>
-                    </div>
-                    
-                    <div className="mt-3">
+                    <div className="mt-3 flex items-center justify-between">
                       <a 
                         href={mix.link}
                         className="text-xs text-[#00F0FF] hover:text-white transition-colors inline-flex items-center"
@@ -220,6 +145,31 @@ export default function FeaturedMixes() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </a>
+                      
+                      <div className="flex space-x-3">
+                        <a 
+                          href={mix.streamingLinks.spotify} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-[#1DB954] hover:text-white transition-colors"
+                          aria-label={`Listen to ${mix.title} on Spotify`}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 496 512" fill="currentColor">
+                            <path d="M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8zm100.7 364.9c-4.2 0-6.8-1.3-10.7-3.6-62.4-37.6-135-39.2-206.7-24.5-3.9 1-9 2.6-11.9 2.6-9.7 0-15.8-7.7-15.8-15.8 0-10.3 6.1-15.2 13.6-16.8 81.9-18.1 165.6-16.5 237 26.2 6.1 3.9 9.7 7.4 9.7 16.5s-7.1 15.4-15.2 15.4zm26.9-65.6c-5.2 0-8.7-2.3-12.3-4.2-62.5-37-155.7-51.9-238.6-29.4-4.8 1.3-7.4 2.6-11.9 2.6-10.7 0-19.4-8.7-19.4-19.4s5.2-17.8 15.5-20.7c27.8-7.8 56.2-13.6 97.8-13.6 64.9 0 127.6 16.1 177 45.5 8.1 4.8 11.3 11 11.3 19.7-.1 10.8-8.5 19.5-19.4 19.5zm31-76.2c-5.2 0-8.4-1.3-12.9-3.9-71.2-42.5-198.5-52.7-280.9-29.7-3.6 1-8.1 2.6-12.9 2.6-13.2 0-23.3-10.3-23.3-23.6 0-13.6 8.4-21.3 17.4-23.9 35.2-10.3 74.6-15.2 117.5-15.2 73 0 149.5 15.2 205.4 47.8 7.8 4.5 12.9 10.7 12.9 22.6 0 13.6-11 23.3-23.2 23.3z"/>
+                          </svg>
+                        </a>
+                        <a 
+                          href={mix.streamingLinks.appleMusic} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-[#FA243C] hover:text-white transition-colors"
+                          aria-label={`Listen to ${mix.title} on Apple Music`}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 384 512" fill="currentColor">
+                            <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                          </svg>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -257,9 +207,6 @@ export default function FeaturedMixes() {
           </a>
         </motion.div>
       </div>
-      
-      {/* Hidden audio element */}
-      <audio ref={audioRef} preload="metadata" />
     </section>
   );
 }

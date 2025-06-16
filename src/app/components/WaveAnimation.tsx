@@ -24,7 +24,7 @@ const WaveAnimation = () => {
 
     const width = canvas.width;
     const height = canvas.height;
-    const N = 500;
+    const N = 300; // Reduced from 500 for better performance
     const dx = 1;
     let t = 0;
 
@@ -32,7 +32,7 @@ const WaveAnimation = () => {
       if (!ctx) return;
       
       ctx.clearRect(0, 0, width, height);
-      ctx.lineWidth = 3; // Increased line width for better visibility
+      ctx.lineWidth = 3;
 
       // Draw wave
       ctx.beginPath();
@@ -50,7 +50,7 @@ const WaveAnimation = () => {
         let real = envelope * Math.cos(k0 * x - 0.02 * t);
 
         let px = i * (width / N);
-        let py = height / 2 - real * 150; // Increased amplitude
+        let py = height / 2 - real * 150;
 
         if (i === 0) ctx.moveTo(px, py);
         else ctx.lineTo(px, py);
@@ -60,14 +60,14 @@ const WaveAnimation = () => {
       // Draw probability density
       ctx.beginPath();
       ctx.strokeStyle = 'rgba(255, 255, 0, 0.5)';
-      for (let i = 0; i < N; i++) {
+      for (let i = 0; i < N; i += 2) { // Skip every other point for better performance
         let x = (i - N / 2) * dx;
         let sigma = 30;
         let envelope = Math.exp(-x * x / (2 * sigma * sigma));
         let prob = envelope * envelope;
 
         let px = i * (width / N);
-        let py = height / 2 - prob * 400; // Increased amplitude
+        let py = height / 2 - prob * 400;
 
         if (i === 0) ctx.moveTo(px, py);
         else ctx.lineTo(px, py);

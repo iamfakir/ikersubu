@@ -19,14 +19,20 @@ export default function Error({
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <h1>500</h1>
-        <h2>Something went wrong!</h2>
-        <p>An unexpected error occurred. Please try again later.</p>
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-          <button onClick={() => reset()} className={styles.button}>
+        <h1 className="text-6xl font-bold text-[#00F0FF] mb-4">500</h1>
+        <h2 className="text-2xl font-semibold mb-4">Something went wrong!</h2>
+        <p className="text-gray-300 mb-6">An unexpected error occurred. Our team has been notified.</p>
+        <div className="flex gap-4 justify-center">
+          <button 
+            onClick={() => reset()} 
+            className="px-6 py-2 bg-[#00F0FF] text-black font-medium rounded-md hover:bg-[#00D0E0] transition-colors"
+          >
             Try Again
           </button>
-          <Link href="/" className={styles.button} style={{ textAlign: 'center' }}>
+          <Link 
+            href="/" 
+            className="px-6 py-2 bg-gray-800 text-white font-medium rounded-md hover:bg-gray-700 transition-colors"
+          >
             Return Home
           </Link>
         </div>

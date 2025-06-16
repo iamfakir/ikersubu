@@ -2,9 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import AudioWave from '../AudioWave';
 import './CardCarousel.css';
-import '../AudioWave.css';
 
 import portfolioData from '@/data/portfolioData.json';
 
@@ -226,7 +224,6 @@ export default function CardCarousel() {
                       <p className="client">{cardData.client}</p>
                       <p className="genre">{cardData.genre}</p>
                     </div>
-                    <AudioWave className="card-wave" />
                   </div>
                 </div>
               );
@@ -273,8 +270,6 @@ export default function CardCarousel() {
         </div>
       )}
 
-
-
       {/* Placeholder for Animated Stats */}
       <div className="animated-stats-placeholder">
         {/* Example Structure: */}
@@ -283,7 +278,6 @@ export default function CardCarousel() {
         {/* <div className="stat-item"><span>99%</span> Client Satisfaction</div> */}
         <p>Animated stats coming soon!</p>
       </div>
-
     </div>
   );
 }

@@ -77,6 +77,7 @@ const Navbar = () => {
       ]
     },
     { href: '/portfolio', label: 'Portfolio' },
+    { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' }
   ];
 
