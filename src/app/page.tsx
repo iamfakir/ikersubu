@@ -107,7 +107,7 @@ export default function Home() {
                 <motion.span
                   className="block text-white text-3xl sm:text-4xl md:text-5xl mt-2"
                 >
-                  R&B & Hip-Hop Mixing Engineer | Audio Plugin Developer
+                  Mixing Engineer | Audio Plugin Developer
                 </motion.span>
               </motion.h1>
               
@@ -117,7 +117,7 @@ export default function Home() {
                 transition={{ duration: 1, delay: 0.5 }}
                 className="text-xl sm:text-2xl text-[#A0A0A5] mt-6 max-w-2xl mx-auto"
               >
-                Expert mixing and mastering services for R&B and Hip-Hop, plus innovative audio plugins to enhance your productions. Achieve major-label sound quality.
+                Expert mixing and mastering services plus innovative audio plugins to enhance your productions. Achieve major-label sound quality.
               </motion.p>
             </motion.div>
             

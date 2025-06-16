@@ -39,7 +39,7 @@ const AboutPage = () => {
                 Crafting Exceptional Sound
               </h1>
               <p className="text-xl text-gray-300 mb-8">
-                Hi, I'm Iker Subu, a professional audio engineer and producer specializing in R&B and Hip-Hop. Since 2022, I've been professionally focused on recording and mixing, and in 2024, I began assisting renowned producer Akash Shravan. I work with talented artists and help them achieve their sonic vision.
+                Hi, I'm Iker Subu, a professional audio engineer and producer. Since 2022, I've been professionally focused on recording and mixing, and in 2024, I began assisting renowned producer Akash Shravan. I work with talented artists and help them achieve their sonic vision.
               </p>
               <div className="flex flex-wrap gap-4 mb-12">
                 <a

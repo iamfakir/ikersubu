@@ -21,8 +21,8 @@ export const viewport = {
 
 export const metadata: Metadata = {
   title: 'IKER SUBU - Mixing, Mastering & Audio Plugins',
-  description: 'Professional mixing and mastering services for R&B and Hip-Hop. High-quality audio plugins for music producers. Elevate your sound with IKER SUBU.',
-  keywords: 'mixing, mastering, audio engineer, music production, R&B, Hip-Hop, audio plugins, music software, pro audio, sound design, IKER SUBU',
+  description: 'Professional mixing and mastering services. High-quality audio plugins for music producers. Elevate your sound with IKER SUBU.',
+  keywords: 'mixing, mastering, audio engineer, music production, audio plugins, music software, pro audio, sound design, IKER SUBU',
   // Viewport is now handled by the separate viewport export
 }
 

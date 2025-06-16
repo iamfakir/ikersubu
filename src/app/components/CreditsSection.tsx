@@ -1,57 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { getCredits } from '../data/credits';
 
-const credits = [
-  {
-    project: 'Squid Game Soundtrack',
-    artist: 'Netflix Original Series',
-    role: 'Assistant Engineer',
-    year: '2021',
-    label: 'Netflix',
-    image: '/assets/images/credits/squid-game.jpg',
-    streamingLinks: {
-      appleMusic: 'https://music.apple.com/us/album/squid-game-soundtrack',
-      spotify: 'https://open.spotify.com/album/3HNnxK7NgLXbDoxRZxNWiR'
-    }
-  },
-  {
-    project: 'Testing Album',
-    artist: 'A$AP Rocky',
-    role: 'Assistant Engineer', 
-    year: '2018',
-    label: 'A$AP Worldwide/Polo Grounds/RCA',
-    image: '/assets/images/credits/asap-rocky.jpg',
-    streamingLinks: {
-      appleMusic: 'https://music.apple.com/us/album/testing/1381052291',
-      spotify: 'https://open.spotify.com/album/3MATDdrpHmQCmuOcozZjDa'
-    }
-  },
-  {
-    project: '[Placeholder Project]',
-    artist: '[Major R&B Artist]',
-    role: 'Mixing Engineer',
-    year: '2023',
-    label: '[Major Label]',
-    image: '/assets/images/credits/placeholder-1.jpg',
-    streamingLinks: {
-      appleMusic: '#',
-      spotify: '#'
-    }
-  },
-  {
-    project: '[Placeholder Album]',
-    artist: '[Hip-Hop Artist]',
-    role: 'Assistant Engineer',
-    year: '2022',
-    label: '[Record Label]',
-    image: '/assets/images/credits/placeholder-2.jpg',
-    streamingLinks: {
-      appleMusic: '#',
-      spotify: '#'
-    }
-  }
-];
+// Get credits data from the external file
+const credits = getCredits();
 
 export default function CreditsSection() {
   return (
@@ -85,12 +39,16 @@ export default function CreditsSection() {
               <div className="flex items-start gap-4">
                 <div className="w-24 h-24 flex-shrink-0 rounded-md overflow-hidden bg-[#0B0E17]">
                   {credit.image ? (
-                    <img 
+                    <Image 
                       src={credit.image} 
                       alt={`${credit.project} by ${credit.artist}`} 
                       className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.currentTarget.src = '/assets/images/placeholder-album.jpg';
+                      width={96}
+                      height={96}
+                      priority={true}
+                      onError={() => {
+                        console.error(`Failed to load image: ${credit.image}`);
+                        // Error handling is built into Next.js Image component
                       }}
                     />
                   ) : (

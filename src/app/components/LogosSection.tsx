@@ -4,34 +4,29 @@ import { motion } from 'framer-motion';
 
 const companies = [
   {
-    name: 'Netflix',
-    logo: '/logos/netflix.svg',
-    url: 'https://www.netflix.com/'
-  },
-  {
-    name: 'A$AP Mob',
-    logo: '/logos/asap-mob.svg',
-    url: 'https://www.asapmob.com/'
-  },
-  {
-    name: 'RCA Records',
-    logo: '/logos/rca-records.svg',
-    url: 'https://www.rcarecords.com/'
-  },
-  {
-    name: 'Polo Grounds Music',
-    logo: '/logos/polo-grounds.svg',
-    url: 'https://www.pologroundsmusic.com/'
-  },
-  {
-    name: 'Def Jam Recordings',
+    name: 'Def Jam',
     logo: '/logos/def-jam.svg',
     url: 'https://www.defjam.com/'
   },
   {
-    name: 'Atlantic Records',
-    logo: '/logos/atlantic-records.svg',
-    url: 'https://www.atlanticrecords.com/'
+    name: 'Think Music',
+    logo: '/logos/think-music.svg',
+    url: 'https://www.thinkmusic.in/'
+  },
+  {
+    name: 'Universal Records',
+    logo: '/logos/universal-records.svg',
+    url: 'https://www.universalmusic.com/'
+  },
+  {
+    name: 'Azadi Records',
+    logo: '/logos/azadi-records.svg',
+    url: 'https://www.azadirecords.com/'
+  },
+  {
+    name: 'Gully Gang',
+    logo: '/logos/gully-gang.svg',
+    url: 'https://www.gullygang.in/'
   },
 ];
 
@@ -46,7 +41,7 @@ export default function LogosSection() {
   };
 
   return (
-    <section className="py-16 px-8 bg-gradient-to-b from-[#1A1F35] to-[#0B0E17]">
+    <section className="py-16 px-8 bg-gradient-to-b from-[#0B0E17] to-[#1A1F35]">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

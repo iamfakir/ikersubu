@@ -33,8 +33,8 @@ interface ServiceModalProps {
 const services: ServiceItem[] = [
   {
     icon: <FaMixer className="w-8 h-8 text-[#00F0FF]" />,
-    title: 'Professional Mixing Services for R&B and Hip-Hop',
-    shortDescription: 'Expert R&B and Hip-Hop mixing services. Achieve polished, release-ready tracks that compete with major-label productions. Vocal clarity, impactful low-end, and optimized loudness for all streaming platforms.',
+    title: 'Professional Mixing Services',
+    shortDescription: 'Expert mixing services. Achieve polished, release-ready tracks that compete with major-label productions. Vocal clarity, impactful low-end, and optimized loudness for all streaming platforms.',
     description: (
       <div className="space-y-4">
         <p><strong>Transform your raw recordings into polished, release-ready tracks.</strong> Drawing from my experience working with high-profile productions, I deliver:</p>
@@ -63,8 +63,8 @@ const services: ServiceItem[] = [
   },
   {
     icon: <FaCompactDisc className="w-8 h-8 text-[#9D00FF]" />,
-    title: 'Vocal Production & Tuning for R&B/Hip-Hop',
-    shortDescription: 'Professional vocal production and tuning services for R&B and Hip-Hop. Get flawless vocal performances with precise comping, natural pitch correction, and creative vocal arrangements.',
+    title: 'Vocal Production & Tuning',
+    shortDescription: 'Professional vocal production and tuning services. Get flawless vocal performances with precise comping, natural pitch correction, and creative vocal arrangements.',
     description: (
       <div className="space-y-4">
         <p><strong>Your vocals are central to your track's impact.</strong> I specialize in vocal production techniques that elevate performances to a professional standard:</p>
@@ -90,8 +90,8 @@ const services: ServiceItem[] = [
   },
   {
     icon: <FaHeadphones className="w-8 h-8 text-[#00F0FF]" />,
-    title: 'Beat Mixing Services for Hip-Hop & R&B Instrumentals',
-    shortDescription: 'Get your Hip-Hop and R&B beats mixed to perfection. Ensure your instrumentals have deep bass, punchy drums, and clear stereo imaging for all playback systems.',
+    title: 'Beat Mixing Services',
+    shortDescription: 'Get your beats mixed to perfection. Ensure your instrumentals have deep bass, punchy drums, and clear stereo imaging for all playback systems.',
     description: (
       <div className="space-y-4">
         <p><strong>Your instrumentals are the backbone of your music.</strong> I ensure your beats have the professional polish that makes them stand out:</p>
@@ -117,11 +117,11 @@ const services: ServiceItem[] = [
   },
   {
     icon: <FaTools className="w-8 h-8 text-[#9D00FF]" />,
-    title: 'Custom Sound Design for R&B and Hip-Hop Productions',
-    shortDescription: 'Unique sound design services for R&B and Hip-Hop. Custom 808s, vocal chops, atmospheric textures, and transition FX to make your music stand out.',
+    title: 'Custom Sound Design',
+    shortDescription: 'Unique sound design services. Custom 808s, vocal chops, atmospheric textures, and transition FX to make your music stand out.',
     description: (
       <div className="space-y-4">
-        <p><strong>Stand out with signature sounds.</strong> I create custom audio elements that give your R&B and Hip-Hop tracks a unique identity:</p>
+        <p><strong>Stand out with signature sounds.</strong> I create custom audio elements that give your tracks a unique identity:</p>
         <ul className="list-disc pl-5 space-y-2">
           <li><strong>Custom 808s:</strong> Unique bass sounds tailored to your track's key and vibe</li>
           <li><strong>Vocal Chops:</strong> Creative vocal manipulation and sampling</li>
@@ -144,19 +144,19 @@ const services: ServiceItem[] = [
   },
   {
     icon: <FaCode className="w-8 h-8 text-[#00F0FF]" />,
-    title: 'R&B/Hip-Hop Mixing Mentorship & Audio Engineering Courses',
-    shortDescription: 'Learn professional R&B and Hip-Hop mixing techniques. One-on-one mentorship and audio engineering courses covering vocal mixing, 808s, and genre-specific processing.',
+    title: 'Mixing Mentorship & Audio Engineering Courses',
+    shortDescription: 'Learn professional mixing techniques. One-on-one mentorship and audio engineering courses covering vocal mixing, 808s, and genre-specific processing.',
     description: (
       <div className="space-y-4">
-        <p><strong>Master the art of R&B and Hip-Hop mixing.</strong> Learn the techniques I've developed working with major artists:</p>
-        <ul className="list-disc pl-5 space-y-2">
-          <li><strong>Vocal Mixing Mastery:</strong> Make vocals sit perfectly in R&B and Hip-Hop mixes</li>
+        <p><strong>Master the art of mixing.</strong> Learn the techniques I've developed working with major artists:</p>
+        <ul className="list-disc pl-5 space-y-2 mb-4">
+          <li><strong>Vocal Mixing Mastery:</strong> Make vocals sit perfectly in your mixes</li>
           <li><strong>808 & Bass Techniques:</strong> Get that professional low-end that translates</li>
           <li><strong>Genre-Specific Processing:</strong> EQ, compression, and effects for each style</li>
           <li><strong>Mix Analysis:</strong> Breakdown of commercial tracks and your own projects</li>
           <li><strong>Industry Insights:</strong> Real-world advice from major label experience</li>
         </ul>
-        <p><strong>Who this helps:</strong> Producers and engineers wanting to specialize in R&B/Hip-Hop, artists learning to mix their own music, or anyone serious about improving their skills.</p>
+        <p><strong>Who this helps:</strong> Producers and engineers wanting to specialize in music production, artists learning to mix their own music, or anyone serious about improving their skills.</p>
         <div className="bg-[#1A1F35] p-4 rounded-lg mt-4">
           <h4 className="text-[#00F0FF] font-semibold mb-2">Mentorship Options:</h4>
           <ul className="space-y-1 text-sm">
@@ -317,7 +317,7 @@ const Services = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Professional mixing and audio services specifically crafted for R&B,POP and Hip-Hop artists. 
+            Professional mixing and audio services specifically crafted for all music artists. 
             With experience working on projects for various reputable projects.
           </motion.p>
         </div>
