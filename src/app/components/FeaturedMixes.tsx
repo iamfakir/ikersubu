@@ -1,43 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { useState } from 'react';
+import { getFeaturedMixes } from '../data/mixes';
 
-// Featured R&B/Hip-Hop portfolio pieces
-const mixes = [
-  {
-    id: 1,
-    title: 'Velvet Dreams',
-    artist: '[R&B Artist Name]',
-    genre: 'Contemporary R&B',
-    year: '2024',
-    coverArt: '/images/velvet-dreams-cover.jpg',
-    credits: 'Mixed by Iker Subu | Produced by [Producer Name]',
-    description: 'Silky smooth R&B track featuring lush vocal harmonies and crisp 808s. This mix showcases the perfect balance between modern production and classic R&B warmth.',
-    highlights: ['Vocal layering and harmonies', 'Punchy 808 processing', 'Spatial reverb design'],
-    link: '/portfolio/velvet-dreams',
-    streamingLinks: {
-      appleMusic: 'https://music.apple.com/us/album/velvet-dreams',
-      spotify: 'https://open.spotify.com/album/velvetdreams'
-    }
-  },
-  {
-    id: 2,
-    title: 'Street Symphony',
-    artist: '[Hip-Hop Artist Name]',
-    genre: 'Hip-Hop',
-    year: '2023',
-    coverArt: '/images/street-symphony-cover.jpg',
-    credits: 'Mixed by Iker Subu | Produced by [Producer Name]',
-    description: 'Hard-hitting Hip-Hop track with aggressive drums and crystal-clear vocals. Demonstrates expertise in making rap vocals cut through dense instrumental arrangements.',
-    highlights: ['Vocal clarity and presence', 'Punchy drum processing', 'Dynamic range control'],
-    link: '/portfolio/street-symphony',
-    streamingLinks: {
-      appleMusic: 'https://music.apple.com/us/album/street-symphony',
-      spotify: 'https://open.spotify.com/album/streetsymphony'
-    }
-  }
-];
+// Get featured mixes from data file
+const mixes = getFeaturedMixes();
 
 export default function FeaturedMixes() {
   const [currentMix, setCurrentMix] = useState<number | null>(null);
@@ -53,10 +22,10 @@ export default function FeaturedMixes() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Featured R&B / Hip-Hop Mixes
+            Featured Mixes
           </h2>
           <p className="text-[#A0A0A5] max-w-2xl mx-auto">
-            Check out my latest mixing work in the R&B and Hip-Hop genres
+            Check out my latest mixing work
           </p>
         </motion.div>
 
@@ -78,17 +47,16 @@ export default function FeaturedMixes() {
                   <div className="relative group">
                     <div className="w-24 h-24 rounded-lg bg-gradient-to-br from-[#00F0FF] to-[#9D00FF] flex items-center justify-center overflow-hidden">
                       {mix.coverArt ? (
-                        <img
+                        <Image
                           src={mix.coverArt}
                           alt={`${mix.title} cover`}
                           className="w-full h-full object-cover"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
-                            const fallback = document.createElement('div');
-                            fallback.className = 'w-full h-full flex items-center justify-center text-white text-2xl font-bold';
-                            fallback.textContent = mix.title.split(' ').map(word => word[0]).join('');
-                            target.parentNode?.insertBefore(fallback, target);
+                          width={96}
+                          height={96}
+                          priority={true}
+                          onError={() => {
+                            console.error(`Failed to load image: ${mix.coverArt}`);
+                            // Next.js Image component handles errors automatically
                           }}
                         />
                       ) : (
