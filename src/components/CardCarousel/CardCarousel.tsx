@@ -25,6 +25,7 @@ export default function CardCarousel() {
     if (activeTab === 'assisted') {
       return item.type === 'assisted';
     } else if (activeTab === 'mixed') {
+      // Show items with type 'mixed'
       return item.type === 'mixed';
     } else if (activeTab === 'production') {
       return item.type === 'production';
@@ -99,7 +100,7 @@ export default function CardCarousel() {
   };
 
   const getVisibleCards = () => {
-    const items = filteredItems;
+    const items = sortedFilteredItems; // Use sortedFilteredItems
     if (items.length === 0) return [];
 
     const visibleCardsData = [];
@@ -112,7 +113,7 @@ export default function CardCarousel() {
         ...cardData,
         originalIndex: cardIndex, // Keep track of original index for selection
         position: i,
-        key: `${cardData.name}-${cardIndex}-${currentIndex}` // More unique key
+        key: `${cardData.id}-${i}` // Use unique id and loop index 'i' (position) for key
       });
     }
     
@@ -234,7 +235,7 @@ export default function CardCarousel() {
         </div>
       ) : (
         <div className="empty-state">
-          <p>No projects in "{activeTab === 'assisted' ? 'Featured Work' : 'All Projects'}" yet. Stay tuned!</p>
+          <p>{activeTab === 'mixed' ? 'No projects in Mix/Master category.' : `No projects in ${activeTab} category yet. Stay tuned!`}</p>
         </div>
       )}
 
@@ -251,14 +252,7 @@ export default function CardCarousel() {
               <h4>Project Details:</h4>
               <p>{selectedProject.description}</p>
             </div>
-            <div className="project-techniques">
-              <h4>Techniques Used:</h4>
-              <ul>
-                {selectedProject.techniques.map((tech, index) => (
-                  <li key={index}>{tech}</li>
-                ))}
-              </ul>
-            </div>
+            {/* Techniques Used section removed as requested */}
           </div>
         </div>
       )}
