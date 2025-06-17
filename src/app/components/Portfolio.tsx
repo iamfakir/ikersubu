@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface Track {
   title: string;
@@ -69,7 +70,7 @@ const Portfolio = () => {
         >
           PORTFOLIO
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:flex-nowrap md:overflow-x-auto lg:grid lg:overflow-x-visible">
           {tracks.map((track, index) => (
             <motion.div
               key={track.title}
@@ -77,13 +78,15 @@ const Portfolio = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="bg-white p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-white p-6 shadow-xs hover:shadow-md transition-shadow"
             >
               <div className="relative aspect-square mb-4 overflow-hidden">
-                <img
+                <Image
                   src={track.image}
                   alt={track.title}
-                  className="object-cover w-full h-full"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover"
                 />
                 <button
                   onClick={() => handlePlayPause(track)}

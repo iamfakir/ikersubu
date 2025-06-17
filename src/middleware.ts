@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { addServerPushHeaders } from './utils/serverPush';
 
 // In-memory store for rate limiting
 // In a production environment, you would use Redis or another distributed store
@@ -103,8 +104,30 @@ function applyPasswordProtection(request: NextRequest): NextResponse | null {
   return null;
 }
 
+// Add caching headers based on content type
+function addCachingHeaders(request: NextRequest, response: NextResponse): NextResponse {
+  const url = request.nextUrl.pathname;
+  
+  // Static assets - long cache
+  if (url.match(/\.(css|js|woff2?|ttf|otf|eot|svg|png|jpe?g|gif|ico|webp)$/i)) {
+    response.headers.set(
+      'Cache-Control',
+      'public, max-age=31536000, immutable'
+    );
+  }
+  // HTML pages - shorter cache with revalidation
+  else if (!url.includes('/api/')) {
+    response.headers.set(
+      'Cache-Control',
+      'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800'
+    );
+  }
+  
+  return response;
+}
+
 export async function middleware(request: NextRequest) {
-  const response = NextResponse.next();
+  let response = NextResponse.next();
   
   // Apply rate limiting for download requests
   if (isDownloadRequest(request)) {
@@ -129,6 +152,14 @@ export async function middleware(request: NextRequest) {
       sameSite: 'lax',
       path: '/',
     });
+  }
+  
+  // Add caching headers based on content type
+  response = addCachingHeaders(request, response);
+  
+  // Add HTTP/2 Server Push hints for HTML requests
+  if (!request.nextUrl.pathname.match(/\.(js|css|png|jpg|jpeg|gif|svg|ico|json)$/i)) {
+    response = addServerPushHeaders(response);
   }
   
   // Add security headers

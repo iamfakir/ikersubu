@@ -2,13 +2,34 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import Navbar from './components/Navbar';
-import CreditsSection from './components/CreditsSection';
-import LogosSection from './components/LogosSection';
-import FeaturedMixes from './components/FeaturedMixes';
-import Footer from './components/Footer';
-import Services from './components/Services';
-import CardCarousel from '../components/CardCarousel/CardCarousel';
+
+// Dynamically import components that are below the fold
+const CreditsSection = dynamic(() => import('./components/CreditsSection'), {
+  loading: () => <div className="min-h-[200px] flex items-center justify-center"><p>Loading...</p></div>,
+});
+
+const LogosSection = dynamic(() => import('./components/LogosSection'), {
+  loading: () => <div className="min-h-[200px] flex items-center justify-center"><p>Loading...</p></div>,
+});
+
+const FeaturedMixes = dynamic(() => import('./components/FeaturedMixes'), {
+  loading: () => <div className="min-h-[200px] flex items-center justify-center"><p>Loading...</p></div>,
+});
+
+const Footer = dynamic(() => import('./components/Footer'), {
+  loading: () => <div className="min-h-[100px]"></div>,
+});
+
+const Services = dynamic(() => import('./components/Services'), {
+  loading: () => <div className="min-h-[200px] flex items-center justify-center"><p>Loading...</p></div>,
+});
+
+const CardCarousel = dynamic(() => import('../components/CardCarousel/CardCarousel'), {
+  loading: () => <div className="min-h-[300px] flex items-center justify-center"><p>Loading...</p></div>,
+  ssr: false,
+});
 
 // Audio wave animation component
 const AudioWave = () => {
@@ -69,7 +90,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow">
+      <main className="grow">
         {/* Hero Section with Parallax Effect */}
         <motion.section
           ref={heroRef}
@@ -205,7 +226,7 @@ export default function Home() {
         </section>
         
         {/* Brand Story Section */}
-        <section className="py-20 px-8 bg-gradient-to-b from-[#0B0E17] to-[#1A1F35]">
+        <section className="py-20 px-8 bg-linear-to-b from-[#0B0E17] to-[#1A1F35]">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -226,7 +247,7 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-center p-6 bg-gradient-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#00F0FF]/20"
+                className="text-center p-6 bg-linear-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#00F0FF]/20"
               >
                 <svg className="w-16 h-16 mx-auto mb-4 text-[#00F0FF]" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
@@ -239,7 +260,7 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-center p-6 bg-gradient-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#9D00FF]/20"
+                className="text-center p-6 bg-linear-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#9D00FF]/20"
               >
                 <svg className="w-16 h-16 mx-auto mb-4 text-[#9D00FF]" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -252,7 +273,7 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-center p-6 bg-gradient-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#00F0FF]/20"
+                className="text-center p-6 bg-linear-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#00F0FF]/20"
               >
                 <svg className="w-16 h-16 mx-auto mb-4 text-[#00F0FF]" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
@@ -267,7 +288,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="bg-gradient-to-r from-[#00F0FF]/10 to-[#9D00FF]/10 rounded-lg p-8 border border-[#00F0FF]/20"
+              className="bg-linear-to-r from-[#00F0FF]/10 to-[#9D00FF]/10 rounded-lg p-8 border border-[#00F0FF]/20"
             >
               <h3 className="text-2xl font-bold text-white text-center mb-8">My Process</h3>
               <div className="grid md:grid-cols-4 gap-6">
@@ -297,7 +318,7 @@ export default function Home() {
         </section>
         
         {/* Enhanced CTA Section */}
-        <section className="py-20 px-8 bg-gradient-to-t from-[#0B0E17] to-[#1A1F35]">
+        <section className="py-20 px-8 bg-linear-to-t from-[#0B0E17] to-[#1A1F35]">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -312,7 +333,7 @@ export default function Home() {
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0, 240, 255, 0.5)" }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gradient-to-r from-[#00F0FF] to-[#9D00FF] text-black font-bold rounded-lg transition-all duration-300"
+                className="px-8 py-4 bg-linear-to-r from-[#00F0FF] to-[#9D00FF] text-black font-bold rounded-lg transition-all duration-300"
               >
                 Start Your Project
               </motion.button>
@@ -334,7 +355,7 @@ export default function Home() {
 }
 
         {/* Brand Story Section */}
-        <section className="py-20 px-8 bg-gradient-to-b from-[#0B0E17] to-[#1A1F35]">
+        <section className="py-20 px-8 bg-linear-to-b from-[#0B0E17] to-[#1A1F35]">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -355,7 +376,7 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-center p-6 bg-gradient-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#00F0FF]/20"
+                className="text-center p-6 bg-linear-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#00F0FF]/20"
               >
                 <svg className="w-16 h-16 mx-auto mb-4 text-[#00F0FF]" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
@@ -368,7 +389,7 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-center p-6 bg-gradient-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#9D00FF]/20"
+                className="text-center p-6 bg-linear-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#9D00FF]/20"
               >
                 <svg className="w-16 h-16 mx-auto mb-4 text-[#9D00FF]" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -381,7 +402,7 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-center p-6 bg-gradient-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#00F0FF]/20"
+                className="text-center p-6 bg-linear-to-br from-[#1A1F35] to-[#0B0E17] rounded-lg border border-[#00F0FF]/20"
               >
                 <svg className="w-16 h-16 mx-auto mb-4 text-[#00F0FF]" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
@@ -396,7 +417,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="bg-gradient-to-r from-[#00F0FF]/10 to-[#9D00FF]/10 rounded-lg p-8 border border-[#00F0FF]/20"
+              className="bg-linear-to-r from-[#00F0FF]/10 to-[#9D00FF]/10 rounded-lg p-8 border border-[#00F0FF]/20"
             >
               <h3 className="text-2xl font-bold text-white text-center mb-8">My Process</h3>
               <div className="grid md:grid-cols-4 gap-6">
@@ -426,7 +447,7 @@ export default function Home() {
         </section>
         
         {/* Enhanced CTA Section */}
-        <section className="py-20 px-8 bg-gradient-to-t from-[#0B0E17] to-[#1A1F35]">
+        <section className="py-20 px-8 bg-linear-to-t from-[#0B0E17] to-[#1A1F35]">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -441,7 +462,7 @@ export default function Home() {
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0, 240, 255, 0.5)" }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gradient-to-r from-[#00F0FF] to-[#9D00FF] text-black font-bold rounded-lg transition-all duration-300"
+                className="px-8 py-4 bg-linear-to-r from-[#00F0FF] to-[#9D00FF] text-black font-bold rounded-lg transition-all duration-300"
               >
                 Start Your Project
               </motion.button>

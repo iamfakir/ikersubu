@@ -200,7 +200,7 @@ const DripperPage = () => {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black p-4 pt-16">
+      <main className="min-h-screen flex items-center justify-center bg-linear-to-br from-black via-gray-900 to-black p-4 pt-16">
         <div className="w-full max-w-4xl px-4 sm:px-8 py-8">
           <div className="grid md:grid-cols-2 gap-8 items-start">
             {/* Image Gallery */}
@@ -252,14 +252,14 @@ const DripperPage = () => {
 
                 <button
                   onClick={goToPrevious}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-800/70 hover:bg-gray-700/80 text-white p-2 rounded-full focus:outline-none transition-colors"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-800/70 hover:bg-gray-700/80 text-white p-2 rounded-full focus:outline-hidden transition-colors"
                   aria-label="Previous image"
                 >
                   &lt;
                 </button>
                 <button
                   onClick={goToNext}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-800/70 hover:bg-gray-700/80 text-white p-2 rounded-full focus:outline-none transition-colors"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-800/70 hover:bg-gray-700/80 text-white p-2 rounded-full focus:outline-hidden transition-colors"
                   aria-label="Next image"
                 >
                   &gt;
@@ -320,7 +320,7 @@ const DripperPage = () => {
                   <button 
                     onClick={handleSubscribeClick}
                     disabled={isSubscribed}
-                    className={`w-full sm:w-auto flex items-center justify-center gap-2 border-2 ${isSubscribed ? 'border-green-500 text-green-500' : 'border-gray-600 text-gray-300 hover:border-blue-400 hover:text-blue-400'} font-medium py-3 px-6 rounded-full transition-all duration-300 focus:outline-none`}
+                    className={`w-full sm:w-auto flex items-center justify-center gap-2 border-2 ${isSubscribed ? 'border-green-500 text-green-500' : 'border-gray-600 text-gray-300 hover:border-blue-400 hover:text-blue-400'} font-medium py-3 px-6 rounded-full transition-all duration-300 focus:outline-hidden`}
                   >
                     {isSubscribed ? (
                       <>
@@ -367,8 +367,8 @@ const DripperPage = () => {
                               type="email"
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
-                              placeholder="your@email.com"
-                              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder="contact@ikersubu.com"
+                              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                               required
                               disabled={isSubmitting}
                             />
@@ -385,7 +385,7 @@ const DripperPage = () => {
                             <button
                               type="submit"
                               disabled={!email.trim() || isSubmitting}
-                              className={`px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-colors ${(!email.trim() || isSubmitting) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                              className={`px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-colors ${(!email.trim() || isSubmitting) ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
                               {isSubmitting ? 'Submitting...' : 'Notify Me'}
                             </button>
@@ -484,7 +484,7 @@ const DripperPage = () => {
                 <input
                   type="email"
                   placeholder="Enter your email address"
-                  className="w-full p-3 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
+                  className="w-full p-3 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-hidden focus:ring-2 focus:ring-blue-500 mb-4"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required

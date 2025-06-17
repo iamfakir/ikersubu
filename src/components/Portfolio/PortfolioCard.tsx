@@ -120,7 +120,7 @@ export default function PortfolioCard({
               e.stopPropagation();
               onPlayToggle();
             }}
-            className={`w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm transition-all ${
+            className={`w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-xs transition-all ${
               isPlaying
                 ? 'bg-cyan-600/90 text-white'
                 : 'bg-black/70 text-white hover:bg-cyan-600/90 hover:scale-110'

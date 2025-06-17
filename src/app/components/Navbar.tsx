@@ -92,9 +92,11 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
-            <span className="text-2xl font-bold text-white">IKER SUBU</span>
-          </Link>
+          <div className="shrink-0">
+            <Link href="/">
+              <span className="text-2xl font-bold text-white">IKER SUBU</span>
+            </Link>
+          </div>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8 h-full">
@@ -216,18 +218,18 @@ const Navbar = () => {
           
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white focus:outline-none"
+            className="md:hidden text-white focus:outline-hidden"
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
           >
             <div className="relative w-6 h-5">
-              <span className={`absolute h-0.5 w-full bg-white transform transition-all duration-300 ${
+              <span className={`absolute h-0.5 w-full bg-white transform transition-[transform,top] duration-300 ease-in-out ${
                 isMobileMenuOpen ? 'rotate-45 top-2.5' : 'top-0'
               }`}></span>
-              <span className={`absolute h-0.5 bg-white transform transition-all duration-300 ${
+              <span className={`absolute h-0.5 bg-white transform transition-[opacity,width] duration-300 ease-in-out ${
                 isMobileMenuOpen ? 'opacity-0 w-0' : 'opacity-100 w-full top-2'
               }`}></span>
-              <span className={`absolute h-0.5 w-full bg-white transform transition-all duration-300 ${
+              <span className={`absolute h-0.5 w-full bg-white transform transition-[transform,top] duration-300 ease-in-out ${
                 isMobileMenuOpen ? '-rotate-45 top-2.5' : 'top-4'
               }`}></span>
             </div>

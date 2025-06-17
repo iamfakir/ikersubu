@@ -64,7 +64,7 @@ const portfolioItems: PortfolioItem[] = [
       "Mid-side EQ for width",
       "Vocal doubling and effects"
     ],
-    imageUrl: "/assets/images/works/34.jpg",
+    imageUrl: "/assets/images/works/optimized/34.webp",
     isFeatured: true,
     order: 1
   },
@@ -82,7 +82,7 @@ const portfolioItems: PortfolioItem[] = [
       "Vocal chain optimization",
       "Spatial processing"
     ],
-    imageUrl: "/assets/images/works/56.jpg",
+    imageUrl: "/assets/images/works/optimized/56.webp",
     isFeatured: true,
     order: 2
   },
@@ -100,7 +100,7 @@ const portfolioItems: PortfolioItem[] = [
       "Vocal production",
       "Dynamic processing"
     ],
-    imageUrl: "/assets/images/works/55.jpg",
+    imageUrl: "/assets/images/works/optimized/55.webp",
     isFeatured: true,
     order: 3
   },
@@ -118,7 +118,7 @@ const portfolioItems: PortfolioItem[] = [
       "Spatial processing",
       "Texture layering"
     ],
-    imageUrl: "/assets/images/works/54.jpg",
+    imageUrl: "/assets/images/works/optimized/54.webp",
     isFeatured: true,
     order: 4
   },
@@ -136,7 +136,7 @@ const portfolioItems: PortfolioItem[] = [
       "Vocal clarity",
       "Mix balance"
     ],
-    imageUrl: "/assets/images/works/53.jpg",
+    imageUrl: "/assets/images/works/optimized/53.webp",
     order: 5
   },
   {
@@ -153,7 +153,7 @@ const portfolioItems: PortfolioItem[] = [
       "Arrangement",
       "Mix balance"
     ],
-    imageUrl: "/assets/images/works/51.jpg",
+    imageUrl: "/assets/images/works/optimized/51.webp",
     order: 6
   },
   {
@@ -170,7 +170,7 @@ const portfolioItems: PortfolioItem[] = [
       "Analog processing",
       "Vocal production"
     ],
-    imageUrl: "/assets/images/works/50.jpg",
+    imageUrl: "/assets/images/works/optimized/50.webp",
     order: 7
   },
   {
@@ -187,7 +187,7 @@ const portfolioItems: PortfolioItem[] = [
       "Beat programming",
       "Vocal production"
     ],
-    imageUrl: "/assets/images/works/49.jpg",
+    imageUrl: "/assets/images/works/optimized/49.webp",
     order: 8
   },
   {
@@ -204,7 +204,7 @@ const portfolioItems: PortfolioItem[] = [
       "Natural processing",
       "Dynamic control"
     ],
-    imageUrl: "/assets/images/works/48.jpg",
+    imageUrl: "/assets/images/works/optimized/48.webp",
     order: 9
   },
   {
@@ -221,7 +221,7 @@ const portfolioItems: PortfolioItem[] = [
       "Mix engineering",
       "Mastering"
     ],
-    imageUrl: "/assets/images/works/47.jpg",
+    imageUrl: "/assets/images/works/optimized/47.webp",
     order: 10
   },
   {
@@ -238,7 +238,7 @@ const portfolioItems: PortfolioItem[] = [
       "Room mic techniques",
       "Natural processing"
     ],
-    imageUrl: "/assets/images/works/46.jpg",
+    imageUrl: "/assets/images/works/optimized/46.webp",
     order: 11
   },
   {
@@ -255,7 +255,7 @@ const portfolioItems: PortfolioItem[] = [
       "Sound design",
       "Mastering"
     ],
-    imageUrl: "/assets/images/works/45.jpg",
+    imageUrl: "/assets/images/works/optimized/45.webp",
     order: 12
   },
   {
@@ -272,7 +272,7 @@ const portfolioItems: PortfolioItem[] = [
       "Effect processing",
       "Arrangement"
     ],
-    imageUrl: "/assets/images/works/44.jpg",
+    imageUrl: "/assets/images/works/optimized/44.webp",
     order: 13
   },
   {
@@ -289,7 +289,7 @@ const portfolioItems: PortfolioItem[] = [
       "Guitar processing",
       "Drum mixing"
     ],
-    imageUrl: "/assets/images/works/43.jpg",
+    imageUrl: "/assets/images/works/optimized/43.webp",
     order: 14
   },
   {
@@ -306,7 +306,7 @@ const portfolioItems: PortfolioItem[] = [
       "Retro processing",
       "Mix engineering"
     ],
-    imageUrl: "/assets/images/works/42.jpg",
+    imageUrl: "/assets/images/works/optimized/42.webp",
     order: 15
   },
   {
@@ -323,7 +323,7 @@ const portfolioItems: PortfolioItem[] = [
       "Beat mixing",
       "Mastering"
     ],
-    imageUrl: "/assets/images/works/40.jpg",
+    imageUrl: "/assets/images/works/optimized/40.webp",
     order: 16
   },
   {
@@ -340,7 +340,7 @@ const portfolioItems: PortfolioItem[] = [
       "Arrangement",
       "Mix engineering"
     ],
-    imageUrl: "/assets/images/works/39.jpg",
+    imageUrl: "/assets/images/works/optimized/39.webp",
     order: 17
   },
   {
@@ -357,7 +357,7 @@ const portfolioItems: PortfolioItem[] = [
       "Analog processing",
       "Mix engineering"
     ],
-    imageUrl: "/assets/images/works/38.jpg",
+    imageUrl: "/assets/images/works/optimized/38.webp",
     order: 18
   },
   {
@@ -374,7 +374,7 @@ const portfolioItems: PortfolioItem[] = [
       "Bass processing",
       "Mix engineering"
     ],
-    imageUrl: "/assets/images/works/37.jpg",
+    imageUrl: "/assets/images/works/optimized/37.webp",
     order: 19
   },
   {
@@ -391,7 +391,7 @@ const portfolioItems: PortfolioItem[] = [
       "Room mic placement",
       "Mix engineering"
     ],
-    imageUrl: "/assets/images/works/36.jpg",
+    imageUrl: "/assets/images/works/optimized/36.webp",
     order: 20
   },
   {
@@ -408,7 +408,7 @@ const portfolioItems: PortfolioItem[] = [
       "Analog processing",
       "Tape saturation"
     ],
-    imageUrl: "/assets/images/works/35.jpg",
+    imageUrl: "/assets/images/works/optimized/35.webp",
     order: 21
   },
   {
@@ -425,7 +425,7 @@ const portfolioItems: PortfolioItem[] = [
       "Electronic integration",
       "Spatial mixing"
     ],
-    imageUrl: "/assets/images/works/32.jpg",
+    imageUrl: "/assets/images/works/optimized/32.webp",
     order: 22
   },
   {
@@ -442,7 +442,7 @@ const portfolioItems: PortfolioItem[] = [
       "Beat programming",
       "Mix engineering"
     ],
-    imageUrl: "/assets/images/works/29.jpg",
+    imageUrl: "/assets/images/works/optimized/29.webp",
     order: 23
   },
   {
@@ -459,7 +459,7 @@ const portfolioItems: PortfolioItem[] = [
       "Natural dynamics",
       "Analog warmth"
     ],
-    imageUrl: "/assets/images/works/28.jpg",
+    imageUrl: "/assets/images/works/optimized/28.webp",
     order: 24
   },
   {
@@ -476,7 +476,7 @@ const portfolioItems: PortfolioItem[] = [
       "Modular synthesis",
       "Digital processing"
     ],
-    imageUrl: "/assets/images/works/26.jpg",
+    imageUrl: "/assets/images/works/optimized/26.webp",
     order: 25
   },
   {
@@ -493,7 +493,7 @@ const portfolioItems: PortfolioItem[] = [
       "Analog processing",
       "Mix engineering"
     ],
-    imageUrl: "/assets/images/works/24.jpg",
+    imageUrl: "/assets/images/works/optimized/24.webp",
     order: 26
   },
   {
@@ -510,7 +510,7 @@ const portfolioItems: PortfolioItem[] = [
       "Sample processing",
       "Mix engineering"
     ],
-    imageUrl: "/assets/images/works/23.jpg",
+    imageUrl: "/assets/images/works/optimized/23.webp",
     order: 27
   },
   {
@@ -527,7 +527,7 @@ const portfolioItems: PortfolioItem[] = [
       "Spatial processing",
       "Mix engineering"
     ],
-    imageUrl: "/assets/images/works/22.jpg",
+    imageUrl: "/assets/images/works/optimized/22.webp",
     order: 28
   },
   {
@@ -544,7 +544,7 @@ const portfolioItems: PortfolioItem[] = [
       "Vocal production",
       "Mix engineering"
     ],
-    imageUrl: "/assets/images/works/21.jpg",
+    imageUrl: "/assets/images/works/optimized/21.webp",
     order: 29
   },
   {
@@ -561,7 +561,7 @@ const portfolioItems: PortfolioItem[] = [
       "Digital processing",
       "Mix engineering"
     ],
-    imageUrl: "/assets/images/works/20.jpg",
+    imageUrl: "/assets/images/works/optimized/20.webp",
     order: 30
   },
   {
@@ -578,7 +578,7 @@ const portfolioItems: PortfolioItem[] = [
       "Natural processing",
       "Mix engineering"
     ],
-    imageUrl: "/assets/images/works/15.jpg",
+    imageUrl: "/assets/images/works/optimized/15.webp",
     order: 31
   },
   {
@@ -595,7 +595,7 @@ const portfolioItems: PortfolioItem[] = [
       "Hybrid processing",
       "Mix engineering"
     ],
-    imageUrl: "/assets/images/works/12.jpg",
+    imageUrl: "/assets/images/works/optimized/12.webp",
     order: 32
   },
   {
@@ -612,7 +612,7 @@ const portfolioItems: PortfolioItem[] = [
       "Beat programming",
       "Mix engineering"
     ],
-    imageUrl: "/assets/images/works/11.jpg",
+    imageUrl: "/assets/images/works/optimized/11.webp",
     order: 33
   }
 ];

@@ -323,11 +323,11 @@ const DripperWebPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              className="p-3 rounded-md bg-white/20 text-white placeholder-gray-400 mb-4 focus:outline-none focus:ring-2 focus:ring-[#ff6b6b]"
+              className="p-3 rounded-md bg-white/20 text-white placeholder-gray-400 mb-4 focus:outline-hidden focus:ring-2 focus:ring-[#ff6b6b]"
             />
             <button
               type="submit"
-              className="bg-gradient-to-r from-[#ff6b6b] to-[#ff8e8e] hover:from-[#ff5252] hover:to-[#ff7979] text-white font-medium py-3 px-6 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+              className="bg-linear-to-r from-[#ff6b6b] to-[#ff8e8e] hover:from-[#ff5252] hover:to-[#ff7979] text-white font-medium py-3 px-6 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
             >
               Submit
             </button>
@@ -363,7 +363,7 @@ const DripperWebPage = () => {
               <div className="text-center mb-8">
                 <button 
                   onClick={() => fileInputRef.current?.click()}
-                  className="bg-gradient-to-r from-[#ff6b6b] to-[#ff8e8e] hover:from-[#ff5252] hover:to-[#ff7979] text-white font-medium py-4 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+                  className="bg-linear-to-r from-[#ff6b6b] to-[#ff8e8e] hover:from-[#ff5252] hover:to-[#ff7979] text-white font-medium py-4 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
                 >
                   Upload Audio File
                 </button>
@@ -386,7 +386,7 @@ const DripperWebPage = () => {
                   {/* Knob */}
                   <div 
                     ref={knobRef}
-                    className="w-40 h-40 rounded-full bg-gradient-to-br from-[#333] to-[#555] relative shadow-2xl hover:shadow-[#555]/30 transition-all duration-300"
+                    className="w-40 h-40 rounded-full bg-linear-to-br from-[#333] to-[#555] relative shadow-2xl hover:shadow-[#555]/30 transition-all duration-300"
                     style={{
                       boxShadow: '0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.1)'
                     }}
@@ -394,7 +394,7 @@ const DripperWebPage = () => {
                     <div ref={markersRef} className="absolute inset-0 pointer-events-none"></div>
                     <div 
                       ref={pointerRef}
-                      className={`absolute top-3 left-1/2 w-1 h-16 rounded-full shadow-lg ${currentStep > 6 ? 'bg-gradient-to-b from-[#8e44ad] to-[#9b59b6]' : 'bg-gradient-to-b from-[#ff6b6b] to-[#ff8e8e]'}`}
+                      className={`absolute top-3 left-1/2 w-1 h-16 rounded-full shadow-lg ${currentStep > 6 ? 'bg-linear-to-b from-[#8e44ad] to-[#9b59b6]' : 'bg-linear-to-b from-[#ff6b6b] to-[#ff8e8e]'}`}
                         style={{
                           transformOrigin: '50% 77px',
                           transform: 'translateX(-50%) rotate(180deg)',
@@ -435,7 +435,7 @@ const DripperWebPage = () => {
                     <button
                       onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
                       disabled={currentStep === 0}
-                      className="bg-gradient-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-5 rounded-full transition-all duration-300 text-xl"
+                      className="bg-linear-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-5 rounded-full transition-all duration-300 text-xl"
                     >
                       ←
                     </button>
@@ -444,7 +444,7 @@ const DripperWebPage = () => {
                     <button
                       onClick={() => setCurrentStep(Math.min(12, currentStep + 1))}
                       disabled={currentStep === 12}
-                      className="bg-gradient-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-5 rounded-full transition-all duration-300 text-xl"
+                      className="bg-linear-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-5 rounded-full transition-all duration-300 text-xl"
                     >
                       →
                     </button>
@@ -454,13 +454,13 @@ const DripperWebPage = () => {
                   <div className="flex justify-center gap-4 mt-4">
                     <button
                       onClick={() => setCurrentStep(1)} // Dripper sets to step 1
-                      className="bg-gradient-to-r from-[#ff6b6b] to-[#ff8e8e] hover:from-[#ff5252] hover:to-[#ff7979] text-white font-medium py-2 px-4 rounded-full transition-all duration-300 shadow-lg"
+                      className="bg-linear-to-r from-[#ff6b6b] to-[#ff8e8e] hover:from-[#ff5252] hover:to-[#ff7979] text-white font-medium py-2 px-4 rounded-full transition-all duration-300 shadow-lg"
                     >
                       Dripper
                     </button>
                     <button
                       onClick={() => setCurrentStep(7)} // Tripper sets to step 7
-                      className="bg-gradient-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] text-white font-medium py-2 px-4 rounded-full transition-all duration-300 shadow-lg"
+                      className="bg-linear-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] text-white font-medium py-2 px-4 rounded-full transition-all duration-300 shadow-lg"
                     >
                       Tripper
                     </button>
@@ -478,28 +478,28 @@ const DripperWebPage = () => {
                 <button 
                   onClick={playAudio}
                   disabled={!audioBuffer || isPlaying}
-                  className="bg-gradient-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
+                  className="bg-linear-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
                 >
                   Play
                 </button>
                 <button 
                   onClick={pauseAudio}
                   disabled={!isPlaying}
-                  className="bg-gradient-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
+                  className="bg-linear-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
                 >
                   Pause
                 </button>
                 <button 
                   onClick={stopAudio}
                   disabled={!audioBuffer}
-                  className="bg-gradient-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
+                  className="bg-linear-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
                 >
                   Stop
                 </button>
                 <button 
                   onClick={downloadProcessedAudio}
                   disabled={!audioBuffer}
-                  className="bg-gradient-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
+                  className="bg-linear-to-r from-[#8e44ad] to-[#9b59b6] hover:from-[#7d3c98] hover:to-[#8e44ad] disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
                 >
                   Download
                 </button>
