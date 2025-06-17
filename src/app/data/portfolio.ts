@@ -15,6 +15,42 @@ export interface PortfolioItem {
 
 const portfolioItems: PortfolioItem[] = [
   {
+    id: 101,
+    name: "Manadhil",
+    role: "Mix & Master",
+    type: "mixed",
+    year: 2025,
+    genre: "R&B/Soul",
+    client: "JBE",
+    description: "Silky smooth track featuring lush vocal harmonies and crisp percussion. This mix showcases the perfect balance between modern production and classic warmth.",
+    techniques: [
+      "Vocal layering and harmonies",
+      "Punchy Low-end processing",
+      "Spatial reverb design"
+    ],
+    imageUrl: "/assets/images/Mixes/mndhl.jpg",
+    isFeatured: true,
+    order: 0
+  },
+  {
+    id: 102,
+    name: "Pesaadhe",
+    role: "Mix & Master",
+    type: "mixed",
+    year: 2025,
+    genre: "R&B/Dance",
+    client: "JBE",
+    description: "Soulful electronic dance Song blending Haitian rhythms with house music, A groundbreaking fusion of styles.",
+    techniques: [
+      "Vocal clarity and presence",
+      "Punchy drum processing",
+      "Dynamic range control"
+    ],
+    imageUrl: "/assets/images/Mixes/pesadhe.jpg",
+    isFeatured: true,
+    order: 1
+  },
+  {
     id: 1,
     name: "Bombay Dreams",
     role: "Assistant Mix",
@@ -578,40 +614,6 @@ const portfolioItems: PortfolioItem[] = [
     ],
     imageUrl: "/assets/images/works/11.jpg",
     order: 33
-  },
-  {
-    id: 13,
-    name: "Velvet Dreams",
-    role: "Mix Engineer",
-    type: "mixed",
-    year: 2024,
-    genre: "R&B/Soul",
-    client: "Smooth Sounds",
-    description: "Silky smooth R&B production with warm vocals and lush instrumentation.",
-    techniques: [
-      "Vocal warmth",
-      "Instrument balance",
-      "Subtle automation"
-    ],
-    imageUrl: "/assets/images/works/44.jpg",
-    order: 1
-  },
-  {
-    id: 14,
-    name: "Electric Pulse",
-    role: "Mix & Master",
-    type: "mixed",
-    year: 2024,
-    genre: "EDM",
-    client: "Bass Drop Records",
-    description: "High-energy electronic dance music with powerful drops and clean transitions.",
-    techniques: [
-      "Transient shaping",
-      "Sidechain compression",
-      "Stereo enhancement"
-    ],
-    imageUrl: "/assets/images/works/43.jpg",
-    order: 2
   }
 ];
 
