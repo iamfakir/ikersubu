@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
   // 2. Check if the user has permission to access the file
   // 3. Stream the file as a response
   
-  // For this example, we'll just return a success message
+  // For this example, we'll just return a success message with caching headers
   return NextResponse.json(
     { 
       success: true, 
@@ -57,6 +57,8 @@ export async function GET(request: NextRequest) {
         'X-RateLimit-Limit': rateLimitResult.limit.toString(),
         'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
         'X-RateLimit-Reset': Math.ceil(rateLimitResult.resetTime / 1000).toString(),
+        // Add caching headers - stale-while-revalidate pattern
+        'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=3600'
       }
     }
   );

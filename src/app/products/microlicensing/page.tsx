@@ -44,7 +44,7 @@ export default function MicrolicensingPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-purple-900 text-white">
+      <div className="min-h-screen bg-linear-to-br from-gray-900 to-purple-900 text-white">
         <div className="container mx-auto px-4 pt-32 pb-16">
           <div className="text-center mb-8">
               <p className="text-xl text-gray-400 animate-pulse">waiting for spaceship to drop</p>
@@ -54,7 +54,7 @@ export default function MicrolicensingPage() {
               </svg>
               {/* Add your SVG animation code here */}
             </div>
-            <h1 className="text-5xl font-extrabold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Microlicensing Information</h1>
+            <h1 className="text-5xl font-extrabold text-center mb-16 text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-600">Microlicensing Information</h1>
 
           <section className="mb-12">
             <h2 className="text-4xl font-bold mb-8 text-purple-300">Frequently Asked Questions</h2>
@@ -81,7 +81,7 @@ export default function MicrolicensingPage() {
               />
               <FAQItem
                 question="Can I Monetize My Video On Youtube?"
-                answer="Yes. If you purchase our YouTube monetization license or social media bundle, simply email licensing@audiomachine.com a copy of your receipt and the url to your video and we will remove the third party claim on the licensed track."
+                answer="Yes. If you purchase our YouTube monetization license or social media bundle, simply email contact@ikersubu.com a copy of your receipt and the url to your video and we will remove the third party claim on the licensed track."
               />
               <FAQItem
                 question="Can I Still Use Audiomachine On My Youtube Without Monetizing?"
@@ -111,7 +111,7 @@ export default function MicrolicensingPage() {
         <section className="py-20 px-8 text-center bg-gray-900 bg-opacity-70">
           <h2 className="text-4xl font-bold mb-6 text-purple-400">Need Custom Audio?</h2>
           <p className="text-xl mb-10 text-gray-300">Contact us for bespoke microlicensing solutions.</p>
-          <button className="px-10 py-5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-xl font-bold hover:from-purple-700 hover:to-pink-700 transition-colors shadow-xl">
+          <button className="px-10 py-5 bg-linear-to-r from-purple-600 to-pink-600 rounded-full text-xl font-bold hover:from-purple-700 hover:to-pink-700 transition-colors shadow-xl">
             Get a Quote
           </button>
         </section>

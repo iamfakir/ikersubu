@@ -41,7 +41,7 @@ export default function PluginsClient({ plugins }: PluginsClientProps) {
             {plugins.map((plugin) => (
               <div 
                 key={plugin.id}
-                className="bg-[#0F172A]/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-[#00F0FF] transition-all duration-300 hover:shadow-lg hover:shadow-[#00F0FF]/10"
+                className="bg-[#0F172A]/50 backdrop-blur-xs rounded-xl overflow-hidden border border-gray-800 hover:border-[#00F0FF] transition-all duration-300 hover:shadow-lg hover:shadow-[#00F0FF]/10"
               >
                 <Link href={`${plugin.url}?edition=${plugin.id}`} className="block">
                   <div className="relative h-64 bg-gray-900">
@@ -102,7 +102,7 @@ export default function PluginsClient({ plugins }: PluginsClientProps) {
             <input
               type="email"
               placeholder="Your email address"
-              className="flex-1 px-4 py-3 rounded-md bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00F0FF] focus:border-transparent"
+              className="flex-1 px-4 py-3 rounded-md bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-hidden focus:ring-2 focus:ring-[#00F0FF] focus:border-transparent"
             />
             <button className="px-6 py-3 bg-gradient-to-r from-[#00F0FF] to-[#9D00FF] text-white font-medium rounded-md hover:opacity-90 transition-opacity">
               Subscribe

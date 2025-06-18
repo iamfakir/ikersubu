@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import Image from 'next/image';
 import './styles.css';
 
 export interface Slide {
@@ -160,11 +161,16 @@ const Carousel: React.FC<CarouselProps> = ({
       >
         {slides.map((slide) => (
           <li key={slide.id} className="carousel__slide">
-            <img 
-              src={slide.image} 
-              alt={slide.title} 
-              loading={currentIndex === slide.id ? 'eager' : 'lazy'}
-            />
+            <div className="relative w-full h-full">
+              <Image 
+                src={slide.image} 
+                alt={slide.title} 
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority={currentIndex === slide.id}
+                className="object-cover"
+              />
+            </div>
             <div className="slide-content">
               <h3 className="slide-title">{slide.title}</h3>
               <p className="slide-description">{slide.description}</p>

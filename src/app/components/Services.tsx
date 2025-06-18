@@ -177,7 +177,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
   return (
     <AnimatePresence>
       <motion.div 
-        className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+        className="fixed inset-0 bg-black/80 backdrop-blur-xs flex items-center justify-center p-4 z-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -226,9 +226,11 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.1 }}
                     >
-                      <svg className="h-5 w-5 text-[#00F0FF] mr-3 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
+                      <div className="shrink-0 mr-3 mt-0.5">
+                        <svg className="h-5 w-5 text-[#00F0FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
                       <span className="text-[#E0E0FF]">{item}</span>
                     </motion.li>
                   ))}
@@ -285,10 +287,20 @@ const Services = () => {
 
   return (
     <section id="services" className="py-20 bg-gradient-to-b from-[#0B0E17] to-[#1A1F35] relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[url('/assets/images/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
-      </div>
+      {/* Optimized background elements with reduced repaints */}
+      <div 
+        className="absolute inset-0 opacity-10 pointer-events-none"
+        style={{
+          backgroundImage: 'url("/assets/images/grid.svg")',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          maskImage: 'linear-gradient(180deg, white, transparent)',
+          WebkitMaskImage: 'linear-gradient(180deg, white, transparent)',
+          willChange: 'opacity',
+          contain: 'paint',
+        }}
+      />
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
@@ -361,9 +373,11 @@ const Services = () => {
                     <ul className="space-y-2">
                       {service.includes.slice(0, 3).map((item, i) => (
                         <li key={i} className="flex items-start">
-                          <svg className="h-5 w-5 text-[#00F0FF] mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
+                          <div className="shrink-0 mr-2 mt-0.5">
+                            <svg className="h-5 w-5 text-[#00F0FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                          </div>
                           <span className="text-[#E0E0FF] text-sm">{item}</span>
                         </li>
                       ))}
@@ -373,9 +387,11 @@ const Services = () => {
                       <ul className="space-y-2">
                         {service.includes.slice(3).map((item, i) => (
                           <li key={i + 3} className="flex items-start">
-                            <svg className="h-5 w-5 text-[#00F0FF] mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                            </svg>
+                            <div className="shrink-0 mr-2 mt-0.5">
+                              <svg className="h-5 w-5 text-[#00F0FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
                             <span className="text-[#E0E0FF] text-sm">{item}</span>
                           </li>
                         ))}

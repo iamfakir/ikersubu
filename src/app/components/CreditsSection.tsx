@@ -37,27 +37,29 @@ export default function CreditsSection() {
               className="bg-[#161B2D] rounded-xl p-6 hover:bg-[#1E243A] transition-colors duration-300"
             >
               <div className="flex items-start gap-4">
-                <div className="w-24 h-24 flex-shrink-0 rounded-md overflow-hidden bg-[#0B0E17]">
-                  {credit.image ? (
-                    <Image 
-                      src={credit.image} 
-                      alt={`${credit.project} by ${credit.artist}`} 
-                      className="w-full h-full object-cover"
-                      width={96}
-                      height={96}
-                      priority={true}
-                      onError={() => {
-                        console.error(`Failed to load image: ${credit.image}`);
-                        // Error handling is built into Next.js Image component
-                      }}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-[#0B0E17]">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#2D3348]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                      </svg>
-                    </div>
-                  )}
+                <div className="shrink-0">
+                  <div className="w-24 h-24 rounded-md overflow-hidden bg-[#0B0E17]">
+                    {credit.image ? (
+                      <Image 
+                        src={credit.image} 
+                        alt={`${credit.project} by ${credit.artist}`} 
+                        className="w-full h-full object-cover"
+                        width={96}
+                        height={96}
+                        priority={true}
+                        onError={() => {
+                          console.error(`Failed to load image: ${credit.image}`);
+                          // Error handling is built into Next.js Image component
+                        }}
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-[#0B0E17]">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-[#2D3348]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-white">{credit.project}</h3>

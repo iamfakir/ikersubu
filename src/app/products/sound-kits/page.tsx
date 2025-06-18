@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
@@ -23,7 +24,15 @@ const SoundKitsPage = () => {
           <section className="mb-16 flex flex-wrap justify-center gap-8">
             {/* Pack 1 */}
             <div className="relative w-72 h-72 bg-gray-800 rounded-lg shadow-xl overflow-hidden flex items-center justify-center">
-              <img src="/assets/images/pack1.svg" alt="Sound Pack 1" className="absolute inset-0 w-full h-full object-cover filter blur-sm brightness-75" />
+              <div className="absolute inset-0">
+                <Image
+                  src="/assets/images/pack1.svg"
+                  alt="Sound Pack 1"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 288px"
+                  className="object-cover filter blur-xs brightness-75"
+                />
+              </div>
               <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
                 <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" d="M10 1a1 1 0 011 1v1h2V2a1 1 0 112 0v1h1a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2h1V2a1 1 0 011-1zM6 5v10h12V5H6zm3 4a1 1 0 00-1 1v3a1 1 0 102 0v-3a1 1 0 00-1-1zm6 0a1 1 0 00-1 1v3a1 1 0 102 0v-3a1 1 0 00-1-1z" clipRule="evenodd" />
@@ -34,7 +43,15 @@ const SoundKitsPage = () => {
 
             {/* Pack 2 */}
             <div className="relative w-72 h-72 bg-gray-800 rounded-lg shadow-xl overflow-hidden flex items-center justify-center">
-              <img src="/assets/images/pack2.svg" alt="Sound Pack 2" className="absolute inset-0 w-full h-full object-cover filter blur-sm brightness-75" />
+              <div className="absolute inset-0">
+                <Image
+                  src="/assets/images/pack2.svg"
+                  alt="Sound Pack 2"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 288px"
+                  className="object-cover filter blur-xs brightness-75"
+                />
+              </div>
               <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
                 <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" d="M10 1a1 1 0 011 1v1h2V2a1 1 0 112 0v1h1a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2h1V2a1 1 0 011-1zM6 5v10h12V5H6zm3 4a1 1 0 00-1 1v3a1 1 0 102 0v-3a1 1 0 00-1-1zm6 0a1 1 0 00-1 1v3a1 1 0 102 0v-3a1 1 0 00-1-1z" clipRule="evenodd" />

@@ -319,7 +319,7 @@ const AirfryPage = () => {
           >
             {label}
           </label>
-          <span className="text-cyan-300 text-sm font-mono bg-black/30 px-2 py-0.5 rounded">
+          <span className="text-cyan-300 text-sm font-mono bg-black/30 px-2 py-0.5 rounded-sm">
             {value}{unit}
           </span>
         </div>

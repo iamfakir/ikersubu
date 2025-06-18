@@ -32,7 +32,7 @@ const credits: CreditItem[] = [
     role: 'Assistant Engineer',
     year: '2024',
     label: 'Capital Records',
-    image: formatImagePath('/assets/images/works/28.jpg'),
+    image: formatImagePath('/assets/images/works/optimized/28.webp'),
     streamingLinks: {
       appleMusic: 'https://music.apple.com/in/album/big-dawgs-single/1754946756',
       spotify: 'https://open.spotify.com/track/0OA00aPt3BV10qeMIs3meW'
@@ -44,7 +44,7 @@ const credits: CreditItem[] = [
     role: 'Assistant Engineer', 
     year: '2025',
     label: 'Karun',
-    image: formatImagePath('public/assets/images/works/47.jpg'),
+    image: formatImagePath('public/assets/images/works/optimized/47.webp'),
     streamingLinks: {
       appleMusic: 'https://music.apple.com/in/album/chehre/1814830773',
       spotify: 'https://open.spotify.com/album/4BGBilCN63p0cNjkTn6Fxa?si=EsgBKKXkRNCwkFVLVv2TkA'
@@ -56,7 +56,7 @@ const credits: CreditItem[] = [
     role: 'Assistant Engineer',
     year: '2024',
     label: 'Yashraj',
-    image: formatImagePath('public/assets/images/works/29.jpg'),
+    image: formatImagePath('public/assets/images/works/optimized/29.webp'),
     streamingLinks: {
       appleMusic: 'https://music.apple.com/in/album/meri-jaan-pehle-naach/1755519457',
       spotify: 'https://open.spotify.com/album/0EjqvUumscGjg4Y12yalkV?si=5pYfLdvUQ5aUcPtQHnrh4Q'
@@ -68,7 +68,7 @@ const credits: CreditItem[] = [
     role: 'Assistant Engineer',
     year: '2024',
     label: 'RED BULL',
-    image: formatImagePath('public/assets/images/works/39.jpg'),
+    image: formatImagePath('public/assets/images/works/optimized/39.webp'),
     streamingLinks: {
       appleMusic: 'https://music.apple.com/in/album/torrie-wilson-red-bull-64-bars/1769602691?i=1769602696',
       spotify: 'https://open.spotify.com/track/7oPg72plmyflBLvGmahUrW?si=8f555a87b64546ba'

@@ -4,7 +4,7 @@ import "./globals.css";
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 
-const Navbar = dynamic(() => import('./components/Navbar'), { ssr: false });
+const Navbar = dynamic(() => import('./components/Navbar'));
 
 const inter = Inter({
   subsets: ['latin'],
@@ -26,6 +26,21 @@ export const metadata: Metadata = {
   // Viewport is now handled by the separate viewport export
 }
 
+// This function generates static pages at build time
+// It helps with SEO and faster page loads
+export const generateStaticParams = async () => {
+  // Define the static routes you want to pre-render
+  // This is a simple example - you would typically fetch this data from an API or CMS
+  const routes = [
+    { slug: '' },              // Home page
+    { slug: 'about' },         // About page
+    { slug: 'portfolio' },      // Portfolio page
+    { slug: 'contact' },        // Contact page
+  ];
+  
+  return routes;
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -34,6 +49,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} font-sans`} suppressHydrationWarning>
       <head>
+  {/* Preload critical images */}
+    <link rel="preload" href="/assets/images/works/optimized/11.webp" as="image" type="image/webp" />
+    <link rel="preload" href="/assets/images/works/optimized/12.webp" as="image" type="image/webp" />
+    <link rel="preload" href="/assets/images/works/optimized/15.webp" as="image" type="image/webp" />
         <meta charSet="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
         {/* Security headers */}
@@ -47,53 +66,9 @@ export default function RootLayout({
           <Navbar />
           {children}
         </div>
-        {/* Initialize CSRF protection */}
-        <Script id="csrf-init" strategy="afterInteractive">
-          {`
-            (function() {
-              function setupCSRFForForms() {
-                const getCookie = (name) => {
-                  const value = \`; \${document.cookie}\`;
-                  const parts = value.split(\`; \${name}=\`);
-                  if (parts.length === 2) return parts.pop().split(';').shift();
-                  return null;
-                };
-                
-                const token = getCookie('csrf_token');
-                if (!token) return;
-                
-                document.querySelectorAll('form').forEach(form => {
-                  if (!form.querySelector('input[name="csrf_token"]')) {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = 'csrf_token';
-                    input.value = token;
-                    form.appendChild(input);
-                  }
-                });
-              }
-              
-              if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', setupCSRFForForms);
-              } else {
-                setupCSRFForForms();
-              }
-              
-              // Setup for dynamically added forms
-              const observer = new MutationObserver(mutations => {
-                for (const mutation of mutations) {
-                  if (mutation.type === 'childList' && mutation.addedNodes.length) {
-                    setupCSRFForForms();
-                    break;
-                  }
-                }
-              });
-              
-              observer.observe(document.body, { childList: true, subtree: true });
-            })();
-          `}
-        </Script>
+        {/* Service Worker Registration - for offline capabilities and caching */}
+        <Script src="/js/sw-register.js" strategy="afterInteractive" />
       </body>
     </html>
-  )
+  );
 }

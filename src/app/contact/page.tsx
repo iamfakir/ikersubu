@@ -16,11 +16,15 @@ function ContactContent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-  const [serviceType, setServiceType] = useState('');
+  const [serviceType, setServiceType] = useState(() => searchParams?.get('service') || '');
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
-    const service = searchParams?.get('service');
-    if (service) {
+    setHasMounted(true);
+
+    // Sync serviceType if searchParams change after initial load
+    const service = searchParams?.get('service') || '';
+    if (service !== serviceType) {
       setServiceType(service);
     }
 
@@ -33,7 +37,7 @@ function ContactContent() {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [searchParams]);
+  }, [searchParams, serviceType]); // Added serviceType to dependencies
 
   // Animation variants
   const containerVariants = {
@@ -82,30 +86,47 @@ function ContactContent() {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <motion.main 
-        className="flex-grow flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+        className="grow flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
       >
-        {/* Background elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0B0E17] to-[#1A1F35] z-0"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E17]/20 to-transparent mix-blend-overlay z-10"></div>
-        
-        {/* Animated background element following cursor */}
-        <motion.div
-          className="absolute w-64 h-64 rounded-full bg-gradient-to-br from-[#00F0FF] to-[#9D00FF] opacity-20 blur-3xl pointer-events-none z-10"
-          animate={{
-            x: mousePosition.x - 128, // Center the element on the cursor (w-64 is 256px, half is 128px)
-            y: mousePosition.y - 128, // Center the element on the cursor
-            scale: [1, 1.05, 1],
-            opacity: [0.2, 0.25, 0.2]
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 60,
-            damping: 25
+        {/* Optimized background elements */}
+        <div 
+          className="absolute inset-0 bg-[#0B0E17] z-0"
+          style={{
+            background: 'linear-gradient(135deg, #0B0E17 0%, #1A1F35 100%)',
+            willChange: 'opacity',
+            contain: 'paint',
           }}
         />
+        <div 
+          className="absolute inset-0 z-10 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to top, rgba(11, 14, 23, 0.2) 0%, transparent 100%)',
+            mixBlendMode: 'overlay',
+            willChange: 'opacity',
+            contain: 'paint',
+          }}
+        />
+        
+        {/* Animated background element following cursor */}
+        {hasMounted && (
+          <motion.div
+            className="absolute w-64 h-64 rounded-full bg-gradient-to-br from-[#00F0FF] to-[#9D00FF] opacity-20 blur-3xl pointer-events-none z-10"
+            animate={{
+              x: mousePosition.x - 128, // Center the element on the cursor (w-64 is 256px, half is 128px)
+              y: mousePosition.y - 128, // Center the element on the cursor
+              scale: [1, 1.05, 1],
+              opacity: [0.15, 0.2, 0.15]
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 60,
+              damping: 25
+            }}
+          />
+        )}
 
         {/* Existing Animated background circles */}
         <motion.div 
@@ -181,7 +202,6 @@ function ContactContent() {
                     className={`absolute left-3 transition-all duration-200 pointer-events-none ${
                       name ? 'text-xs -top-2 text-[#00F0FF]' : 'text-sm top-3 text-[#A0A0A5]'
                     }`}
-                    variants={itemVariants}
                   >
                     Full Name
                   </motion.label>
@@ -193,7 +213,6 @@ function ContactContent() {
                     onChange={(e) => setName(e.target.value)}
                     required
                     className="input-futuristic pt-4"
-                    variants={itemVariants}
                   />
                 </div>
                 
@@ -279,7 +298,7 @@ function ContactContent() {
                   <label className="flex items-center space-x-2">
                     <input 
                       type="checkbox" 
-                      className="form-checkbox h-5 w-5 text-cyan-500 rounded focus:ring-cyan-500 border-cyan-500" 
+                      className="form-checkbox h-5 w-5 text-cyan-500 rounded-sm focus:ring-cyan-500 border-cyan-500" 
                     />
                     <span className="text-[#00F0FF]">Sign up for newsletter</span>
                   </label>

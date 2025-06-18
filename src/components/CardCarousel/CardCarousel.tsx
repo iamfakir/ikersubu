@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import './CardCarousel.css';
 
-import { getPortfolioItems, getPortfolioItemsWithOrder, PortfolioItem } from '@/app/data/portfolio';
+import { getPortfolioItems, PortfolioItem } from '@/app/data/portfolio';
 
-// Use the PortfolioItem interface from the portfolio.ts file
-// Get portfolio items from the new data file
+// Get portfolio items from the data file
 const workItems: PortfolioItem[] = getPortfolioItems();
 
 export default function CardCarousel() {
+  const [isClient, setIsClient] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(null);
@@ -19,6 +19,11 @@ export default function CardCarousel() {
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const transitionTimeout = useRef<NodeJS.Timeout | null>(null);
+  
+  // Set isClient to true on mount
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   
   // Filter projects based on active tab
   const filteredItems = workItems.filter(item => {
@@ -135,6 +140,17 @@ export default function CardCarousel() {
   // Use the sorted filtered items for the visible cards
   const visibleCards = getVisibleCards();
 
+  // Don't render anything on the server
+  if (!isClient) {
+    return (
+      <div className="card-carousel-container">
+        <div className="loading-placeholder" style={{ height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          Loading portfolio...
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="card-carousel-container">
       <h1 className="portfolio-title">Portfolio</h1>
@@ -143,24 +159,28 @@ export default function CardCarousel() {
         <button 
           onClick={() => setActiveTab('assisted')}
           className={`filter-button ${activeTab === 'assisted' ? 'active' : ''}`}
+          aria-pressed={activeTab === 'assisted'}
         >
           Assisted Mixes
         </button>
         <button 
           onClick={() => setActiveTab('mixed')}
           className={`filter-button ${activeTab === 'mixed' ? 'active' : ''}`}
+          aria-pressed={activeTab === 'mixed'}
         >
           Mix/Master
         </button>
         <button 
           onClick={() => setActiveTab('production')}
           className={`filter-button ${activeTab === 'production' ? 'active' : ''}`}
+          aria-pressed={activeTab === 'production'}
         >
           Production
         </button>
         <button 
           onClick={() => setActiveTab('recording')}
           className={`filter-button ${activeTab === 'recording' ? 'active' : ''}`}
+          aria-pressed={activeTab === 'recording'}
         >
           Recording
         </button>

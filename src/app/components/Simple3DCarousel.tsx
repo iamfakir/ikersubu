@@ -10,10 +10,10 @@ interface Simple3DCarouselProps {
 
 const Simple3DCarousel = ({ 
   images = [
-    '/assets/images/works/53.jpg',
-    '/assets/images/works/54.jpg',
-    '/assets/images/works/55.jpg',
-    '/assets/images/works/56.jpg',
+    '/assets/images/works/optimized/53.webp',
+    '/assets/images/works/optimized/54.webp',
+    '/assets/images/works/optimized/55.webp',
+    '/assets/images/works/optimized/56.webp',
   ],
   className = '' 
 }: Simple3DCarouselProps) => {

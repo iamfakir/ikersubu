@@ -124,7 +124,14 @@ const Carousel = (): JSX.Element => {
   }
   
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
+    <section 
+      className="py-16 md:py-24 bg-white"
+      style={{
+        background: 'linear-gradient(to bottom, #f9fafb 0%, #ffffff 100%)',
+        willChange: 'opacity',
+        contain: 'paint',
+      }}
+    >
       <div className="container mx-auto px-4">
         <motion.h2 
           className="text-4xl font-bold text-center mb-4 text-gray-900"
@@ -165,7 +172,7 @@ const Carousel = (): JSX.Element => {
               <>
                 <motion.button
                   onClick={prevCard}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 text-gray-900 p-3 rounded-full shadow-lg hover:bg-white transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 text-gray-900 p-3 rounded-full shadow-lg hover:bg-white transition-all duration-300 hover:scale-110 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   aria-label="Previous work"
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -178,7 +185,7 @@ const Carousel = (): JSX.Element => {
                 
                 <motion.button
                   onClick={nextCard}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 text-gray-900 p-3 rounded-full shadow-lg hover:bg-white transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 text-gray-900 p-3 rounded-full shadow-lg hover:bg-white transition-all duration-300 hover:scale-110 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   aria-label="Next work"
                   initial={{ opacity: 0, x: 10 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -213,7 +220,15 @@ const Carousel = (): JSX.Element => {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       priority={index < 3}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <div 
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none"
+                      style={{
+                        background: 'linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 50%, transparent 100%)',
+                        willChange: 'opacity',
+                        contain: 'paint',
+                      }}
+                      aria-hidden="true"
+                    >
                       <div className="flex items-center space-x-2">
                         <span className="inline-block px-3 py-1 text-sm font-medium bg-indigo-600 text-white rounded-full">
                           {work.category}

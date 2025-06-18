@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const companies = [
   {
@@ -74,20 +75,24 @@ export default function LogosSection() {
               title={company.name}
             >
               {company.logo ? (
-                <img
-                  src={company.logo}
-                  alt={company.name}
-                  className="max-h-12 w-auto max-w-full object-contain"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.alt = getInitials(company.name);
-                    target.style.display = 'none';
-                    const fallback = document.createElement('div');
-                    fallback.className = 'w-20 h-12 flex items-center justify-center bg-[#1E243A] rounded-lg text-[#00F0FF] font-bold';
-                    fallback.textContent = getInitials(company.name);
-                    target.parentNode?.insertBefore(fallback, target);
-                  }}
-                />
+                <div className="relative h-12 w-full">
+                  <Image
+                    src={company.logo}
+                    alt={company.name}
+                    width={80}
+                    height={48}
+                    className="max-h-12 w-auto max-w-full object-contain"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.alt = getInitials(company.name);
+                      target.style.display = 'none';
+                      const fallback = document.createElement('div');
+                      fallback.className = 'w-20 h-12 flex items-center justify-center bg-[#1E243A] rounded-lg text-[#00F0FF] font-bold';
+                      fallback.textContent = getInitials(company.name);
+                      target.parentNode?.insertBefore(fallback, target);
+                    }}
+                  />
+                </div>
               ) : (
                 <div className="w-20 h-12 flex items-center justify-center bg-[#1E243A] rounded-lg text-[#00F0FF] font-bold">
                   {getInitials(company.name)}

@@ -96,9 +96,19 @@ export default function PortfolioCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Project Thumbnail */}
+      {/* Optimized Project Thumbnail */}
       <div className="relative aspect-square overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-600/10 group-hover:opacity-100 opacity-0 transition-opacity duration-300" />
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%)',
+            opacity: 0,
+            transition: 'opacity 300ms ease',
+            willChange: 'opacity',
+            contain: 'paint',
+          }}
+          aria-hidden="true"
+        />
         
         {/* Project Image */}
         <div className="absolute inset-0">
@@ -120,7 +130,7 @@ export default function PortfolioCard({
               e.stopPropagation();
               onPlayToggle();
             }}
-            className={`w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm transition-all ${
+            className={`w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-xs transition-all ${
               isPlaying
                 ? 'bg-cyan-600/90 text-white'
                 : 'bg-black/70 text-white hover:bg-cyan-600/90 hover:scale-110'
