@@ -91,9 +91,24 @@ function ContactContent() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
       >
-        {/* Background elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0B0E17] to-[#1A1F35] z-0"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E17]/20 to-transparent mix-blend-overlay z-10"></div>
+        {/* Optimized background elements */}
+        <div 
+          className="absolute inset-0 bg-[#0B0E17] z-0"
+          style={{
+            background: 'linear-gradient(135deg, #0B0E17 0%, #1A1F35 100%)',
+            willChange: 'opacity',
+            contain: 'paint',
+          }}
+        />
+        <div 
+          className="absolute inset-0 z-10 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to top, rgba(11, 14, 23, 0.2) 0%, transparent 100%)',
+            mixBlendMode: 'overlay',
+            willChange: 'opacity',
+            contain: 'paint',
+          }}
+        />
         
         {/* Animated background element following cursor */}
         {hasMounted && (
@@ -103,7 +118,7 @@ function ContactContent() {
               x: mousePosition.x - 128, // Center the element on the cursor (w-64 is 256px, half is 128px)
               y: mousePosition.y - 128, // Center the element on the cursor
               scale: [1, 1.05, 1],
-              opacity: [0.2, 0.25, 0.2]
+              opacity: [0.15, 0.2, 0.15]
             }}
             transition={{
               type: "spring",

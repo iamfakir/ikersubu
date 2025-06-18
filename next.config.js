@@ -5,10 +5,19 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 const nextConfig = {
   images: {
-    domains: [
-      'images.unsplash.com',
-      'plus.unsplash.com',
-      'source.unsplash.com',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'plus.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'source.unsplash.com',
+      },
     ],
     unoptimized: false,
     formats: ['image/webp'],

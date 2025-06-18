@@ -287,10 +287,20 @@ const Services = () => {
 
   return (
     <section id="services" className="py-20 bg-gradient-to-b from-[#0B0E17] to-[#1A1F35] relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[url('/assets/images/grid.svg')] bg-center mask-[linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
-      </div>
+      {/* Optimized background elements with reduced repaints */}
+      <div 
+        className="absolute inset-0 opacity-10 pointer-events-none"
+        style={{
+          backgroundImage: 'url("/assets/images/grid.svg")',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          maskImage: 'linear-gradient(180deg, white, transparent)',
+          WebkitMaskImage: 'linear-gradient(180deg, white, transparent)',
+          willChange: 'opacity',
+          contain: 'paint',
+        }}
+      />
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">

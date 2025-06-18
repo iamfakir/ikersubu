@@ -65,6 +65,7 @@ const AudioWave = () => {
 };
 
 export default function Home() {
+  const [isClient, setIsClient] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
@@ -72,6 +73,10 @@ export default function Home() {
   const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
 
   useEffect(() => {
+    setIsClient(true);
+    
+    if (typeof window === 'undefined') return;
+    
     const handleMouseMove = (e: MouseEvent) => {
       if (heroRef.current) {
         const rect = heroRef.current.getBoundingClientRect();
@@ -100,15 +105,37 @@ export default function Home() {
             scale: heroScale
           }}
         >
-          {/* Background gradient with parallax effect */}
+          {/* Optimized background gradient with reduced motion */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-[#0B0E17] to-[#1A1F35] z-0"
+            className="absolute inset-0 bg-[#0B0E17] z-0"
             style={{
-              backgroundPosition: `${50 + (mousePosition.x * 0.01)}% ${50 + (mousePosition.y * 0.01)}%`
+              background: `
+                linear-gradient(
+                  135deg,
+                  #0B0E17 0%,
+                  #1A1F35 100%
+                )
+                ${isClient ? 
+                  `${50 + (mousePosition.x * 0.01)}% ${50 + (mousePosition.y * 0.01)}%` : 
+                  'center center'}
+              `,
+              backgroundSize: '200% 200%',
+              willChange: 'background-position',
+              contain: 'paint',
+              opacity: isClient ? 1 : 0,
+              transition: 'opacity 0.5s ease-out'
             }}
           />
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E17]/20 to-transparent mix-blend-overlay z-10"></div>
+          {/* Optimized subtle overlay with reduced blending */}
+          <div 
+            className="absolute inset-0 z-10 pointer-events-none"
+            style={{
+              background: 'linear-gradient(to top, rgba(11, 14, 23, 0.2) 0%, transparent 100%)',
+              mixBlendMode: 'overlay',
+              willChange: 'opacity',
+              contain: 'paint',
+            }}
+          />
           
           
           {/* Content */}

@@ -77,7 +77,15 @@ const SimpleCarousel = ({
             priority
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50" />
+          <div 
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: 'linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.5) 100%)',
+              willChange: 'opacity',
+              contain: 'paint',
+            }}
+            aria-hidden="true"
+          />
         </motion.div>
       </AnimatePresence>
       

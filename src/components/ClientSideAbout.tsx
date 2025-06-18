@@ -52,7 +52,15 @@ const ClientSideAbout = () => {
                 className="object-cover"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+              <div 
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: 'linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%)',
+                  willChange: 'opacity',
+                  contain: 'paint',
+                }}
+                aria-hidden="true"
+              />
               <div className="absolute bottom-0 left-0 p-6">
                 <h3 className="text-2xl font-bold">{aboutContent.hero.name}</h3>
                 <p className="text-cyan-400">{aboutContent.hero.role}</p>

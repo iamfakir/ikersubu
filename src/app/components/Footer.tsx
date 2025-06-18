@@ -30,12 +30,33 @@ const Footer = () => {
 
   return (
     <footer className="relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0B0E17] to-[#0F1320] z-0"></div>
+      {/* Optimized background with reduced gradient complexity */}
+      <div 
+        className="absolute inset-0 bg-[#0B0E17] z-0"
+        style={{
+          background: 'linear-gradient(to bottom, #0B0E17 0%, #0F1320 100%)',
+          willChange: 'opacity',
+          contain: 'paint',
+        }}
+      />
       
-      {/* Decorative elements */}
-      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#00F0FF]/30 to-transparent"></div>
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#9D00FF]/20 to-transparent"></div>
+      {/* Optimized decorative elements with reduced repaints */}
+      <div 
+        className="absolute bottom-0 left-0 w-full h-px z-0"
+        style={{
+          background: 'linear-gradient(90deg, transparent 0%, rgba(0, 240, 255, 0.3) 50%, transparent 100%)',
+          willChange: 'opacity',
+          contain: 'paint',
+        }}
+      />
+      <div 
+        className="absolute top-0 left-0 w-full h-px z-0"
+        style={{
+          background: 'linear-gradient(90deg, transparent 0%, rgba(157, 0, 255, 0.2) 50%, transparent 100%)',
+          willChange: 'opacity',
+          contain: 'paint',
+        }}
+      />
       
       <motion.div
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"

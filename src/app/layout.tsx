@@ -50,9 +50,9 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} font-sans`} suppressHydrationWarning>
       <head>
   {/* Preload critical images */}
-    <link rel="preload" href="/assets/images/works/optimized/1.webp" as="image" type="image/webp" />
-    <link rel="preload" href="/assets/images/works/optimized/2.webp" as="image" type="image/webp" />
-    <link rel="preload" href="/assets/images/works/optimized/3.webp" as="image" type="image/webp" />
+    <link rel="preload" href="/assets/images/works/optimized/11.webp" as="image" type="image/webp" />
+    <link rel="preload" href="/assets/images/works/optimized/12.webp" as="image" type="image/webp" />
+    <link rel="preload" href="/assets/images/works/optimized/15.webp" as="image" type="image/webp" />
         <meta charSet="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
         {/* Security headers */}
