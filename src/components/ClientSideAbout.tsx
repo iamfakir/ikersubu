@@ -26,7 +26,9 @@ const ClientSideAbout = () => {
               </p>
               <div className="flex flex-wrap gap-4 mb-12">
                 <a
-                  href="/contact"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdcrTUIlxrNMsLj5vxQGb07lv927oq0r4cvl883aAaSkT3pzA/viewform?usp=header"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full font-medium hover:opacity-90 transition-all"
                 >
                   Get in Touch
@@ -46,21 +48,28 @@ const ClientSideAbout = () => {
               className="relative h-96 lg:h-[500px] w-full rounded-2xl overflow-hidden"
             >
               <div className="absolute inset-0 bg-gray-900 flex items-center justify-center">
-                <div className="w-full h-full transform rotate-90">
+                <div className="w-full h-full transform rotate-90 relative">
                   <Image
-                    src="/assets/images/studiopic/studiop1.webp"
+                    src="/assets/images/studiopic/studiop.webp"
                     alt={`${aboutContent.hero.name} - ${aboutContent.hero.role}`}
                     width={800}
                     height={600}
                     className="w-full h-full object-cover rounded-2xl"
                     priority
                     onError={(e) => {
-                    console.error('Image failed to load:', e);
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src = '/assets/images/studiopic/studiop1.JPG';
-                  }}
+                      const target = e.target as HTMLImageElement;
+                      // Prevent infinite loop by checking if we've already tried to fall back
+                      if (target.src.endsWith('.JPG')) {
+                        // If we've already tried JPG, show nothing or a placeholder
+                        target.style.display = 'none';
+                      } else {
+                        // Try JPG fallback once
+                        target.src = '/assets/images/studiopic/studiop.JPG';
+                      }
+                    }}
                   />
+                  {/* Fallback background in case both images fail */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 to-blue-900/20 rounded-2xl" aria-hidden="true" />
                 </div>
               </div>
               <div 
@@ -116,7 +125,7 @@ const ClientSideAbout = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href="/contact"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSdcrTUIlxrNMsLj5vxQGb07lv927oq0r4cvl883aAaSkT3pzA/viewform?usp=header"
                 className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full font-medium hover:opacity-90 transition-all text-lg"
               >
                 Get Started

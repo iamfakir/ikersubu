@@ -111,9 +111,14 @@ export default function MicrolicensingPage() {
         <section className="py-20 px-8 text-center bg-gray-900 bg-opacity-70">
           <h2 className="text-4xl font-bold mb-6 text-purple-400">Need Custom Audio?</h2>
           <p className="text-xl mb-10 text-gray-300">Contact us for bespoke microlicensing solutions.</p>
-          <button className="px-10 py-5 bg-linear-to-r from-purple-600 to-pink-600 rounded-full text-xl font-bold hover:from-purple-700 hover:to-pink-700 transition-colors shadow-xl">
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdcrTUIlxrNMsLj5vxQGb07lv927oq0r4cvl883aAaSkT3pzA/viewform?usp=header"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-futuristic inline-block px-10 py-5 rounded-full text-xl font-bold"
+          >
             Get a Quote
-          </button>
+          </a>
         </section>
       </div>
       <Footer />

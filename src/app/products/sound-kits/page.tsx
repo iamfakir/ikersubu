@@ -65,7 +65,7 @@ const SoundKitsPage = () => {
           <section className="text-center py-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-2xl">
             <h2 className="text-4xl font-bold text-white mb-4">Can't Find What You Need?</h2>
             <p className="text-xl text-blue-100 mb-8">We offer custom sound design services tailored to your unique vision.</p>
-            <Link href="/contact">
+            <Link href="https://forms.gle/h1H74cbkGqP819BX7" target="_blank" rel="noopener noreferrer">
               <button className="bg-white text-blue-700 px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:bg-gray-200 transition-all duration-300">
                 Get Custom Sounds
               </button>

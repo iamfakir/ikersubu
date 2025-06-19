@@ -37,7 +37,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="px-8 py-3 bg-white text-black text-lg font-light tracking-wider hover:bg-opacity-90 transition-all"
-            onClick={() => window.location.href='/contact?service=mix_and_master'}
+            onClick={() => window.open('https://forms.gle/h1H74cbkGqP819BX7', '_blank', 'noopener,noreferrer')}
           >
             START YOUR PROJECT
           </motion.button>

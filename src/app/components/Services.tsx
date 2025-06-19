@@ -47,12 +47,8 @@ const services: ServiceItem[] = [
         </ul>
         <p><strong>Why choose my mixing?</strong> Your music deserves meticulous attention to detail. I address common challenges such as muddy low-end, vocals that don't blend, and mixes that lack translation across different listening environments.</p>
         <div className="bg-[#1A1F35] p-4 rounded-lg mt-4">
-          <h4 className="text-[#00F0FF] font-semibold mb-2">Pricing Tiers:</h4>
-          <ul className="space-y-1 text-sm">
-            <li><strong>Essential Mix:</strong> $150 - Professional mix with 2 revisions</li>
-            <li><strong>Premium Mix:</strong> $250 - Includes vocal production + unlimited revisions</li>
-            <li><strong>Deluxe Package:</strong> $350 - Mix + Master + stems + radio edit</li>
-          </ul>
+          <h4 className="text-[#00F0FF] font-semibold mb-2">Pricing:</h4>
+          <p className="text-sm">Contact us for custom pricing tailored to your project needs.</p>
         </div>
       </div>
     ),
@@ -77,11 +73,8 @@ const services: ServiceItem[] = [
         </ul>
         <p><strong>My approach:</strong> I focus on bringing out the best in your vocal performance, ensuring it sits perfectly within the mix and captivates your audience.</p>
         <div className="bg-[#1A1F35] p-4 rounded-lg mt-4">
-          <h4 className="text-[#00F0FF] font-semibold mb-2">Pricing Options:</h4>
-          <ul className="space-y-1 text-sm">
-            <li><strong>Basic Vocal Production:</strong> $100 - Comping, tuning, basic processing</li>
-            <li><strong>Full Vocal Production:</strong> $175 - Includes harmonies, ad-libs, creative effects</li>
-          </ul>
+          <h4 className="text-[#00F0FF] font-semibold mb-2">Pricing:</h4>
+          <p className="text-sm">Contact us for custom pricing tailored to your project needs.</p>
         </div>
       </div>
     ),
@@ -104,70 +97,13 @@ const services: ServiceItem[] = [
         </ul>
         <p><strong>Ideal for:</strong> Producers, artists, and anyone seeking a professional, impactful mix for their instrumental tracks.</p>
         <div className="bg-[#1A1F35] p-4 rounded-lg mt-4">
-          <h4 className="text-[#00F0FF] font-semibold mb-2">Beat Mixing Rates:</h4>
-          <ul className="space-y-1 text-sm">
-            <li><strong>Standard Beat Mix:</strong> $75 - Professional mix with 1 revision</li>
-            <li><strong>Premium Beat Mix:</strong> $125 - Includes tagged/untagged versions + stems</li>
-          </ul>
+          <h4 className="text-[#00F0FF] font-semibold mb-2">Pricing:</h4>
+          <p className="text-sm">Contact us for custom pricing tailored to your project needs.</p>
         </div>
       </div>
     ),
     delivery: '2-4 business days',
     includes: ['Professional mixing', 'Stem delivery', 'Reference matching', 'Commercial loudness']
-  },
-  {
-    icon: <FaTools className="w-8 h-8 text-[#9D00FF]" />,
-    title: 'Custom Sound Design',
-    shortDescription: 'Unique sound design services. Custom 808s, vocal chops, atmospheric textures, and transition FX to make your music stand out.',
-    description: (
-      <div className="space-y-4">
-        <p><strong>Stand out with signature sounds.</strong> I create custom audio elements that give your tracks a unique identity:</p>
-        <ul className="list-disc pl-5 space-y-2">
-          <li><strong>Custom 808s:</strong> Unique bass sounds tailored to your track's key and vibe</li>
-          <li><strong>Vocal Chops:</strong> Creative vocal manipulation and sampling</li>
-          <li><strong>Atmospheric Elements:</strong> Pads, textures, and ambient sounds</li>
-          <li><strong>Transition Effects:</strong> Risers, sweeps, and ear candy</li>
-          <li><strong>Drum Layering:</strong> Enhanced percussion with custom processing</li>
-        </ul>
-        <p><strong>Perfect for:</strong> Artists wanting signature sounds, producers building unique beat libraries, or tracks needing that extra creative touch.</p>
-        <div className="bg-[#1A1F35] p-4 rounded-lg mt-4">
-          <h4 className="text-[#00F0FF] font-semibold mb-2">Sound Design Pricing:</h4>
-          <ul className="space-y-1 text-sm">
-            <li><strong>Basic Package:</strong> $50 - 3-5 custom elements</li>
-            <li><strong>Full Package:</strong> $100 - 8-10 elements + variations</li>
-          </ul>
-        </div>
-      </div>
-    ),
-    delivery: '3-5 business days',
-    includes: ['Custom sound elements', 'Multiple variations', 'Stems provided', 'Commercial usage rights']
-  },
-  {
-    icon: <FaCode className="w-8 h-8 text-[#00F0FF]" />,
-    title: 'Mixing Mentorship & Audio Engineering Courses',
-    shortDescription: 'Learn professional mixing techniques. One-on-one mentorship and audio engineering courses covering vocal mixing, 808s, and genre-specific processing.',
-    description: (
-      <div className="space-y-4">
-        <p><strong>Master the art of mixing.</strong> Learn the techniques I've developed working with major artists:</p>
-        <ul className="list-disc pl-5 space-y-2 mb-4">
-          <li><strong>Vocal Mixing Mastery:</strong> Make vocals sit perfectly in your mixes</li>
-          <li><strong>808 & Bass Techniques:</strong> Get that professional low-end that translates</li>
-          <li><strong>Genre-Specific Processing:</strong> EQ, compression, and effects for each style</li>
-          <li><strong>Mix Analysis:</strong> Breakdown of commercial tracks and your own projects</li>
-          <li><strong>Industry Insights:</strong> Real-world advice from major label experience</li>
-        </ul>
-        <p><strong>Who this helps:</strong> Producers and engineers wanting to specialize in music production, artists learning to mix their own music, or anyone serious about improving their skills.</p>
-        <div className="bg-[#1A1F35] p-4 rounded-lg mt-4">
-          <h4 className="text-[#00F0FF] font-semibold mb-2">Mentorship Options:</h4>
-          <ul className="space-y-1 text-sm">
-            <li><strong>Single Session:</strong> $75/hour - One-time consultation</li>
-            <li><strong>Monthly Package:</strong> $250 - 4 sessions + project feedback</li>
-          </ul>
-        </div>
-      </div>
-    ),
-    delivery: '1-2 hours per session',
-    includes: ['Personalized curriculum', 'Project feedback', 'Resource library', 'Follow-up support']
   }
 ];
 
@@ -248,7 +184,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
               
               <div className="pt-4 border-t border-[#1A1F35]">
                 <a 
-                  href="/contact" 
+                  href="https://forms.gle/h1H74cbkGqP819BX7" 
                   className="group inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-lg text-white bg-gradient-to-r from-[#00F0FF] to-[#9D00FF] hover:from-[#00D1E0] hover:to-[#8A00E0] transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-[#00F0FF]/20"
                 >
                   Get Started with {service.title}
@@ -446,8 +382,10 @@ const Services = () => {
         >
           <p className="text-lg text-[#A0A0A5] mb-6">Looking for a custom solution? Let's discuss your project.</p>
           <a 
-            href="/contact" 
-            className="inline-flex items-center justify-center px-8 py-3.5 text-base font-medium rounded-full text-white bg-transparent border-2 border-[#00F0FF] hover:bg-[#00F0FF]/10 transition-all duration-300 hover:shadow-lg hover:shadow-[#00F0FF]/20"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdcrTUIlxrNMsLj5vxQGb07lv927oq0r4cvl883aAaSkT3pzA/viewform?usp=header"
+            target="_blank"
+            rel="noopener noreferrer" 
+            className="btn-futuristic inline-flex items-center justify-center px-8 py-3.5 text-base font-medium rounded-full text-white"
           >
             Contact Us
             <svg className="w-5 h-5 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

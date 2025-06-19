@@ -72,7 +72,7 @@ const Navbar = () => {
     },
     { href: '/portfolio', label: 'Portfolio' },
     { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact' }
+    { href: 'https://forms.gle/h1H74cbkGqP819BX7', label: 'Contact' }
   ];
 
   return (
