@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-// First install framer-motion: npm install framer-motion
 import { motion } from 'framer-motion';
+import { CONTACT_FORM_URL } from '../config/links';
 
 const Hero = () => {
   return (
@@ -32,15 +32,17 @@ const Hero = () => {
           >
             Professional mixing and mastering services for artists who demand excellence
           </motion.p>
-          <motion.button
+          <motion.a
+            href={`${CONTACT_FORM_URL}?entry.1234567890=Mix%20and%20Master`}
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="px-8 py-3 bg-white text-black text-lg font-light tracking-wider hover:bg-opacity-90 transition-all"
-            onClick={() => window.location.href='/contact?service=mix_and_master'}
+            className="inline-block px-8 py-3 bg-white text-black text-lg font-light tracking-wider hover:bg-opacity-90 transition-all cursor-pointer"
           >
             START YOUR PROJECT
-          </motion.button>
+          </motion.a>
         </div>
       </div>
     </div>

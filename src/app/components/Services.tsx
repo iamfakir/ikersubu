@@ -2,6 +2,7 @@
 
 import React, { useState, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { CONTACT_FORM_URL } from '../config/links';
 import { 
   FaMixer, 
   FaCompactDisc, 
@@ -248,7 +249,9 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
               
               <div className="pt-4 border-t border-[#1A1F35]">
                 <a 
-                  href="/contact" 
+                  href={`${CONTACT_FORM_URL}?entry.1234567890=${encodeURIComponent(service.title)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-lg text-white bg-gradient-to-r from-[#00F0FF] to-[#9D00FF] hover:from-[#00D1E0] hover:to-[#8A00E0] transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-[#00F0FF]/20"
                 >
                   Get Started with {service.title}

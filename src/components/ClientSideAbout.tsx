@@ -26,7 +26,9 @@ const ClientSideAbout = () => {
               </p>
               <div className="flex flex-wrap gap-4 mb-12">
                 <a
-                  href="/contact"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdcrTUIlxrNMsLj5vxQGb07lv927oq0r4cvl883aAaSkT3pzA/viewform?usp=header"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full font-medium hover:opacity-90 transition-all"
                 >
                   Get in Touch

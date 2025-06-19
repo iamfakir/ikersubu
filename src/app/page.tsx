@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { CONTACT_FORM_URL } from './config/links';
 import Navbar from './components/Navbar';
 
 // Dynamically import components that are below the fold
@@ -175,21 +176,27 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.8 }}
               className="flex flex-col sm:flex-row justify-center items-center space-y-5 sm:space-y-0 sm:space-x-6 mt-12"
             >
-              <motion.a
-                href="/contact"
+              <motion.div
                 className="btn-futuristic group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Get In Touch
-                <motion.span
-                  className="ml-2"
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
+                <a
+                  href={CONTACT_FORM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center"
                 >
-                  →
-                </motion.span>
-              </motion.a>
+                  Get In Touch
+                  <motion.span
+                    className="ml-2"
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    →
+                  </motion.span>
+                </a>
+              </motion.div>
             </motion.div>
           </div>
           
