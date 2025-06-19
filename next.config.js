@@ -5,6 +5,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 const nextConfig = {
   images: {
+    domains: ['localhost'],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
       {
         protocol: 'https',
@@ -19,8 +23,10 @@ const nextConfig = {
         hostname: 'source.unsplash.com',
       },
     ],
-    unoptimized: false,
+    unoptimized: true,
     formats: ['image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   // Remove experimental configuration as it's not needed with current Next.js version
   async headers() {
@@ -37,9 +43,7 @@ const nextConfig = {
     ];
   },
   swcMinify: true,
-  experimental: {
-    modern: true
-  },
+  experimental: {},
   transpilePackages: ['react-icons'], // Only transpile packages that need it
 };
 

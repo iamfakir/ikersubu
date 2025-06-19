@@ -1,10 +1,13 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import './CardCarousel.css';
 
 import { getPortfolioItems, PortfolioItem } from '@/app/data/portfolio';
+
+// Fallback image for when an image fails to load
+const FALLBACK_IMAGE = '/assets/images/placeholder.jpg'; // Make sure this exists in your public folder
 
 // Get portfolio items from the data file
 const workItems: PortfolioItem[] = getPortfolioItems();
@@ -25,12 +28,13 @@ export default function CardCarousel() {
     setIsClient(true);
   }, []);
   
-  // Filter projects based on active tab
+  // Filter projects based on active tab with null checks
   const filteredItems = workItems.filter(item => {
+    if (!item) return false;
+    
     if (activeTab === 'assisted') {
       return item.type === 'assisted';
     } else if (activeTab === 'mixed') {
-      // Show items with type 'mixed'
       return item.type === 'mixed';
     } else if (activeTab === 'production') {
       return item.type === 'production';
@@ -47,7 +51,7 @@ export default function CardCarousel() {
     return orderA - orderB;
   });
 
-  const updateCarousel = (direction: 'next' | 'prev' | number) => {
+  const updateCarousel = useCallback((direction: 'next' | 'prev' | number) => {
     if (isAnimating) return;
     
     setSelectedProject(null);
@@ -70,8 +74,8 @@ export default function CardCarousel() {
 
     transitionTimeout.current = setTimeout(() => {
       setIsAnimating(false);
-    }, 600); 
-  };
+    }, 600);
+  }, [isAnimating, currentIndex, filteredItems.length]);
 
   useEffect(() => {
     setCurrentIndex(0);
@@ -105,31 +109,57 @@ export default function CardCarousel() {
   };
 
   const getVisibleCards = () => {
-    const items = sortedFilteredItems; // Use sortedFilteredItems
-    if (items.length === 0) return [];
-
-    const visibleCardsData = [];
+    const cards: Array<PortfolioItem & { position: number; key: string }> = [];
     
-    for (let i = -2; i <= 2; i++) {
-      const cardIndex = (currentIndex + i + items.length) % items.length;
-      const cardData = items[cardIndex];
-      
-      visibleCardsData.push({
-        ...cardData,
-        originalIndex: cardIndex, // Keep track of original index for selection
-        position: i,
-        key: `${cardData.id}-${i}` // Use unique id and loop index 'i' (position) for key
-      });
+    if (sortedFilteredItems.length === 0) return [];
+    
+    // Helper function to create a safe card with fallbacks
+    const createSafeCard = (item: PortfolioItem, position: number, index: number): PortfolioItem & { position: number; key: string } => {
+      return {
+        ...item,
+        id: item.id || index,
+        name: item.name || 'Untitled Project',
+        role: item.role || 'Role not specified',
+        client: item.client || 'Client not specified',
+        genre: item.genre || 'Genre not specified',
+        imageUrl: item.imageUrl || FALLBACK_IMAGE,
+        position,
+        key: `${item.id}-${index}-${position}`
+      };
+    };
+    
+    // Always include the current item
+    const currentItem = sortedFilteredItems[currentIndex];
+    if (currentItem) {
+      cards.push(createSafeCard(currentItem, 0, currentIndex));
     }
     
-    return visibleCardsData;
+    // Add next items
+    for (let i = 1; i <= 2; i++) {
+      const nextIndex = (currentIndex + i) % sortedFilteredItems.length;
+      const nextItem = sortedFilteredItems[nextIndex];
+      if (nextItem) {
+        cards.push(createSafeCard(nextItem, i, nextIndex));
+      }
+    }
+    
+    // Add previous items
+    for (let i = 1; i <= 2; i++) {
+      const prevIndex = (currentIndex - i + sortedFilteredItems.length) % sortedFilteredItems.length;
+      const prevItem = sortedFilteredItems[prevIndex];
+      if (prevItem) {
+        cards.unshift(createSafeCard(prevItem, -i, prevIndex));
+      }
+    }
+    
+    return cards;
   };
 
-  const handleCardClick = (project: PortfolioItem) => {
+  const handleCardClick = useCallback((project: PortfolioItem) => {
     if (!isAnimating) {
-      setSelectedProject(selectedProject?.name === project.name ? null : project);
+      setSelectedProject(prev => prev?.name === project.name ? null : project);
     }
-  };
+  }, [isAnimating]);
 
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -137,8 +167,8 @@ export default function CardCarousel() {
     }
   };
 
-  // Use the sorted filtered items for the visible cards
-  const visibleCards = getVisibleCards();
+  // Memoize the visible cards to prevent unnecessary re-renders
+  const visibleCards = useMemo(() => getVisibleCards(), [sortedFilteredItems, currentIndex]);
 
   // Don't render anything on the server
   if (!isClient) {
@@ -223,14 +253,26 @@ export default function CardCarousel() {
                 >
                   <div className="card-inner">
                     <div className="image-container">
-                      <Image
-                        src={cardData.imageUrl} 
-                        alt={cardData.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="card-image"
-                        priority={cardData.position === 0} // Prioritize center image
-                      />
+                      <div className="image-wrapper" style={{ position: 'relative', width: '100%', height: '100%' }}>
+                        <Image
+                          src={cardData.imageUrl} 
+                          alt={cardData.name || 'Project image'}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          className="card-image"
+                          style={{
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                          }}
+                          priority={cardData.position === 0}
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.onerror = null; // Prevent infinite loop
+                            target.src = FALLBACK_IMAGE;
+                          }}
+                          unoptimized={process.env.NODE_ENV !== 'production'}
+                        />
+                      </div>
                     </div>
                     <div className="card-content">
                       <h3>{cardData.name}</h3>

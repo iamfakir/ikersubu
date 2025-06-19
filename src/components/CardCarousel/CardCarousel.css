@@ -148,6 +148,8 @@
   -webkit-backface-visibility: hidden;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
   
   /* Only apply backdrop-filter on hover for non-touch devices */
   @media (hover: hover) and (pointer: fine) {
@@ -219,6 +221,41 @@
   }
 }
 
+/* Card inner container */
+.card-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Image container */
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+/* Image wrapper */
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Card image */
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+/* Card content */
 .card-content {
   position: absolute;
   bottom: 0;
