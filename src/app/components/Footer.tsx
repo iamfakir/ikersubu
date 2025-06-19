@@ -91,7 +91,7 @@ const Footer = () => {
                 >
                   <Link
                     href={link.href}
-                    className="text-[#A0A0A5] hover:text-[#00F0FF] transition-colors flex items-center"
+                    className="text-[#0051c3] underline hover:text-[#00F0FF] transition-colors flex items-center focus:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00F0FF]"
                   >
                     <span className="mr-2 text-xs opacity-60">→</span>
                     {link.label}
@@ -136,7 +136,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`text-[#A0A0A5] ${social.hoverColor} transition-all duration-300 p-2 rounded-full bg-[#1A1F35]/50 border border-[#ffffff10] flex items-center justify-center`}
+                  className={`text-[#0051c3] underline ${social.hoverColor} transition-all duration-300 p-2 rounded-full bg-[#1A1F35]/50 border border-[#ffffff10] flex items-center justify-center focus:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00F0FF]`}
                   aria-label={social.label}
                   whileHover={{
                     scale: 1.15,

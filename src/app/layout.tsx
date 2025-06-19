@@ -50,29 +50,28 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} font-sans`} suppressHydrationWarning>
       <head>
   {/* Preload critical images */}
-
-        <meta charSet="UTF-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-        {/* Security headers */}
-        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-        <meta httpEquiv="X-Frame-Options" content="DENY" />
-        <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
-        <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-        
-        {/* Google Tag Manager */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-L1C1BMBG65"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-L1C1BMBG65');
-          `}
-        </Script>
-      </head>
+  <meta charSet="UTF-8" />
+  <meta name="description" content="Professional mixing and mastering services. High-quality audio plugins for music producers. Elevate your sound with IKER SUBU." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  {/* Security headers */}
+  <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+  <meta httpEquiv="X-Frame-Options" content="DENY" />
+  <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
+  <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  {/* Google Tag Manager */}
+  <Script
+    src="https://www.googletagmanager.com/gtag/js?id=G-L1C1BMBG65"
+    strategy="afterInteractive"
+  />
+  <Script id="google-analytics" strategy="afterInteractive">
+    {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L1C1BMBG65');
+    `}
+  </Script>
+</head>
       <body className="text-gray-900 antialiased">
         <div id="root" className="flex flex-col">
           <Navbar />
