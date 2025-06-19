@@ -50,7 +50,7 @@ const ClientSideAbout = () => {
               <div className="absolute inset-0 bg-gray-900 flex items-center justify-center">
                 <div className="w-full h-full transform rotate-90 relative">
                   <Image
-                    src="/assets/images/studiopic/studiop1.webp"
+                    src="/assets/images/studiopic/studiop.webp"
                     alt={`${aboutContent.hero.name} - ${aboutContent.hero.role}`}
                     width={800}
                     height={600}
@@ -64,7 +64,7 @@ const ClientSideAbout = () => {
                         target.style.display = 'none';
                       } else {
                         // Try JPG fallback once
-                        target.src = '/assets/images/studiopic/studiop1.JPG';
+                        target.src = '/assets/images/studiopic/studiop.JPG';
                       }
                     }}
                   />
@@ -125,7 +125,7 @@ const ClientSideAbout = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href="/contact"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSdcrTUIlxrNMsLj5vxQGb07lv927oq0r4cvl883aAaSkT3pzA/viewform?usp=header"
                 className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full font-medium hover:opacity-90 transition-all text-lg"
               >
                 Get Started

@@ -3,13 +3,6 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaInstagram, FaSpotify, FaApple, FaYoutube } from 'react-icons/fa';
-import { CONTACT_FORM_URL } from '../config/links';
-
-type FooterLink = {
-  href: string;
-  label: string;
-  external?: boolean;
-};
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -85,39 +78,24 @@ const Footer = () => {
           <motion.div variants={itemVariants}>
             <h3 className="text-lg font-bold mb-6 text-white font-display bg-clip-text text-transparent bg-gradient-primary">Quick Links</h3>
             <ul className="space-y-3">
-              {([
+              {[
                 { href: "/", label: "Home" },
                 { href: "/portfolio", label: "Portfolio" },
-                { 
-                  href: CONTACT_FORM_URL, 
-                  label: "Contact",
-                  external: true 
-                }
-              ] as FooterLink[]).map((link, index) => (
+                
+                { href: "/contact", label: "Contact" }
+              ].map((link, index) => (
                 <motion.li
                   key={index}
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {link.external ? (
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#A0A0A5] hover:text-[#00F0FF] transition-colors flex items-center"
-                    >
-                      <span className="mr-2 text-xs opacity-60">→</span>
-                      {link.label}
-                    </a>
-                  ) : (
-                    <Link
-                      href={link.href}
-                      className="text-[#A0A0A5] hover:text-[#00F0FF] transition-colors flex items-center"
-                    >
-                      <span className="mr-2 text-xs opacity-60">→</span>
-                      {link.label}
-                    </Link>
-                  )}
+                  <Link
+                    href={link.href}
+                    className="text-[#A0A0A5] hover:text-[#00F0FF] transition-colors flex items-center"
+                  >
+                    <span className="mr-2 text-xs opacity-60">→</span>
+                    {link.label}
+                  </Link>
                 </motion.li>
               ))}
             </ul>

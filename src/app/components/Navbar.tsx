@@ -8,8 +8,6 @@ interface NavLinkItem {
   href: string;
   label: string;
   submenu?: NavLinkItem[];
-  target?: string;
-  rel?: string;
 }
 
 interface NavLink extends NavLinkItem {
@@ -74,12 +72,7 @@ const Navbar = () => {
     },
     { href: '/portfolio', label: 'Portfolio' },
     { href: '/about', label: 'About' },
-    { 
-      href: 'https://docs.google.com/forms/d/e/1FAIpQLSdcrTUIlxrNMsLj5vxQGb07lv927oq0r4cvl883aAaSkT3pzA/viewform?usp=header', 
-      label: 'Contact',
-      target: '_blank',
-      rel: 'noopener noreferrer'
-    }
+    { href: 'https://forms.gle/h1H74cbkGqP819BX7', label: 'Contact' }
   ];
 
   return (
@@ -196,18 +189,6 @@ const Navbar = () => {
                       )}
                     </AnimatePresence>
                   </>
-                ) : link.href.startsWith('http') ? (
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative group h-full flex items-center"
-                  >
-                    <span className="text-white hover:text-[#00F0FF] transition-colors duration-300">
-                      {link.label}
-                    </span>
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 transform origin-left transition-transform duration-300 bg-[#00F0FF] scale-x-0 group-hover:scale-x-100" />
-                  </a>
                 ) : (
                   <Link
                     href={link.href}
@@ -302,19 +283,6 @@ const Navbar = () => {
                     </div>
                   )}
                 </div>
-              ) : link.href.startsWith('http') ? (
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block py-3 px-4 rounded-md transition-all duration-300 text-white hover:bg-white/5 hover:text-[#00F0FF]"
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setOpenSubmenu(null);
-                  }}
-                >
-                  {link.label}
-                </a>
               ) : (
                 <Link
                   href={link.href}
