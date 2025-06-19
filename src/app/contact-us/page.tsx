@@ -12,11 +12,9 @@ export default function ContactUsPage() {
             width={640}
             height={1877}
             frameBorder="0"
-            marginHeight="0"
-            marginWidth="0"
             className="mx-auto"
           >
-            Loading…
+            Loading
           </iframe>
         </div>
       </div>
