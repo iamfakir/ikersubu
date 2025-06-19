@@ -46,7 +46,7 @@ const ClientSideAbout = () => {
               className="relative h-96 lg:h-[500px] w-full rounded-2xl overflow-hidden"
             >
               <div className="absolute inset-0 bg-gray-900 flex items-center justify-center">
-                <div className="w-full h-full transform rotate-90">
+                <div className="w-full h-full transform rotate-90 relative">
                   <Image
                     src="/assets/images/studiopic/studiop1.webp"
                     alt={`${aboutContent.hero.name} - ${aboutContent.hero.role}`}
@@ -55,12 +55,19 @@ const ClientSideAbout = () => {
                     className="w-full h-full object-cover rounded-2xl"
                     priority
                     onError={(e) => {
-                    console.error('Image failed to load:', e);
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src = '/assets/images/studiopic/studiop1.JPG';
-                  }}
+                      const target = e.target as HTMLImageElement;
+                      // Prevent infinite loop by checking if we've already tried to fall back
+                      if (target.src.endsWith('.JPG')) {
+                        // If we've already tried JPG, show nothing or a placeholder
+                        target.style.display = 'none';
+                      } else {
+                        // Try JPG fallback once
+                        target.src = '/assets/images/studiopic/studiop1.JPG';
+                      }
+                    }}
                   />
+                  {/* Fallback background in case both images fail */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 to-blue-900/20 rounded-2xl" aria-hidden="true" />
                 </div>
               </div>
               <div 
