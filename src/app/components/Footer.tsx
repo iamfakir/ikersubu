@@ -82,7 +82,7 @@ const Footer = () => {
                 { href: "/", label: "Home" },
                 { href: "/portfolio", label: "Portfolio" },
                 
-                { href: "/contact", label: "Contact" }
+                { href: "https://forms.gle/h1H74cbkGqP819BX7", label: "Contact" }
               ].map((link, index) => (
                 <motion.li
                   key={index}

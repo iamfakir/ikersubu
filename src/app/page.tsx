@@ -100,13 +100,14 @@ export default function Home() {
             <motion.div
               className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6"
             >
-              <motion.button
+              <motion.a
+                href="https://forms.gle/h1H74cbkGqP819BX7"
                 whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0, 240, 255, 0.5)" }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 bg-linear-to-r from-[#00F0FF] to-[#9D00FF] text-black font-bold rounded-lg transition-all duration-300"
               >
                 Start Your Project
-              </motion.button>
+              </motion.a>
               <motion.a
                 href="https://forms.gle/h1H74cbkGqP819BX7"
                 whileHover={{ scale: 1.05 }}
