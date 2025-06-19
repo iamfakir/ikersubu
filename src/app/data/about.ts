@@ -21,7 +21,7 @@ interface AboutContent {
 const aboutContent: AboutContent = {
   hero: {
     title: 'Crafting Exceptional Sound',
-    description: "Hi, I'm Iker Subu, a professional audio engineer and producer. I work with talented artists and help them achieve their sonic vision.",
+    description: "Hi, I'm Iker Subu, a professional audio engineer and producer with a passion for crafting exceptional sound experiences. With expertise in mixing, mastering, and audio plugin development, I've helped artists across various genres achieve their sonic vision. My approach combines technical precision with creative intuition to deliver professional results that make your music stand out. Whether you're an independent artist or an established label, I'm dedicated to elevating your sound to industry standards while preserving your unique artistic identity.",
     profileImage: '/assets/images/studiopic/studiop1.webp',
     name: 'Iker Subu',
     role: 'Audio Engineer & Producer'

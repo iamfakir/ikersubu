@@ -17,7 +17,7 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: 101,
     name: "Manadhil",
-    role: "Mix & Master",
+    role: "Assistant Mix",
     type: "mixed",
     year: 2025,
     genre: "R&B/Soul",
@@ -70,8 +70,8 @@ const portfolioItems: PortfolioItem[] = [
   },
   {
     id: 2,
-    name: "Urban Pulse",
-    role: "Full Mix",
+    name: "Vaari",
+    role: "Assistant Mix",
     type: "assisted",
     year: 2024,
     genre: "Hip-Hop/Trap",
@@ -88,8 +88,8 @@ const portfolioItems: PortfolioItem[] = [
   },
   {
     id: 3,
-    name: "Neon Nights",
-    role: "Production & Mix",
+    name: "Hamilton",
+    role: "Assistant Mix",
     type: "assisted",
     year: 2024,
     genre: "Electronic/Pop",
@@ -107,7 +107,7 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: 4,
     name: "Ethereal Dreams",
-    role: "Mix Engineer",
+    role: "Assistant Mix",
     type: "assisted",
     year: 2023,
     genre: "Ambient",
@@ -142,7 +142,7 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: 6,
     name: "Digital Horizon",
-    role: "Production",
+    role: "Assistant Mix",
     type: "assisted",
     year: 2023,
     genre: "Electronic",
@@ -159,7 +159,7 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: 7,
     name: "Soul Sessions",
-    role: "Recording & Mix",
+    role: "Assistant Mix",
     type: "assisted",
     year: 2023,
     genre: "R&B/Soul",
@@ -227,7 +227,7 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: 11,
     name: "Jazz Fusion",
-    role: "Recording Engineer",
+    role: "Assistant Mix",
     type: "assisted",
     year: 2023,
     genre: "Jazz/Fusion",
@@ -261,7 +261,7 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: 13,
     name: "Vocal Sessions",
-    role: "Vocal Producer",
+    role: "Assistant Mix",
     type: "assisted",
     year: 2023,
     genre: "Pop",
@@ -329,7 +329,7 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: 17,
     name: "Electronic Journey",
-    role: "Producer",
+    role: "Assistant Mix",
     type: "assisted",
     year: 2023,
     genre: "Electronic",
@@ -363,7 +363,7 @@ const portfolioItems: PortfolioItem[] = [
   {
     id: 19,
     name: "Future Bass",
-    role: "Producer & Mix",
+    role: "Assistant Mix",
     type: "assisted",
     year: 2023,
     genre: "Electronic",
