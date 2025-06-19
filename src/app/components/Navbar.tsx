@@ -18,16 +18,10 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
-  const [activeLink, setActiveLink] = useState('');
-  
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    
-    if (typeof window !== 'undefined') {
-      setActiveLink(window.location.pathname);
-    }
     
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -200,16 +194,10 @@ const Navbar = () => {
                     href={link.href}
                     className="relative group h-full flex items-center"
                   >
-                    <span className={`text-white hover:text-[#00F0FF] transition-colors duration-300 ${
-                      activeLink === link.href ? 'text-[#00F0FF]' : ''
-                    }`}>
+                    <span className="text-white hover:text-[#00F0FF] transition-colors duration-300">
                       {link.label}
                     </span>
-                    <span className={`absolute bottom-0 left-0 w-full h-0.5 transform origin-left transition-transform duration-300 ${
-                      activeLink === link.href
-                        ? 'bg-gradient-to-r from-[#00F0FF] to-[#9D00FF] scale-x-100'
-                        : 'bg-[#00F0FF] scale-x-0 group-hover:scale-x-100'
-                    }`} />
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 transform origin-left transition-transform duration-300 bg-[#00F0FF] scale-x-0 group-hover:scale-x-100" />
                   </Link>
                 )}
               </div>
@@ -298,11 +286,7 @@ const Navbar = () => {
               ) : (
                 <Link
                   href={link.href}
-                  className={`block py-3 px-4 rounded-md transition-all duration-300 ${
-                    activeLink === link.href
-                      ? 'bg-white/10 text-[#00F0FF]'
-                      : 'text-white hover:bg-white/5 hover:text-[#00F0FF]'
-                  }`}
+                  className="block py-3 px-4 rounded-md transition-all duration-300 text-white hover:bg-white/5 hover:text-[#00F0FF]"
                   onClick={() => {
                     setIsMobileMenuOpen(false);
                     setOpenSubmenu(null);

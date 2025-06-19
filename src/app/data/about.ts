@@ -21,8 +21,8 @@ interface AboutContent {
 const aboutContent: AboutContent = {
   hero: {
     title: 'Crafting Exceptional Sound',
-    description: "Hi, I'm Iker Subu, a professional audio engineer and producer. Since 2022, I've been professionally focused on recording and mixing, and in 2024, I began assisting renowned Engineer x Producer Akash Shravan. I work with talented artists and help them achieve their sonic vision.",
-    profileImage: '/assets/images/Studiopic/studiop1.JPG',
+    description: "Hi, I'm Iker Subu, a professional audio engineer and producer. I work with talented artists and help them achieve their sonic vision.",
+    profileImage: '/assets/images/studiopic/studiop1.webp',
     name: 'Iker Subu',
     role: 'Audio Engineer & Producer'
   },

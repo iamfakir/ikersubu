@@ -45,13 +45,24 @@ const ClientSideAbout = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="relative h-96 lg:h-[500px] w-full rounded-2xl overflow-hidden"
             >
-              <Image
-                src={aboutContent.hero.profileImage}
-                alt={`${aboutContent.hero.name} - ${aboutContent.hero.role}`}
-                fill
-                className="object-cover"
-                priority
-              />
+              <div className="absolute inset-0 bg-gray-900 flex items-center justify-center">
+                <div className="w-full h-full transform rotate-90">
+                  <Image
+                    src="/assets/images/studiopic/studiop1.webp"
+                    alt={`${aboutContent.hero.name} - ${aboutContent.hero.role}`}
+                    width={800}
+                    height={600}
+                    className="w-full h-full object-cover rounded-2xl"
+                    priority
+                    onError={(e) => {
+                    console.error('Image failed to load:', e);
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = '/assets/images/studiopic/studiop1.JPG';
+                  }}
+                  />
+                </div>
+              </div>
               <div 
                 className="absolute inset-0 pointer-events-none"
                 style={{

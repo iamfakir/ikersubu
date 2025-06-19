@@ -64,7 +64,7 @@ const portfolioItems: PortfolioItem[] = [
       "Mid-side EQ for width",
       "Vocal doubling and effects"
     ],
-    imageUrl: "/assets/images/works/optimized/34.webp",
+    imageUrl: "/assets/images/works/34.jpg",
     isFeatured: true,
     order: 1
   },
@@ -82,7 +82,7 @@ const portfolioItems: PortfolioItem[] = [
       "Vocal chain optimization",
       "Spatial processing"
     ],
-    imageUrl: "/assets/images/works/optimized/56.webp",
+    imageUrl: "/assets/images/works/56.jpg",
     isFeatured: true,
     order: 2
   },

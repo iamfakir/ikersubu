@@ -4,7 +4,7 @@ import "./globals.css";
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 
-const Navbar = dynamic(() => import('./components/Navbar'));
+const Navbar = dynamic(() => import('./components/Navbar'), { ssr: false });
 
 const inter = Inter({
   subsets: ['latin'],
@@ -50,9 +50,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} font-sans`} suppressHydrationWarning>
       <head>
   {/* Preload critical images */}
-    <link rel="preload" href="/assets/images/works/optimized/11.webp" as="image" type="image/webp" />
-    <link rel="preload" href="/assets/images/works/optimized/12.webp" as="image" type="image/webp" />
-    <link rel="preload" href="/assets/images/works/optimized/15.webp" as="image" type="image/webp" />
+
         <meta charSet="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
         {/* Security headers */}
