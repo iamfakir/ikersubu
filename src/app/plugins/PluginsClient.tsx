@@ -24,14 +24,14 @@ export default function PluginsClient({ plugins }: PluginsClientProps) {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-b from-[#0A0E1A] to-[#0F172A]">
+      <div className="min-h-screen bg-gradient-to-b from-[#0A0E1A] to-[#0F172A] pb-12">
         {/* Hero Section */}
-        <header className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            IKER SUBU Audio Plugins for Music Production
+        <header className="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
+            IKER SUBU Audio Plugins
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Discover innovative audio plugins designed by IKER SUBU. Enhance your music production and sound design workflow with professional VST, AU, and AAX tools.
+          <p className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto">
+            Professional audio tools for music production and sound design
           </p>
         </header>
 
@@ -58,22 +58,24 @@ export default function PluginsClient({ plugins }: PluginsClientProps) {
                     )}
                   </div>
                 </Link>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-2">
-                    <h2 className="text-2xl font-bold text-white">{plugin.title} - {plugin.category} Plugin</h2>
-                    <span className="text-sm text-[#00F0FF] bg-[#00F0FF]/10 px-3 py-1 rounded-full">
-                      {plugin.category}
-                    </span>
+                <div className="p-5">
+                  <div className="flex flex-col space-y-2 mb-3">
+                    <div className="flex justify-between items-start">
+                      <h2 className="text-lg font-semibold text-white leading-tight">{plugin.title}</h2>
+                      <span className="text-xs text-[#00F0FF] bg-[#00F0FF]/10 px-2 py-0.5 rounded-full whitespace-nowrap ml-2">
+                        {plugin.category}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-300 line-clamp-2">{plugin.description}</p>
                   </div>
-                  <p className="text-gray-300 mb-4">{plugin.description} Enhance your tracks with this powerful {plugin.category.toLowerCase()} plugin, designed for intuitive workflow and professional results.</p>
                   
-                  <ul className="space-y-1 mb-6">
+                  <ul className="space-y-1.5 mb-5">
                     {plugin.features.map((feature, index) => (
-                      <li key={index} className="flex items-center text-gray-400 text-sm">
-                        <svg className="w-4 h-4 mr-2 text-[#00F0FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <li key={index} className="flex items-start text-gray-300 text-xs">
+                        <svg className="w-3 h-3 mt-0.5 mr-2 flex-shrink-0 text-[#00F0FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
-                        {feature}
+                        <span className="leading-tight">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -91,12 +93,12 @@ export default function PluginsClient({ plugins }: PluginsClientProps) {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-6">
-            Want to be the first to know about new plugins?
+        <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-white mb-4">
+            Stay Updated with New Plugins
           </h2>
-          <p className="text-gray-300 mb-8">
-            Join our newsletter to get updates on new releases, exclusive offers, and production tips.
+          <p className="text-gray-300 text-sm mb-6 max-w-2xl mx-auto">
+            Subscribe to our newsletter for updates on new releases, exclusive offers, and production tips.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <input

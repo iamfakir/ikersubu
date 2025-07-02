@@ -1,9 +1,15 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 
 const AudioWave = () => {
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const bars = 20;
   const barVariants = {
     initial: { scaleY: 0.2 },
@@ -17,6 +23,8 @@ const AudioWave = () => {
       }
     })
   };
+
+  if (!mounted) return null;
 
   return (
     <div className="flex items-end justify-center h-16 gap-1 opacity-70 absolute bottom-10 left-1/2 transform -translate-x-1/2">
@@ -36,17 +44,27 @@ const AudioWave = () => {
 };
 
 export default function HeroSection() {
-  const [isClient, setIsClient] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll();
+  const targetRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ['start start', 'end start']
+  });
+  
+  // Set the target element after mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      targetRef.current = document.documentElement;
+    }
+  }, []);
+  
   const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
 
   useEffect(() => {
-    setIsClient(true);
-    
-    if (typeof window === 'undefined') return;
+    setMounted(true);
     
     const handleMouseMove = (e: MouseEvent) => {
       if (heroRef.current) {
@@ -57,11 +75,28 @@ export default function HeroSection() {
       }
     };
 
+    // Only add event listener on client side
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
+
+  // Don't render on server
+  if (!mounted) {
+    return (
+      <div className="relative flex items-center justify-center min-h-screen overflow-hidden bg-[#0B0E17]">
+        <div className="relative z-20 text-center px-8 max-w-4xl mx-auto">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-4">
+            <span className="block text-[#00F0FF]">IKER SUBU</span>
+            <span className="block text-white text-3xl sm:text-4xl md:text-5xl mt-2">
+              Mixing Engineer | Audio Plugin Developer
+            </span>
+          </h1>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <motion.section
@@ -72,18 +107,16 @@ export default function HeroSection() {
         scale: heroScale
       }}
     >
-      {/* Optimized background gradient with reduced motion */}
+      {/* Background gradient */}
       <motion.div
         className="absolute inset-0 bg-[#0B0E17] z-0"
         style={{
           backgroundImage: `linear-gradient(135deg, #0B0E17 0%, #1A1F35 100%)`,
-          backgroundPosition: isClient ? 
-            `${50 + (mousePosition.x * 0.01)}% ${50 + (mousePosition.y * 0.01)}%` : 
-            'center center',
+          backgroundPosition: `${50 + (mousePosition.x * 0.01)}% ${50 + (mousePosition.y * 0.01)}%`,
           backgroundSize: '200% 200%',
           willChange: 'background-position',
           contain: 'paint',
-          opacity: isClient ? 1 : 0,
+          opacity: 1,
           transition: 'opacity 0.5s ease-out'
         }}
       />

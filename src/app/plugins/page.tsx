@@ -12,7 +12,7 @@ const plugins = [
     title: 'Airfry Audio Demo',
     description: 'Try the Airfry audio effect demo. Adjust presence and wet mix, then play the audio!',
     category: 'Web Demo',
-    image: '/assets/images/Plugin/airfry/thumbnail.png', // Place your image here
+    image: '/assets/images/Plugin/dripper/Silver.png', // Using Silver as a placeholder
     url: '/plugins/airfry',
     comingSoon: false,
     features: [

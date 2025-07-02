@@ -17,22 +17,12 @@ const downloadRateLimits: RateLimitStore = {};
 const DOWNLOAD_RATE_LIMIT = 10; // Max downloads per window
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour in milliseconds
 
-// CSRF token configuration
-const CSRF_COOKIE_NAME = 'csrf_token';
-const CSRF_HEADER_NAME = 'x-csrf-token';
-
-// Generate a random token for CSRF protection
-function generateCSRFToken(): string {
-  return Math.random().toString(36).substring(2, 15) + 
-         Math.random().toString(36).substring(2, 15);
-}
-
 // Check if a request is a download request
 function isDownloadRequest(request: NextRequest): boolean {
   const url = request.nextUrl.pathname;
   // Add your download paths here
   return url.includes('/downloads/') || 
-         url.includes('/products/') && url.includes('/download');
+         (url.includes('/products/') && url.includes('/download'));
 }
 
 // Apply rate limiting for downloads
@@ -66,44 +56,6 @@ function applyRateLimit(request: NextRequest): NextResponse | null {
   return null;
 }
 
-// Apply CSRF protection
-function applyCSRFProtection(request: NextRequest): NextResponse | null {
-  // Skip CSRF check for GET, HEAD, OPTIONS requests as they should be idempotent
-  if (['GET', 'HEAD', 'OPTIONS'].includes(request.method)) {
-    return null;
-  }
-  
-  // Get the CSRF token from the cookie and header
-  const csrfCookie = request.cookies.get(CSRF_COOKIE_NAME)?.value;
-  const csrfHeader = request.headers.get(CSRF_HEADER_NAME);
-  
-  // If tokens don't match, reject the request
-  if (!csrfCookie || !csrfHeader || csrfCookie !== csrfHeader) {
-    return NextResponse.json(
-      { error: 'CSRF token validation failed' },
-      { status: 403 }
-    );
-  }
-  
-  return null;
-}
-
-// Apply password protection for specific routes
-function applyPasswordProtection(request: NextRequest): NextResponse | null {
-  const MASTER_PASSWORD = process.env.PLUGINS_MASTER_PASSWORD || 'masterpassword'; // Use environment variable in production
-  const requestedPassword = request.nextUrl.searchParams.get('password');
-
-  if (request.nextUrl.pathname === '/plugins' && requestedPassword !== MASTER_PASSWORD) {
-    // Redirect to a login page or return unauthorized
-    // For simplicity, returning unauthorized here. You might want to redirect to a custom login page.
-    return NextResponse.json(
-      { error: 'Unauthorized access to plugins. Please provide the correct password.' },
-      { status: 401 }
-    );
-  }
-  return null;
-}
-
 // Add caching headers based on content type
 function addCachingHeaders(request: NextRequest, response: NextResponse): NextResponse {
   const url = request.nextUrl.pathname;
@@ -133,25 +85,6 @@ export async function middleware(request: NextRequest) {
   if (isDownloadRequest(request)) {
     const rateLimitResponse = applyRateLimit(request);
     if (rateLimitResponse) return rateLimitResponse;
-  }
-  
-  // Apply CSRF protection for state-changing requests
-  const csrfResponse = applyCSRFProtection(request);
-  if (csrfResponse) return csrfResponse;
-
-  // Apply password protection for the /plugins route
-  const passwordProtectionResponse = applyPasswordProtection(request);
-  if (passwordProtectionResponse) return passwordProtectionResponse;
-  
-  // For GET requests, set a CSRF token if one doesn't exist
-  if (request.method === 'GET' && !request.cookies.has(CSRF_COOKIE_NAME)) {
-    const csrfToken = generateCSRFToken();
-    response.cookies.set(CSRF_COOKIE_NAME, csrfToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      path: '/',
-    });
   }
   
   // Add caching headers based on content type
