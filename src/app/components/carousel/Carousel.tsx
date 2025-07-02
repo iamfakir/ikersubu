@@ -141,7 +141,6 @@ const Carousel: React.FC<CarouselProps> = ({
       className="carousel"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      data-testid="carousel"
     >
       <button 
         className="carousel__nav prev"
