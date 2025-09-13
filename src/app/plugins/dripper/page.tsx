@@ -367,7 +367,7 @@ const DripperPage = () => {
                               type="email"
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
-                              placeholder="contact@ikersubu.com"
+                              placeholder="therealikersubu@gmail.com"
                               className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                               required
                               disabled={isSubmitting}

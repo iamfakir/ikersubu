@@ -104,6 +104,32 @@ const services: ServiceItem[] = [
     ),
     delivery: '2-4 business days',
     includes: ['Professional mixing', 'Stem delivery', 'Reference matching', 'Commercial loudness']
+  },
+  {
+    icon: <FaHeadphones className="w-8 h-8 text-[#9D00FF]" />,
+    title: 'Dolby Atmos Engineering Services',
+    shortDescription: 'Immersive audio mixing and mastering for Dolby Atmos. Elevate your music with spatial sound that captivates listeners on all compatible platforms.',
+    description: (
+      <div className="space-y-4">
+        <p><strong>Step into the future of sound with Dolby Atmos.</strong> I provide comprehensive engineering services to transform your music into an immersive, multi-dimensional experience:</p>
+        <ul className="list-disc pl-5 space-y-2">
+          <li><strong>Spatial Mixing:</strong> Crafting a 360-degree soundscape that places instruments and vocals precisely in the immersive field</li>
+          <li><strong>Atmos Mastering:</strong> Optimizing your Dolby Atmos mix for various playback environments, ensuring consistent quality across streaming platforms</li>
+          <li><strong>Binaural Rendering:</strong> Ensuring an exceptional headphone experience for listeners without a full Atmos setup</li>
+          <li><strong>Compatibility:</strong> Delivering mixes ready for Apple Music, Amazon Music, Tidal, and other Dolby Atmos enabled platforms</li>
+          <li><strong>Creative Sound Design:</strong> Utilizing the full potential of spatial audio to enhance the emotional impact of your music</li>
+        </ul>
+        <p><strong>Why Dolby Atmos?</strong> Provide your audience with an unparalleled listening experience that goes beyond traditional stereo. Stand out in a competitive market and offer your fans a truly immersive journey into your sound.</p>
+        <div className="bg-[#1A1F35] p-4 rounded-lg mt-4">
+          <h4 className="text-[#00F0FF] font-semibold mb-2">Pricing:</h4>
+          <p className="text-sm">Contact us for custom pricing tailored to your project needs.</p>
+        </div>
+      </div>
+    ),
+    delivery: '5-7 business days',
+    includes: ['Dolby Atmos mixing', 'Spatial audio mastering', 'Binaural rendering', 'Platform compatibility checks', 'Revision rounds included'],
+    featured: true,
+    popular: true
   }
 ];
 
