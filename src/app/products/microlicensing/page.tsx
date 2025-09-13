@@ -81,7 +81,7 @@ export default function MicrolicensingPage() {
               />
               <FAQItem
                 question="Can I Monetize My Video On Youtube?"
-                answer="Yes. If you purchase our YouTube monetization license or social media bundle, simply email contact@ikersubu.com a copy of your receipt and the url to your video and we will remove the third party claim on the licensed track."
+                answer="Yes. If you purchase our YouTube monetization license or social media bundle, simply email therealikersubu@gmail.com a copy of your receipt and the url to your video and we will remove the third party claim on the licensed track."
               />
               <FAQItem
                 question="Can I Still Use Audiomachine On My Youtube Without Monetizing?"
