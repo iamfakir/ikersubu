@@ -5,13 +5,7 @@ import dynamic from 'next/dynamic';
 import Navbar from './components/Navbar';
 
 // Dynamically import components that are below the fold
-const CreditsSection = dynamic(() => import('./components/CreditsSection'), {
-  loading: () => <div className="min-h-[200px] flex items-center justify-center"><p>Loading...</p></div>,
-});
-
-const LogosSection = dynamic(() => import('./components/LogosSection'), {
-  loading: () => <div className="min-h-[200px] flex items-center justify-center"><p>Loading...</p></div>,
-});
+// Removed CreditsSection and LogosSection
 
 const FeaturedMixes = dynamic(() => import('./components/FeaturedMixes'), {
   loading: () => <div className="min-h-[200px] flex items-center justify-center"><p>Loading...</p></div>,
@@ -59,11 +53,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Credits Section */}
-        <CreditsSection />
-
-        {/* Company Logos Section */}
-        <LogosSection />
+        {/* Credits and Logos sections removed */}
 
         {/* Featured Mixes Section */}
         <FeaturedMixes />
@@ -75,7 +65,7 @@ export default function Home() {
 
         {/* Featured Work Carousel Section */}
         <section className="py-20 px-8">
-          <h2 className="text-4xl font-bold text-center mb-12 text-white">Featured Mixes</h2>
+          <h2 className="text-4xl font-bold text-center mb-12 text:white">Featured Mixes</h2>
           <CardCarousel />
           <div className="carousel">
             
@@ -85,7 +75,7 @@ export default function Home() {
           </div>
         </section>
         
-
+        
         
         {/* Enhanced CTA Section */}
         <section className="py-20 px-8 bg-linear-to-t from-[#0B0E17] to-[#1A1F35]">

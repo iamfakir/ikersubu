@@ -159,12 +159,13 @@ export default function PortfolioCard({
           preload="none"
         />
 
-        {/* Project Type Badge */}
-        <div className="absolute top-4 left-4">
-          <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${typeInfo.color} text-white`}>
-            {typeInfo.label}
-          </span>
-        </div>
+        {project.type !== 'assisted' && (
+          <div className="absolute top-4 left-4">
+            <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${typeInfo.color} text-white`}>
+              {typeInfo.label}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Project Info */}

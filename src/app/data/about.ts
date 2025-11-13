@@ -28,7 +28,6 @@ const aboutContent: AboutContent = {
   },
   stats: [
     { value: '2+', label: 'Years Experience' },
-    { value: '100+', label: 'Projects Completed' },
     { value: '25+', label: 'Artists Worked With' },
   ],
 

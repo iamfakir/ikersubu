@@ -618,7 +618,11 @@ const portfolioItems: PortfolioItem[] = [
 ];
 
 // Get all portfolio items
-export const getPortfolioItems = () => portfolioItems;
+export const getPortfolioItems = () =>
+  portfolioItems.map((item) => ({
+    ...item,
+    role: item.type === 'assisted' || /Assistant Mix/i.test(item.role) ? '' : item.role,
+  }));
 
 // Get portfolio items by type
 export const getPortfolioItemsByType = (type: PortfolioItem['type']) => {
