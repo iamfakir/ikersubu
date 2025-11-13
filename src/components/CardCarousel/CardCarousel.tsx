@@ -17,7 +17,7 @@ export default function CardCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(null);
-  const [activeTab, setActiveTab] = useState<'assisted' | 'mixed' | 'production' | 'recording'>('assisted');
+  const [activeTab, setActiveTab] = useState<'mixed' | 'production' | 'recording'>('mixed');
   const carouselRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
@@ -32,9 +32,7 @@ export default function CardCarousel() {
   const filteredItems = workItems.filter(item => {
     if (!item) return false;
     
-    if (activeTab === 'assisted') {
-      return item.type === 'assisted';
-    } else if (activeTab === 'mixed') {
+    if (activeTab === 'mixed') {
       return item.type === 'mixed';
     } else if (activeTab === 'production') {
       return item.type === 'production';
@@ -119,7 +117,7 @@ export default function CardCarousel() {
         ...item,
         id: item.id || index,
         name: item.name || 'Untitled Project',
-        role: item.role || 'Role not specified',
+        role: item.type === 'assisted' ? '' : (item.role || ''),
         client: item.client || 'Client not specified',
         genre: item.genre || 'Genre not specified',
         imageUrl: item.imageUrl || FALLBACK_IMAGE,
@@ -186,13 +184,6 @@ export default function CardCarousel() {
       <h1 className="portfolio-title">Portfolio</h1>
       
       <div className="filter-buttons">
-        <button 
-          onClick={() => setActiveTab('assisted')}
-          className={`filter-button ${activeTab === 'assisted' ? 'active' : ''}`}
-          aria-pressed={activeTab === 'assisted'}
-        >
-          Assisted Mixes
-        </button>
         <button 
           onClick={() => setActiveTab('mixed')}
           className={`filter-button ${activeTab === 'mixed' ? 'active' : ''}`}
@@ -276,7 +267,7 @@ export default function CardCarousel() {
                     </div>
                     <div className="card-content">
                       <h3>{cardData.name}</h3>
-                      <p className="role">{cardData.role}</p>
+                      {cardData.role && <p className="role">{cardData.role}</p>}
                       <p className="client">{cardData.client}</p>
                       <p className="genre">{cardData.genre}</p>
                     </div>
@@ -306,7 +297,7 @@ export default function CardCarousel() {
           <div className="member-details-card">
             <button className="close-button" onClick={() => setSelectedProject(null)}>×</button>
             <h2 className="project-name">{selectedProject.name}</h2>
-            <p className="project-role">{selectedProject.role}</p>
+            {selectedProject.role && <p className="project-role">{selectedProject.role}</p>}
             <p className="project-client">Client: {selectedProject.client}</p>
             <p className="project-genre">Genre: {selectedProject.genre}</p>
             <p className="project-year">Year: {selectedProject.year}</p>
